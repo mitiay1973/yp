@@ -1,0 +1,39 @@
+﻿<Window x:Class="уп.kat_monitori"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:уп"
+        mc:Ignorable="d"
+        Title="Главная" Height="450" Width="800"  MaxHeight="450" MaxWidth="800" MinHeight="450" MinWidth="800">
+    
+    <Grid Background="#FFE4E4E4">
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="41" Width="792" Background="#FFEEC5A4" Foreground="Black"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="378" Width="126" Background="#FFEEC5A4" Margin="0,41,0,0"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="1" Width="792" Background="Black" Foreground="Black" Margin="-1,26,0,0" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <Button x:Name="katalog2" Content="Каталог" HorizontalAlignment="Left" Margin="10,63,0,0" VerticalAlignment="Top" Width="105" Height="22" Background="#FFFDE9D6" BorderBrush="Black" Click="katalog_Click"/>
+        <Image HorizontalAlignment="Left" Height="41" Margin="331,0,0,0" VerticalAlignment="Top" Width="129" Source="лого.jpg"/>
+        <Label x:Name="label3" Content="Мониторы" HorizontalAlignment="Left" Margin="143,63,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+        <TextBox x:Name="pr1"  HorizontalAlignment="Left" Margin="131,114,0,0" VerticalAlignment="Top" FontSize="10" Height="59" Width="215" Background="{x:Null}" IsEnabled="False"/>
+        <TextBox x:Name="pr2"  HorizontalAlignment="Left" Margin="351,114,0,0" VerticalAlignment="Top" FontSize="10" Height="59" Width="215" Background="{x:Null}" IsEnabled="False"/>
+        <TextBox x:Name="pr3"  HorizontalAlignment="Left" Margin="571,114,0,0" VerticalAlignment="Top" FontSize="10" Height="59" Width="215" Background="{x:Null}" IsEnabled="False"/>
+        <TextBox x:Name="pr4"  HorizontalAlignment="Left" Margin="131,234,0,0" VerticalAlignment="Top" FontSize="10" Height="59" Width="215" Background="{x:Null}" IsEnabled="False"/>
+        <TextBox x:Name="pr5"  HorizontalAlignment="Left" Margin="351,234,0,0" VerticalAlignment="Top" FontSize="10" Height="59" Width="215" Background="{x:Null}" IsEnabled="False"/>
+        <TextBox x:Name="pr6"  HorizontalAlignment="Left" Margin="571,234,0,0" VerticalAlignment="Top" FontSize="10" Height="59" Width="215" Background="{x:Null}" IsEnabled="False"/>
+        <Button x:Name="kyp1" Content="Купить" HorizontalAlignment="Left" Margin="189,178,0,0" VerticalAlignment="Top" Width="105" Height="22"  Click="kyp1_Click"  />
+        <Button x:Name="kyp2" Content="Купить" HorizontalAlignment="Left" Margin="412,178,0,0" VerticalAlignment="Top" Width="105" Height="22"  Click="kyp2_Click" />
+        <Button x:Name="kyp3" Content="Купить" HorizontalAlignment="Left" Margin="635,178,0,0" VerticalAlignment="Top" Width="105" Height="22"  Click="kyp3_Click" />
+        <Button x:Name="kyp4" Content="Купить" HorizontalAlignment="Left" Margin="189,298,0,0" VerticalAlignment="Top" Width="105" Height="22"  Click="kyp4_Click"  />
+        <Button x:Name="kyp5" Content="Купить" HorizontalAlignment="Left" Margin="412,298,0,0" VerticalAlignment="Top" Width="105" Height="22"  Click="kyp5_Click" />
+        <Button x:Name="kyp6" Content="Купить" HorizontalAlignment="Left" Margin="635,298,0,0" VerticalAlignment="Top" Width="105" Height="22"  Click="kyp6_Click"  />
+    </Grid>
+</Window>

@@ -1,0 +1,19 @@
+﻿<Window x:Class="уп.Registracia"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:уп"
+        mc:Ignorable="d"
+        Title="Регистрация" Height="254.476" Width="304.152" MaxHeight="254.476" MaxWidth="304.152" MinHeight="254.476" MinWidth="304.152">
+    <Grid Background="#FFEEC5A4">
+        <TextBox x:Name="login_reg" HorizontalAlignment="Left" Margin="52,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="19" Width="194" Background="White" TextChanged="login_reg_TextChanged"/>
+        <TextBox x:Name="password_reg" HorizontalAlignment="Left" Margin="52,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="19" Width="194" Background="White" TextChanged="password_reg_TextChanged"/>
+        <TextBox x:Name="password_reg_Copy" HorizontalAlignment="Left" Margin="52,121,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="19" Width="194" Background="White" TextChanged="password_reg_Copy_TextChanged"/>
+        <Button x:Name="zaregistrirovatsia" Content="Зарегистрироваться" HorizontalAlignment="Left" Margin="71,154,0,0" VerticalAlignment="Top" Width="159" Click="zaregistrirovatsia_Click"/>
+        <Label Content="Логин" HorizontalAlignment="Left" Margin="126,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="Пароль" Margin="122,52,116,0" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+        <Label Content="Повторите пароль" Margin="93,97,85,0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="111"/>
+
+    </Grid>
+</Window>

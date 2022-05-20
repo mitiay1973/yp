@@ -1,0 +1,128 @@
+﻿<Window x:Class="уп.glavnaya"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:уп"
+        mc:Ignorable="d"
+        Title="Главная" Height="450" Width="800" MaxHeight="450" MaxWidth="800" MinHeight="450" MinWidth="800">
+    <Window.Resources>
+
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2"
+                       SnapsToDevicePixels="true"
+                       Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                       StrokeDashArray="1 2"
+                       StrokeThickness="1" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <SolidColorBrush x:Key="Button.Static.Background"
+                     Color="#FFDDDDDD" />
+        <SolidColorBrush x:Key="Button.Static.Border"
+                     Color="#FF707070" />
+        <SolidColorBrush x:Key="Button.MouseOver.Background"
+                     Color="#FFBEE6FD" />
+        <SolidColorBrush x:Key="Button.MouseOver.Border"
+                     Color="#FF3C7FB1" />
+        <SolidColorBrush x:Key="Button.Pressed.Background"
+                     Color="#FFC4E5F6" />
+        <SolidColorBrush x:Key="Button.Pressed.Border"
+                     Color="#FF2C628B" />
+        <SolidColorBrush x:Key="Button.Disabled.Background"
+                     Color="#FFF4F4F4" />
+        <SolidColorBrush x:Key="Button.Disabled.Border"
+                     Color="#FFADB2B5" />
+        <SolidColorBrush x:Key="Button.Disabled.Foreground"
+                     Color="#FF838383" />
+
+        <Style x:Key="DefaultButtonStyle"
+           TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}" />
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter"
+                                Margin="{TemplateBinding Padding}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Focusable="False"
+                                RecognizesAccessKey="True"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource Button.Pressed.Background}" />
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource Button.Pressed.Border}" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource Button.Disabled.Background}" />
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource Button.Disabled.Border}" />
+                                <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{StaticResource Button.Disabled.Foreground}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>
+    <Grid Background="#FFE4E4E4">
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="41" Width="792" Background="#FFEEC5A4" Foreground="Black"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="378" Width="126" Background="#FFEEC5A4" Margin="0,41,0,0"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="1" Width="792" Background="Black" Foreground="Black" Margin="-1,26,0,0" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <Button x:Name="glavniy" Content="Главная" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top" Width="105" Height="22" Background="#FFFDE9D6" BorderBrush="Black" Click="glavniy_Click"/>
+        <Button x:Name="katalog" Content="Каталог" HorizontalAlignment="Left" Margin="10,99,0,0" VerticalAlignment="Top" Width="105" Height="22" Background="#FFFDE9D6" BorderBrush="Black" Click="katalog_Click"/>
+        <Image x:Name="reklama" HorizontalAlignment="Center" Height="378" Margin="115,41,11,0" VerticalAlignment="Center" Width="666" Source="реклама.png"/>
+        <Image HorizontalAlignment="Left" Height="41" Margin="331,0,0,0" VerticalAlignment="Top" Width="129" Source="лого.jpg"/>
+        <Label x:Name="label1" Content="Комплектующие для ПК" HorizontalAlignment="Left" Margin="141,50,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+        <Button x:Name="processori" Content="Процессоры" HorizontalAlignment="Left" Margin="141,81,0,0" VerticalAlignment="Top" Width="74" Background="{x:Null}" BorderBrush="{x:Null}" Height="21" Click="processori_Click"  Style="{DynamicResource DefaultButtonStyle}"/>
+        <Button x:Name="mat_plati" Content="Материнские платы" HorizontalAlignment="Left" Margin="141,102,0,0" VerticalAlignment="Top" Width="113" Background="{x:Null}" BorderBrush="{x:Null}" Height="19" Click="mat_plati_Click" Style="{DynamicResource DefaultButtonStyle}"/>
+        <Button x:Name="videokarti" Content="Видеокарты" HorizontalAlignment="Left" Margin="141,126,0,0" VerticalAlignment="Top" Width="71" Background="{x:Null}" BorderBrush="{x:Null}" Height="19" Click="videokarti_Click" Style="{DynamicResource DefaultButtonStyle}"/>
+        <Button x:Name="operativka" Content="Оперативная память" HorizontalAlignment="Left" Margin="141,150,0,0" VerticalAlignment="Top" Width="119" Background="{x:Null}" BorderBrush="{x:Null}" Height="19" Click="operativka_Click" Style="{DynamicResource DefaultButtonStyle}"/>
+        <Button x:Name="bloki_pit" Content="Блоки питания" HorizontalAlignment="Left" Margin="331,81,0,0" VerticalAlignment="Top" Width="85" Background="{x:Null}" BorderBrush="{x:Null}" Height="21" Click="bloki_pit_Click" Style="{DynamicResource DefaultButtonStyle}"/>
+        <Button x:Name="korpusa" Content="Корпуса" HorizontalAlignment="Left" Margin="331,102,0,0" VerticalAlignment="Top" Width="51" Background="{x:Null}" BorderBrush="{x:Null}" Height="19" Click="korpusa_Click" Style="{DynamicResource DefaultButtonStyle}"/>
+        <Button x:Name="oxlad" Content="Охлаждение компьютера" HorizontalAlignment="Left" Margin="331,126,0,0" VerticalAlignment="Top" Width="146" Background="{x:Null}" BorderBrush="{x:Null}" Height="19" Click="oxlad_Click" Style="{DynamicResource DefaultButtonStyle}"/>
+        <Button x:Name="ssd_hdd" Content="SSD и HDD" HorizontalAlignment="Left" Margin="331,150,0,0" VerticalAlignment="Top" Width="64" Background="{x:Null}" BorderBrush="{x:Null}" Height="19" Click="ssd_hdd_Click" Style="{DynamicResource DefaultButtonStyle}"/>
+        <Label x:Name="label2" Content="Периферия и аксессуары" HorizontalAlignment="Left" Margin="141,196,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+        <Button x:Name="monitori" Content="Мониторы" HorizontalAlignment="Left" Margin="141,232,0,0" VerticalAlignment="Top" Width="66" Background="{x:Null}" BorderBrush="{x:Null}" Height="21" Click="monitori_Click" Style="{DynamicResource DefaultButtonStyle}"/>
+        <Button x:Name="klaviatyri" Content="Клавиатуры" HorizontalAlignment="Left" Margin="141,253,0,0" VerticalAlignment="Top" Width="74" Background="{x:Null}" BorderBrush="{x:Null}" Height="21" Click="klaviatyri_Click" Style="{DynamicResource DefaultButtonStyle}"/>
+        <Button x:Name="mishi" Content="Компьютерные мыши" HorizontalAlignment="Left" Margin="141,274,0,0" VerticalAlignment="Top" Width="129" Background="{x:Null}" BorderBrush="{x:Null}" Height="20" Click="mishi_Click" Style="{DynamicResource DefaultButtonStyle}"/>
+        <Button x:Name="veb_kameri" Content="Веб-камеры" HorizontalAlignment="Left" Margin="141,294,0,0" VerticalAlignment="Top" Width="74" Background="{x:Null}" BorderBrush="{x:Null}" Height="19" Click="veb_kameri_Click" Style="{DynamicResource DefaultButtonStyle}"/>
+        <Button x:Name="Nakopiteli_dannix" Content="Внешние накопители данных" HorizontalAlignment="Left" Margin="331,232,0,0" VerticalAlignment="Top" Width="166" Background="{x:Null}" BorderBrush="{x:Null}" Height="21" Click="Nakopiteli_dannix_Click" Style="{DynamicResource DefaultButtonStyle}"/>
+        <Button x:Name="nayshniki" Content="Наушники" HorizontalAlignment="Left" Margin="331,253,0,0" VerticalAlignment="Top" Width="61" Background="{x:Null}" BorderBrush="{x:Null}" Height="21" Click="nayshniki_Click" Style="{DynamicResource DefaultButtonStyle}"/>
+        <Button x:Name="kabeli" Content="Кабели" HorizontalAlignment="Left" Margin="331,274,0,0" VerticalAlignment="Top" Width="44" Background="{x:Null}" BorderBrush="{x:Null}" Height="20" Click="kabeli_Click" Style="{DynamicResource DefaultButtonStyle}"/>
+        <Button x:Name="kovriki" Content="Коврики для мыши" HorizontalAlignment="Left" Margin="331,294,0,0" VerticalAlignment="Top" Width="110" Background="{x:Null}" BorderBrush="{x:Null}" Height="19" Click="kovriki_Click" Style="{DynamicResource DefaultButtonStyle}"/>
+        <Button x:Name="noutbuki" Content="Ноутбуки" HorizontalAlignment="Left" Margin="141,345,0,0" VerticalAlignment="Top" Width="88" Background="{x:Null}" BorderBrush="{x:Null}" Height="26" Style="{DynamicResource DefaultButtonStyle}" FontSize="16" FontWeight="Bold" Click="noutbuki_Click" RenderTransformOrigin="0.481,1.064"/>
+        <Button x:Name="Admin_panel" Content="Админ" HorizontalAlignment="Left" Margin="10,297,0,0" VerticalAlignment="Top" Width="105" Height="22" Background="#FFFDE9D6" BorderBrush="Black" Click="Admin_panel_Click"/>
+    </Grid>
+</Window>
