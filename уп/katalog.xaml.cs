@@ -52,7 +52,6 @@ namespace уп
             glavnaya.kabeli.Visibility = Visibility.Visible;
             glavnaya.kovriki.Visibility = Visibility.Visible;
             glavnaya.noutbuki.Visibility = Visibility.Visible;
-
         }
 
 

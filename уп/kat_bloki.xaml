@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:уп"
         mc:Ignorable="d"
-        Title="Главная" Height="450" Width="800"  MaxHeight="450" MaxWidth="800" MinHeight="450" MinWidth="800">
+        Title="Блоки питания" Height="450" Width="800"  MaxHeight="450" MaxWidth="800" MinHeight="450" MinWidth="800">
     
     <Grid Background="#FFE4E4E4">
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="41" Width="792" Background="#FFEEC5A4" Foreground="Black"/>
@@ -35,5 +35,6 @@
         <Button x:Name="kyp4" Content="Купить" HorizontalAlignment="Left" Margin="189,298,0,0" VerticalAlignment="Top" Width="105" Height="22"  Click="kyp4_Click"  />
         <Button x:Name="kyp5" Content="Купить" HorizontalAlignment="Left" Margin="412,298,0,0" VerticalAlignment="Top" Width="105" Height="22"  Click="kyp5_Click" />
         <Button x:Name="kyp6" Content="Купить" HorizontalAlignment="Left" Margin="635,298,0,0" VerticalAlignment="Top" Width="105" Height="22"  Click="kyp6_Click"  />
+        <Button x:Name="Admin_panel" Content="Админ" HorizontalAlignment="Left" Margin="10,297,0,0" VerticalAlignment="Top" Width="105" Height="22" Background="#FFFDE9D6" BorderBrush="Black" Click="Admin_panel_Click" Visibility="Hidden"/>
     </Grid>
 </Window>

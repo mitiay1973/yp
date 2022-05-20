@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:уп"
         mc:Ignorable="d"
-        Title="Главная" Height="450" Width="800" MaxHeight="450" MaxWidth="800" MinHeight="450" MinWidth="800">
+        Title="Главная" Height="450" Width="800" MaxHeight="450" MaxWidth="800" MinHeight="450" MinWidth="800" Icon="превью.png">
     <Window.Resources>
 
         <Style x:Key="FocusVisual">
@@ -111,7 +111,7 @@
         <Button x:Name="operativka" Content="Оперативная память" HorizontalAlignment="Left" Margin="141,150,0,0" VerticalAlignment="Top" Width="119" Background="{x:Null}" BorderBrush="{x:Null}" Height="19" Click="operativka_Click" Style="{DynamicResource DefaultButtonStyle}"/>
         <Button x:Name="bloki_pit" Content="Блоки питания" HorizontalAlignment="Left" Margin="331,81,0,0" VerticalAlignment="Top" Width="85" Background="{x:Null}" BorderBrush="{x:Null}" Height="21" Click="bloki_pit_Click" Style="{DynamicResource DefaultButtonStyle}"/>
         <Button x:Name="korpusa" Content="Корпуса" HorizontalAlignment="Left" Margin="331,102,0,0" VerticalAlignment="Top" Width="51" Background="{x:Null}" BorderBrush="{x:Null}" Height="19" Click="korpusa_Click" Style="{DynamicResource DefaultButtonStyle}"/>
-        <Button x:Name="oxlad" Content="Охлаждение компьютера" HorizontalAlignment="Left" Margin="331,126,0,0" VerticalAlignment="Top" Width="146" Background="{x:Null}" BorderBrush="{x:Null}" Height="19" Click="oxlad_Click" Style="{DynamicResource DefaultButtonStyle}"/>
+        <Button x:Name="oxlad" Content="Охлаждение процессора" HorizontalAlignment="Left" Margin="331,126,0,0" VerticalAlignment="Top" Width="146" Background="{x:Null}" BorderBrush="{x:Null}" Height="19" Click="oxlad_Click" Style="{DynamicResource DefaultButtonStyle}"/>
         <Button x:Name="ssd_hdd" Content="SSD и HDD" HorizontalAlignment="Left" Margin="331,150,0,0" VerticalAlignment="Top" Width="64" Background="{x:Null}" BorderBrush="{x:Null}" Height="19" Click="ssd_hdd_Click" Style="{DynamicResource DefaultButtonStyle}"/>
         <Label x:Name="label2" Content="Периферия и аксессуары" HorizontalAlignment="Left" Margin="141,196,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
         <Button x:Name="monitori" Content="Мониторы" HorizontalAlignment="Left" Margin="141,232,0,0" VerticalAlignment="Top" Width="66" Background="{x:Null}" BorderBrush="{x:Null}" Height="21" Click="monitori_Click" Style="{DynamicResource DefaultButtonStyle}"/>
@@ -123,6 +123,6 @@
         <Button x:Name="kabeli" Content="Кабели" HorizontalAlignment="Left" Margin="331,274,0,0" VerticalAlignment="Top" Width="44" Background="{x:Null}" BorderBrush="{x:Null}" Height="20" Click="kabeli_Click" Style="{DynamicResource DefaultButtonStyle}"/>
         <Button x:Name="kovriki" Content="Коврики для мыши" HorizontalAlignment="Left" Margin="331,294,0,0" VerticalAlignment="Top" Width="110" Background="{x:Null}" BorderBrush="{x:Null}" Height="19" Click="kovriki_Click" Style="{DynamicResource DefaultButtonStyle}"/>
         <Button x:Name="noutbuki" Content="Ноутбуки" HorizontalAlignment="Left" Margin="141,345,0,0" VerticalAlignment="Top" Width="88" Background="{x:Null}" BorderBrush="{x:Null}" Height="26" Style="{DynamicResource DefaultButtonStyle}" FontSize="16" FontWeight="Bold" Click="noutbuki_Click" RenderTransformOrigin="0.481,1.064"/>
-        <Button x:Name="Admin_panel" Content="Админ" HorizontalAlignment="Left" Margin="10,297,0,0" VerticalAlignment="Top" Width="105" Height="22" Background="#FFFDE9D6" BorderBrush="Black" Click="Admin_panel_Click"/>
+        <Button x:Name="Admin_panel" Content="Админ" HorizontalAlignment="Left" Margin="10,297,0,0" VerticalAlignment="Top" Width="105" Height="22" Background="#FFFDE9D6" BorderBrush="Black" Click="Admin_panel_Click" Visibility="Hidden"/>
     </Grid>
 </Window>

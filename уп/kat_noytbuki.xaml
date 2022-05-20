@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:уп"
         mc:Ignorable="d"
-        Title="Главная" Height="450" Width="800" MaxHeight="450" MaxWidth="800" MinHeight="450" MinWidth="800">
+        Title="Ноутбуки" Height="450" Width="800" MaxHeight="450" MaxWidth="800" MinHeight="450" MinWidth="800">
     
     <Grid Background="#FFE4E4E4">
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="41" Width="792" Background="#FFEEC5A4" Foreground="Black"/>
@@ -29,5 +29,11 @@
         <TextBox x:Name="pr4"  HorizontalAlignment="Left" Margin="131,234,0,0" VerticalAlignment="Top" FontSize="10" Height="76" Width="215" Background="{x:Null}" IsEnabled="False"/>
         <TextBox x:Name="pr5"  HorizontalAlignment="Left" Margin="351,234,0,0" VerticalAlignment="Top" FontSize="10" Height="76" Width="215" Background="{x:Null}" IsEnabled="False"/>
         <TextBox x:Name="pr6"  HorizontalAlignment="Left" Margin="571,234,0,0" VerticalAlignment="Top" FontSize="10" Height="76" Width="215" Background="{x:Null}" IsEnabled="False"/>
+        <Button x:Name="kyp1" Content="Купить" HorizontalAlignment="Left" Margin="189,195,0,0" VerticalAlignment="Top" Width="105" Height="22"  Click="kyp1_Click"  />
+        <Button x:Name="kyp2" Content="Купить" HorizontalAlignment="Left" Margin="412,195,0,0" VerticalAlignment="Top" Width="105" Height="22"  Click="kyp2_Click" />
+        <Button x:Name="kyp3" Content="Купить" HorizontalAlignment="Left" Margin="635,195,0,0" VerticalAlignment="Top" Width="105" Height="22"  Click="kyp3_Click" />
+        <Button x:Name="kyp4" Content="Купить" HorizontalAlignment="Left" Margin="189,315,0,0" VerticalAlignment="Top" Width="105" Height="22"  Click="kyp4_Click"  />
+        <Button x:Name="kyp5" Content="Купить" HorizontalAlignment="Left" Margin="412,315,0,0" VerticalAlignment="Top" Width="105" Height="22"  Click="kyp5_Click" />
+        <Button x:Name="kyp6" Content="Купить" HorizontalAlignment="Left" Margin="635,315,0,0" VerticalAlignment="Top" Width="105" Height="22"  Click="kyp6_Click"  />
     </Grid>
 </Window>

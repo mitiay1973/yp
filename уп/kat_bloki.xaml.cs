@@ -83,5 +83,9 @@ namespace уп
         {
 
         }
+        private void Admin_panel_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:уп"
         mc:Ignorable="d"
-        Title="Главная" Height="450" Width="800"  MaxHeight="450" MaxWidth="800" MinHeight="450" MinWidth="800">
+        Title="Охлаждение процессора" Height="450" Width="800"  MaxHeight="450" MaxWidth="800" MinHeight="450" MinWidth="800">
     
     <Grid Background="#FFE4E4E4">
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="41" Width="792" Background="#FFEEC5A4" Foreground="Black"/>
@@ -22,7 +22,7 @@
         </TextBlock>
         <Button x:Name="katalog2" Content="Каталог" HorizontalAlignment="Left" Margin="10,63,0,0" VerticalAlignment="Top" Width="105" Height="22" Background="#FFFDE9D6" BorderBrush="Black" Click="katalog_Click"/>
         <Image HorizontalAlignment="Left" Height="41" Margin="331,0,0,0" VerticalAlignment="Top" Width="129" Source="лого.jpg"/>
-        <Label x:Name="label3" Content="Охлаждение компьютера" HorizontalAlignment="Left" Margin="143,63,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+        <Label x:Name="label3" Content="Охлаждение процессора" HorizontalAlignment="Left" Margin="143,63,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
         <TextBox x:Name="pr1"  HorizontalAlignment="Left" Margin="131,114,0,0" VerticalAlignment="Top" FontSize="10" Height="59" Width="215" Background="{x:Null}" IsEnabled="False"/>
         <TextBox x:Name="pr2"  HorizontalAlignment="Left" Margin="351,114,0,0" VerticalAlignment="Top" FontSize="10" Height="59" Width="215" Background="{x:Null}" IsEnabled="False"/>
         <TextBox x:Name="pr3"  HorizontalAlignment="Left" Margin="571,114,0,0" VerticalAlignment="Top" FontSize="10" Height="59" Width="215" Background="{x:Null}" IsEnabled="False"/>

@@ -8,8 +8,8 @@
         Title="Регистрация" Height="254.476" Width="304.152" MaxHeight="254.476" MaxWidth="304.152" MinHeight="254.476" MinWidth="304.152">
     <Grid Background="#FFEEC5A4">
         <TextBox x:Name="login_reg" HorizontalAlignment="Left" Margin="52,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="19" Width="194" Background="White" TextChanged="login_reg_TextChanged"/>
-        <TextBox x:Name="password_reg" HorizontalAlignment="Left" Margin="52,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="19" Width="194" Background="White" TextChanged="password_reg_TextChanged"/>
-        <TextBox x:Name="password_reg_Copy" HorizontalAlignment="Left" Margin="52,121,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="19" Width="194" Background="White" TextChanged="password_reg_Copy_TextChanged"/>
+        <PasswordBox x:Name="password_reg" HorizontalAlignment="Left" Margin="52,78,0,0"  VerticalAlignment="Top" Height="19" Width="194" Background="White" />
+        <PasswordBox x:Name="password_reg_Copy" HorizontalAlignment="Left" Margin="52,121,0,0"  VerticalAlignment="Top" Height="19" Width="194" Background="White" />
         <Button x:Name="zaregistrirovatsia" Content="Зарегистрироваться" HorizontalAlignment="Left" Margin="71,154,0,0" VerticalAlignment="Top" Width="159" Click="zaregistrirovatsia_Click"/>
         <Label Content="Логин" HorizontalAlignment="Left" Margin="126,10,0,0" VerticalAlignment="Top"/>
         <Label Content="Пароль" Margin="122,52,116,0" VerticalAlignment="Top" HorizontalAlignment="Center"/>

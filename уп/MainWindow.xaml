@@ -11,7 +11,7 @@
 
         </Grid.ColumnDefinitions>
         <TextBox x:Name="login_vxod" HorizontalAlignment="Left" Margin="27,49,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="19" Width="194" Background="White" TextChanged="login_vxod_TextChanged"/>
-        <TextBox x:Name="password_vxod" HorizontalAlignment="Left" Margin="26.742,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="19" Width="194" Background="White" Grid.Column="1" TextChanged="password_vxod_TextChanged"/>
+        <PasswordBox x:Name="password_vxod" HorizontalAlignment="Left" Margin="26.742,98,0,0"  VerticalAlignment="Top" Height="19" Width="194" Background="White" Grid.Column="1" />
         <Button x:Name="vxod" Content="Войти" HorizontalAlignment="Left" Margin="45.742,143,0,0" VerticalAlignment="Top" Width="159" Click="vxod_Click" Grid.Column="1"/>
         <Button x:Name="registration" Content="Регистрация" HorizontalAlignment="Left" Margin="45.742,178,0,0" VerticalAlignment="Top" Width="159" Click="registration_Click" Grid.Column="1"/>
         <Label Content="Логин" HorizontalAlignment="Left" Margin="104,23,0,0" VerticalAlignment="Top"/>

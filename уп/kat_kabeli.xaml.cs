@@ -54,6 +54,34 @@ namespace уп
             glavnaya.kovriki.Visibility = Visibility.Visible;
             glavnaya.noutbuki.Visibility = Visibility.Visible;
         }
+        private void kyp1_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
+
+        private void kyp2_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void kyp3_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void kyp4_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void kyp5_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void kyp6_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

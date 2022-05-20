@@ -98,7 +98,6 @@ namespace уп
             kovriki.Visibility = Visibility.Visible;
             noutbuki.Visibility = Visibility.Visible;
         }
-
         private void processori_Click(object sender, RoutedEventArgs e)
         {
             string[] opisanie = new string[6];
@@ -228,6 +227,7 @@ namespace уп
             win_proc.kyp4.Click += Kyp4_Click;
             win_proc.kyp5.Click += Kyp5_Click;
             win_proc.kyp6.Click += Kyp6_Click;
+
         }
 
         private void Kyp6_Click(object sender, RoutedEventArgs e)
@@ -5741,8 +5741,276 @@ namespace уп
             }
             this.Close();
             win_kabeli.Show();
+            win_kabeli.kyp1.Click += Kyp85_Click;
+            win_kabeli.kyp2.Click += Kyp86_Click;
+            win_kabeli.kyp3.Click += Kyp87_Click;
+            win_kabeli.kyp4.Click += Kyp88_Click;
+            win_kabeli.kyp5.Click += Kyp89_Click;
+            win_kabeli.kyp6.Click += Kyp90_Click;
+        }
+        private void Kyp85_Click(object sender, RoutedEventArgs e)
+        {
+            katalog win_kabeli = new katalog();
+            string[] opisanie = new string[6];
+            korzina kor = new korzina();
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri(@"https://sun9-45.userapi.com/s/v1/if2/6ihqLedokA4C4LZ2tWYrpF91G1wJ_02Dtd63cCU3U-vgcxlB7IPVIyUI4ENSVlQJoddGc2Twy5O0gn4JpcMvag2J.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
+            this.Close();
+            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 1", connection);
+                opisanie[0] = command.ExecuteScalar().ToString();
+                win_kabeli.pr1.Text = $"{opisanie[0]}, \n";
+
+                SqlCommand commandd = new SqlCommand("SELECT [Connector_1] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 1", connection);
+                opisanie[0] = commandd.ExecuteScalar().ToString();
+                win_kabeli.pr1.Text += $"{opisanie[0]} - ";
+
+                SqlCommand commandddd = new SqlCommand("SELECT [Connector_2] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 1", connection);
+                opisanie[0] = commandddd.ExecuteScalar().ToString();
+                win_kabeli.pr1.Text += $"{opisanie[0]}, ";
+
+                SqlCommand commanddd = new SqlCommand("SELECT [Dlina(M)] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 1", connection);
+                opisanie[0] = commanddd.ExecuteScalar().ToString();
+                win_kabeli.pr1.Text += $"Длина {opisanie[0]}м, \n";
+
+                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 1", connection);
+                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                win_kabeli.pr1.Text += $"Цена {opisanie[0]}, ";
+
+                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 1", connection);
+                opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                win_kabeli.pr1.Text += $"Количество на складе {opisanie[0]} ";
+
+            }
+            kor.Show();
+            kor.pokupka.Text = win_kabeli.pr1.Text;
+            kor.oform.Click += Oform_Click;
         }
 
+        private void Kyp86_Click(object sender, RoutedEventArgs e)
+        {
+            katalog win_kabeli = new katalog();
+            string[] opisanie = new string[6];
+            korzina kor = new korzina();
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri(@"https://sun9-82.userapi.com/s/v1/if2/FGixl3BIusER6PWetWMY69uXqMbvm7g4YDbIJW2o_haXtUURcBCskMJabIJZ6zaMgNfkmNf05QNsq49YaQLyBmRd.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
+            this.Close();
+            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 2", connection);
+                opisanie[0] = command.ExecuteScalar().ToString();
+                win_kabeli.pr2.Text = $"{opisanie[0]}, \n";
+
+                SqlCommand commandd = new SqlCommand("SELECT [Connector_1] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 2", connection);
+                opisanie[0] = commandd.ExecuteScalar().ToString();
+                win_kabeli.pr2.Text += $"{opisanie[0]} - ";
+
+                SqlCommand commandddd = new SqlCommand("SELECT [Connector_2] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 2", connection);
+                opisanie[0] = commandddd.ExecuteScalar().ToString();
+                win_kabeli.pr2.Text += $"{opisanie[0]}, ";
+
+                SqlCommand commanddd = new SqlCommand("SELECT [Dlina(M)] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 2", connection);
+                opisanie[0] = commanddd.ExecuteScalar().ToString();
+                win_kabeli.pr2.Text += $"Длина {opisanie[0]}м, \n";
+
+                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 2", connection);
+                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                win_kabeli.pr2.Text += $"Цена {opisanie[0]}, ";
+
+                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 2", connection);
+                opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                win_kabeli.pr2.Text += $"Количество на складе {opisanie[0]} ";
+
+            }
+            kor.Show();
+            kor.pokupka.Text = win_kabeli.pr2.Text;
+            kor.oform.Click += Oform_Click;
+        }
+
+        private void Kyp87_Click(object sender, RoutedEventArgs e)
+        {
+            katalog win_kabeli = new katalog();
+            string[] opisanie = new string[6];
+            korzina kor = new korzina();
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri(@"https://sun9-71.userapi.com/s/v1/if2/hEk6FZrwYF5nhYmWBGr-mbq3i1IDo500vyBr0rHSqj4kAmGfJXJVD-NV1XRkSUK6GcvJieaodGS5YlxvzmW2q-UW.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
+            this.Close();
+            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 3", connection);
+                opisanie[0] = command.ExecuteScalar().ToString();
+                win_kabeli.pr3.Text = $"{opisanie[0]}, \n";
+
+                SqlCommand commandd = new SqlCommand("SELECT [Connector_1] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 3", connection);
+                opisanie[0] = commandd.ExecuteScalar().ToString();
+                win_kabeli.pr3.Text += $"{opisanie[0]} - ";
+
+                SqlCommand commandddd = new SqlCommand("SELECT [Connector_2] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 3", connection);
+                opisanie[0] = commandddd.ExecuteScalar().ToString();
+                win_kabeli.pr3.Text += $"{opisanie[0]}, ";
+
+                SqlCommand commanddd = new SqlCommand("SELECT [Dlina(M)] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 3", connection);
+                opisanie[0] = commanddd.ExecuteScalar().ToString();
+                win_kabeli.pr3.Text += $"Длина {opisanie[0]}м, \n";
+
+                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 3", connection);
+                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                win_kabeli.pr3.Text += $"Цена {opisanie[0]}, ";
+
+                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 3", connection);
+                opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                win_kabeli.pr3.Text += $"Количество на складе {opisanie[0]} ";
+
+            }
+            kor.Show();
+            kor.pokupka.Text = win_kabeli.pr3.Text;
+            kor.oform.Click += Oform_Click;
+        }
+
+        private void Kyp88_Click(object sender, RoutedEventArgs e)
+        {
+            katalog win_kabeli = new katalog();
+            string[] opisanie = new string[6];
+            korzina kor = new korzina();
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri(@"https://sun9-48.userapi.com/s/v1/if2/7h06Y55g0Np_jTzE7qLE5-tX26ezkzHju99UbYtjCsnKYv5HS6_e2_0nG6U6aCiu0Q2VTz5nbnsyMQhOGjWz6qoe.jpg?size=500x453&quality=96&type=album", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
+            this.Close();
+            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 4", connection);
+                opisanie[0] = command.ExecuteScalar().ToString();
+                win_kabeli.pr4.Text = $"{opisanie[0]}, \n";
+
+                SqlCommand commandd = new SqlCommand("SELECT [Connector_1] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 4", connection);
+                opisanie[0] = commandd.ExecuteScalar().ToString();
+                win_kabeli.pr4.Text += $"{opisanie[0]} - ";
+
+                SqlCommand commandddd = new SqlCommand("SELECT [Connector_2] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 4", connection);
+                opisanie[0] = commandddd.ExecuteScalar().ToString();
+                win_kabeli.pr4.Text += $"{opisanie[0]}, ";
+
+                SqlCommand commanddd = new SqlCommand("SELECT [Dlina(M)] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 4", connection);
+                opisanie[0] = commanddd.ExecuteScalar().ToString();
+                win_kabeli.pr4.Text += $"Длина {opisanie[0]}м, \n";
+
+                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 4", connection);
+                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                win_kabeli.pr4.Text += $"Цена {opisanie[0]}, ";
+
+                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 4", connection);
+                opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                win_kabeli.pr4.Text += $"Количество на складе {opisanie[0]} ";
+
+            }
+            kor.Show();
+            kor.pokupka.Text = win_kabeli.pr4.Text;
+            kor.oform.Click += Oform_Click;
+        }
+
+        private void Kyp89_Click(object sender, RoutedEventArgs e)
+        {
+            katalog win_kabeli = new katalog();
+            string[] opisanie = new string[6];
+            korzina kor = new korzina();
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri(@"https://sun9-22.userapi.com/s/v1/if2/KMXGygT36VFTJ6xs2ehhj2Of1eT1qBRBNBpoz14HNVuaHnQzSNl5tA5e_4v0mf2QJY0waFL_vi7NGE4RBV9v4VR7.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
+            this.Close();
+            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 5", connection);
+                opisanie[0] = command.ExecuteScalar().ToString();
+                win_kabeli.pr5.Text = $"{opisanie[0]}, \n";
+
+                SqlCommand commandd = new SqlCommand("SELECT [Connector_1] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 5", connection);
+                opisanie[0] = commandd.ExecuteScalar().ToString();
+                win_kabeli.pr5.Text += $"{opisanie[0]} - ";
+
+                SqlCommand commandddd = new SqlCommand("SELECT [Connector_2] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 5", connection);
+                opisanie[0] = commandddd.ExecuteScalar().ToString();
+                win_kabeli.pr5.Text += $"{opisanie[0]}, ";
+
+                SqlCommand commanddd = new SqlCommand("SELECT [Dlina(M)] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 5", connection);
+                opisanie[0] = commanddd.ExecuteScalar().ToString();
+                win_kabeli.pr5.Text += $"Длина {opisanie[0]}м, \n";
+
+                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 5", connection);
+                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                win_kabeli.pr5.Text += $"Цена {opisanie[0]}, ";
+
+                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 5", connection);
+                opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                win_kabeli.pr5.Text += $"Количество на складе {opisanie[0]} ";
+
+            }
+            kor.Show();
+            kor.pokupka.Text = win_kabeli.pr5.Text;
+            kor.oform.Click += Oform_Click;
+        }
+
+        private void Kyp90_Click(object sender, RoutedEventArgs e)
+        {
+            katalog win_kabeli = new katalog();
+            string[] opisanie = new string[6];
+            korzina kor = new korzina();
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri(@"https://sun9-50.userapi.com/s/v1/if2/3FGe_xchFMuaWVHGPrw8qmsZCL2rVSx7a5X2Lg_RODNg0XJoOb4uptXMM5swd2fLXdyVdwZLkkLLnIAk8_v2VmJq.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
+            this.Close();
+            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 6", connection);
+                opisanie[0] = command.ExecuteScalar().ToString();
+                win_kabeli.pr6.Text = $"{opisanie[0]}, \n";
+
+                SqlCommand commandd = new SqlCommand("SELECT [Connector_1] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 6", connection);
+                opisanie[0] = commandd.ExecuteScalar().ToString();
+                win_kabeli.pr6.Text += $"{opisanie[0]} - ";
+
+                SqlCommand commandddd = new SqlCommand("SELECT [Connector_2] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 6", connection);
+                opisanie[0] = commandddd.ExecuteScalar().ToString();
+                win_kabeli.pr6.Text += $"{opisanie[0]}, ";
+
+                SqlCommand commanddd = new SqlCommand("SELECT [Dlina(M)] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 6", connection);
+                opisanie[0] = commanddd.ExecuteScalar().ToString();
+                win_kabeli.pr6.Text += $"Длина {opisanie[0]}м, \n";
+
+                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 6", connection);
+                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                win_kabeli.pr6.Text += $"Цена {opisanie[0]}, ";
+
+                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 6", connection);
+                opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                win_kabeli.pr6.Text += $"Количество на складе {opisanie[0]} ";
+
+            }
+            kor.Show();
+            kor.pokupka.Text = win_kabeli.pr6.Text;
+            kor.oform.Click += Oform_Click;
+        }
         private void kovriki_Click(object sender, RoutedEventArgs e)
         {
             string[] opisanie = new string[6];
@@ -5866,6 +6134,276 @@ namespace уп
             }
             this.Close();
             win_kovriki.Show();
+            win_kovriki.kyp1.Click += Kyp91_Click;
+            win_kovriki.kyp2.Click += Kyp92_Click;
+            win_kovriki.kyp3.Click += Kyp93_Click;
+            win_kovriki.kyp4.Click += Kyp94_Click;
+            win_kovriki.kyp5.Click += Kyp95_Click;
+            win_kovriki.kyp6.Click += Kyp96_Click;
+        }
+
+        private void Kyp91_Click(object sender, RoutedEventArgs e)
+        {
+            katalog win_kovriki = new katalog();
+            string[] opisanie = new string[6];
+            korzina kor = new korzina();
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri(@"https://sun9-33.userapi.com/s/v1/if2/tCBAl939NUy-H1zG9iTv-6s6jm1FulouvSA1lvlYPU0gSyPWCwBnjqVhNnXex8FgSkW0yKIp9dE2jb78vMGeAWui.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
+            this.Close();
+            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 1", connection);
+                opisanie[0] = command.ExecuteScalar().ToString();
+                win_kovriki.pr1.Text = $"{opisanie[0]}, \n";
+
+                SqlCommand commandd = new SqlCommand("SELECT [Material_pokritia] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 1", connection);
+                opisanie[0] = commandd.ExecuteScalar().ToString();
+                win_kovriki.pr1.Text += $"Материал покрытия {opisanie[0]}, \n";
+
+                SqlCommand commanddd = new SqlCommand("SELECT [Material_ocnovania] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 1", connection);
+                opisanie[0] = commanddd.ExecuteScalar().ToString();
+                win_kovriki.pr1.Text += $"Материал основания {opisanie[0]}, \n";
+
+                SqlCommand commandddd = new SqlCommand("SELECT [Razmer] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 1", connection);
+                opisanie[0] = commandddd.ExecuteScalar().ToString();
+                win_kovriki.pr1.Text += $"Размер {opisanie[0]}, ";
+
+                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 1", connection);
+                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                win_kovriki.pr1.Text += $"Цена {opisanie[0]}, \n";
+
+                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 1", connection);
+                opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                win_kovriki.pr1.Text += $"Количество на складе {opisanie[0]} ";
+
+            }
+            kor.Show();
+            kor.pokupka.Text = win_kovriki.pr1.Text;
+            kor.oform.Click += Oform_Click;
+        }
+
+        private void Kyp92_Click(object sender, RoutedEventArgs e)
+        {
+            katalog win_kovriki = new katalog();
+            string[] opisanie = new string[6];
+            korzina kor = new korzina();
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri(@"https://sun9-59.userapi.com/s/v1/if2/fEkogG8N6ea0IB7ekj3MNQRE-ZEjRwoQBChpKUtbOOBiz1CTNB1Jjfn64nyLlXydDQZG8Yt9KATstUNfCoTpLkGb.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
+            this.Close();
+            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 2", connection);
+                opisanie[0] = command.ExecuteScalar().ToString();
+                win_kovriki.pr2.Text = $"{opisanie[0]}, \n";
+
+                SqlCommand commandd = new SqlCommand("SELECT [Material_pokritia] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 2", connection);
+                opisanie[0] = commandd.ExecuteScalar().ToString();
+                win_kovriki.pr2.Text += $"Материал покрытия {opisanie[0]}, \n";
+
+                SqlCommand commanddd = new SqlCommand("SELECT [Material_ocnovania] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 2", connection);
+                opisanie[0] = commanddd.ExecuteScalar().ToString();
+                win_kovriki.pr2.Text += $"Материал основания {opisanie[0]}, \n";
+
+                SqlCommand commandddd = new SqlCommand("SELECT [Razmer] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 2", connection);
+                opisanie[0] = commandddd.ExecuteScalar().ToString();
+                win_kovriki.pr2.Text += $"Размер {opisanie[0]}, ";
+
+                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 2", connection);
+                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                win_kovriki.pr2.Text += $"Цена {opisanie[0]}, \n";
+
+                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 2", connection);
+                opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                win_kovriki.pr2.Text += $"Количество на складе {opisanie[0]} ";
+
+            }
+            kor.Show();
+            kor.pokupka.Text = win_kovriki.pr2.Text;
+            kor.oform.Click += Oform_Click;
+        }
+
+        private void Kyp93_Click(object sender, RoutedEventArgs e)
+        {
+            katalog win_kovriki = new katalog();
+            string[] opisanie = new string[6];
+            korzina kor = new korzina();
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri(@"https://sun9-20.userapi.com/s/v1/if2/TTi6H1b4kDPc_R1h-wHdszjXyGpeceFSvP9qG3x2z1iToQn8A2uvwKwdFKRPXekDBKTaqyISApA2UWv6dOn8zKZ_.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
+            this.Close();
+            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 3", connection);
+                opisanie[0] = command.ExecuteScalar().ToString();
+                win_kovriki.pr3.Text = $"{opisanie[0]}, \n";
+
+                SqlCommand commandd = new SqlCommand("SELECT [Material_pokritia] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 3", connection);
+                opisanie[0] = commandd.ExecuteScalar().ToString();
+                win_kovriki.pr3.Text += $"Материал покрытия {opisanie[0]}, \n";
+
+                SqlCommand commanddd = new SqlCommand("SELECT [Material_ocnovania] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 3", connection);
+                opisanie[0] = commanddd.ExecuteScalar().ToString();
+                win_kovriki.pr3.Text += $"Материал основания {opisanie[0]}, \n";
+
+                SqlCommand commandddd = new SqlCommand("SELECT [Razmer] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 3", connection);
+                opisanie[0] = commandddd.ExecuteScalar().ToString();
+                win_kovriki.pr3.Text += $"Размер {opisanie[0]}, ";
+
+                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 3", connection);
+                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                win_kovriki.pr3.Text += $"Цена {opisanie[0]}, \n";
+
+                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 3", connection);
+                opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                win_kovriki.pr3.Text += $"Количество на складе {opisanie[0]} ";
+
+            }
+            kor.Show();
+            kor.pokupka.Text = win_kovriki.pr3.Text;
+            kor.oform.Click += Oform_Click;
+        }
+
+        private void Kyp94_Click(object sender, RoutedEventArgs e)
+        {
+            katalog win_kovriki = new katalog();
+            string[] opisanie = new string[6];
+            korzina kor = new korzina();
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri(@"https://sun9-12.userapi.com/s/v1/if2/YuFIAQSf08TBX16J-g2fU2foWMHYlQ13ozSNEnosiL7ayIiC19ONdmZOdCSe-gaBjZ3fetIacw912WhVHMrNkY1I.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
+            this.Close();
+            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 4", connection);
+                opisanie[0] = command.ExecuteScalar().ToString();
+                win_kovriki.pr4.Text = $"{opisanie[0]}, \n";
+
+                SqlCommand commandd = new SqlCommand("SELECT [Material_pokritia] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 4", connection);
+                opisanie[0] = commandd.ExecuteScalar().ToString();
+                win_kovriki.pr4.Text += $"Материал покрытия {opisanie[0]}, \n";
+
+                SqlCommand commanddd = new SqlCommand("SELECT [Material_ocnovania] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 4", connection);
+                opisanie[0] = commanddd.ExecuteScalar().ToString();
+                win_kovriki.pr4.Text += $"Материал основания {opisanie[0]}, \n";
+
+                SqlCommand commandddd = new SqlCommand("SELECT [Razmer] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 4", connection);
+                opisanie[0] = commandddd.ExecuteScalar().ToString();
+                win_kovriki.pr4.Text += $"Размер {opisanie[0]}, ";
+
+                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 4", connection);
+                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                win_kovriki.pr4.Text += $"Цена {opisanie[0]}, \n";
+
+                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 4", connection);
+                opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                win_kovriki.pr4.Text += $"Количество на складе {opisanie[0]} ";
+
+            }
+            kor.Show();
+            kor.pokupka.Text = win_kovriki.pr4.Text;
+            kor.oform.Click += Oform_Click;
+        }
+
+        private void Kyp95_Click(object sender, RoutedEventArgs e)
+        {
+            katalog win_kovriki = new katalog();
+            string[] opisanie = new string[6];
+            korzina kor = new korzina();
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri(@"https://sun9-82.userapi.com/s/v1/if2/Krlw_w9OHRBL7wEhGVlmpVoM31sVVR4_qQARmSYSiz6uliv6WJgKjS4QGKzTw1OaRp9BgkTWwMn8ErtrKccF6ifX.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
+            this.Close();
+            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 5", connection);
+                opisanie[0] = command.ExecuteScalar().ToString();
+                win_kovriki.pr5.Text = $"{opisanie[0]}, \n";
+
+                SqlCommand commandd = new SqlCommand("SELECT [Material_pokritia] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 5", connection);
+                opisanie[0] = commandd.ExecuteScalar().ToString();
+                win_kovriki.pr5.Text += $"Материал покрытия {opisanie[0]}, \n";
+
+                SqlCommand commanddd = new SqlCommand("SELECT [Material_ocnovania] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 5", connection);
+                opisanie[0] = commanddd.ExecuteScalar().ToString();
+                win_kovriki.pr5.Text += $"Материал основания {opisanie[0]}, \n";
+
+                SqlCommand commandddd = new SqlCommand("SELECT [Razmer] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 5", connection);
+                opisanie[0] = commandddd.ExecuteScalar().ToString();
+                win_kovriki.pr5.Text += $"Размер {opisanie[0]}, ";
+
+                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 5", connection);
+                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                win_kovriki.pr5.Text += $"Цена {opisanie[0]}, \n";
+
+                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 5", connection);
+                opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                win_kovriki.pr5.Text += $"Количество на складе {opisanie[0]} ";
+
+            }
+            kor.Show();
+            kor.pokupka.Text = win_kovriki.pr5.Text;
+            kor.oform.Click += Oform_Click;
+        }
+
+        private void Kyp96_Click(object sender, RoutedEventArgs e)
+        {
+            katalog win_kovriki = new katalog();
+            string[] opisanie = new string[6];
+            korzina kor = new korzina();
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri(@"https://sun9-51.userapi.com/s/v1/if2/3izsdUxdCK9cWHWFXiRaDwisJLsSiI5xyDqCNsTB422No7he0nUCmkZbkht4Km-QHilbzu4tCkMVyUUg6cJqc1bd.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
+            this.Close();
+            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 6", connection);
+                opisanie[0] = command.ExecuteScalar().ToString();
+                win_kovriki.pr6.Text = $"{opisanie[0]}, \n";
+
+                SqlCommand commandd = new SqlCommand("SELECT [Material_pokritia] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 6", connection);
+                opisanie[0] = commandd.ExecuteScalar().ToString();
+                win_kovriki.pr6.Text += $"Материал покрытия {opisanie[0]}, \n";
+
+                SqlCommand commanddd = new SqlCommand("SELECT [Material_ocnovania] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 6", connection);
+                opisanie[0] = commanddd.ExecuteScalar().ToString();
+                win_kovriki.pr6.Text += $"Материал основания {opisanie[0]}, \n";
+
+                SqlCommand commandddd = new SqlCommand("SELECT [Razmer] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 6", connection);
+                opisanie[0] = commandddd.ExecuteScalar().ToString();
+                win_kovriki.pr6.Text += $"Размер {opisanie[0]}, ";
+
+                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 6", connection);
+                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                win_kovriki.pr6.Text += $"Цена {opisanie[0]}, \n";
+
+                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 6", connection);
+                opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                win_kovriki.pr6.Text += $"Количество на складе {opisanie[0]} ";
+
+            }
+            kor.Show();
+            kor.pokupka.Text = win_kovriki.pr6.Text;
+            kor.oform.Click += Oform_Click;
         }
 
         private void noutbuki_Click(object sender, RoutedEventArgs e)
@@ -5991,6 +6529,276 @@ namespace уп
             }
             this.Close();
             win_nout.Show();
+            win_nout.kyp1.Click += Kyp97_Click;
+            win_nout.kyp2.Click += Kyp98_Click;
+            win_nout.kyp3.Click += Kyp99_Click;
+            win_nout.kyp4.Click += Kyp100_Click;
+            win_nout.kyp5.Click += Kyp101_Click;
+            win_nout.kyp6.Click += Kyp102_Click;
+        }
+
+        private void Kyp97_Click(object sender, RoutedEventArgs e)
+        {
+            katalog win_nout = new katalog();
+            string[] opisanie = new string[6];
+            korzina kor = new korzina();
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri(@"https://sun9-65.userapi.com/s/v1/if2/lYsDWo8jt47w2OMOHxjuRwU3K7-S8DVpWKL1BgnYfh5zZtrhnUA75Jdhc7RPxqs9ynpj2hZRT5k2tOkh0Bb7ri9H.jpg?size=500x395&quality=96&type=album", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
+            this.Close();
+            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 1", connection);
+                opisanie[0] = command.ExecuteScalar().ToString();
+                win_nout.pr1.Text = $"{opisanie[0]}, \n";
+
+                SqlCommand commandd = new SqlCommand("SELECT [Volume_operativ] FROM [dbo].[Notebok] WHERE [id_notebok] = 1", connection);
+                opisanie[0] = commandd.ExecuteScalar().ToString();
+                win_nout.pr1.Text += $"Объем оперативной памяти {opisanie[0]}, \n";
+
+                SqlCommand commandddd = new SqlCommand("SELECT [procesor] FROM [dbo].[Notebok] WHERE [id_notebok] = 1", connection);
+                opisanie[0] = commandddd.ExecuteScalar().ToString();
+                win_nout.pr1.Text += $"Процессор {opisanie[0]}, \n";
+
+                SqlCommand commanddddd = new SqlCommand("SELECT [Pamat] FROM [dbo].[Notebok] WHERE [id_notebok] = 1", connection);
+                opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                win_nout.pr1.Text += $"Объем памяти {opisanie[0]}, \n";
+
+                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 1", connection);
+                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                win_nout.pr1.Text += $"Цена {opisanie[0]}, ";
+
+                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichectvo] FROM [dbo].[Notebok] WHERE [id_notebok] = 1", connection);
+                opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                win_nout.pr1.Text += $"Количество на складе {opisanie[0]} ";
+
+            }
+            kor.Show();
+            kor.pokupka.Text = win_nout.pr1.Text;
+            kor.oform.Click += Oform_Click;
+        }
+
+        private void Kyp98_Click(object sender, RoutedEventArgs e)
+        {
+            katalog win_nout = new katalog();
+            string[] opisanie = new string[6];
+            korzina kor = new korzina();
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri(@"https://sun9-76.userapi.com/s/v1/if2/139e4AtaYGc8SLZuOD-aesz6P2HOBPv7yJ5clEDR-Cyx9OLi9F12uDJpaCGDQMGw5jRICDuO6NRQcvSM2Kml_CL8.jpg?size=500x335&quality=96&type=album", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
+            this.Close();
+            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 2", connection);
+                opisanie[0] = command.ExecuteScalar().ToString();
+                win_nout.pr2.Text = $"{opisanie[0]}, \n";
+
+                SqlCommand commandd = new SqlCommand("SELECT [Volume_operativ] FROM [dbo].[Notebok] WHERE [id_notebok] = 2", connection);
+                opisanie[0] = commandd.ExecuteScalar().ToString();
+                win_nout.pr2.Text += $"Объем оперативной памяти {opisanie[0]}, \n";
+
+                SqlCommand commandddd = new SqlCommand("SELECT [procesor] FROM [dbo].[Notebok] WHERE [id_notebok] = 2", connection);
+                opisanie[0] = commandddd.ExecuteScalar().ToString();
+                win_nout.pr2.Text += $"Процессор {opisanie[0]}, \n";
+
+                SqlCommand commanddddd = new SqlCommand("SELECT [Pamat] FROM [dbo].[Notebok] WHERE [id_notebok] = 2", connection);
+                opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                win_nout.pr2.Text += $"Объем памяти {opisanie[0]}, \n";
+
+                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 2", connection);
+                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                win_nout.pr2.Text += $"Цена {opisanie[0]}, ";
+
+                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichectvo] FROM [dbo].[Notebok] WHERE [id_notebok] = 2", connection);
+                opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                win_nout.pr2.Text += $"Количество на складе {opisanie[0]} ";
+
+            }
+            kor.Show();
+            kor.pokupka.Text = win_nout.pr2.Text;
+            kor.oform.Click += Oform_Click;
+        }
+
+        private void Kyp99_Click(object sender, RoutedEventArgs e)
+        {
+            katalog win_nout = new katalog();
+            string[] opisanie = new string[6];
+            korzina kor = new korzina();
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri(@"https://sun9-29.userapi.com/s/v1/if2/t5Wj3W9rebcSyM-9ivtTcmg6QhPKB7pSVWhZZGr1xHWknPGw7_REaG6d7G-u3TW_VCF1sz8uV4KqSyYO-qg2RA9i.jpg?size=500x339&quality=96&type=album", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
+            this.Close();
+            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 3", connection);
+                opisanie[0] = command.ExecuteScalar().ToString();
+                win_nout.pr3.Text = $"{opisanie[0]}, \n";
+
+                SqlCommand commandd = new SqlCommand("SELECT [Volume_operativ] FROM [dbo].[Notebok] WHERE [id_notebok] = 3", connection);
+                opisanie[0] = commandd.ExecuteScalar().ToString();
+                win_nout.pr3.Text += $"Объем оперативной памяти {opisanie[0]}, \n";
+
+                SqlCommand commandddd = new SqlCommand("SELECT [procesor] FROM [dbo].[Notebok] WHERE [id_notebok] = 3", connection);
+                opisanie[0] = commandddd.ExecuteScalar().ToString();
+                win_nout.pr3.Text += $"Процессор {opisanie[0]}, \n";
+
+                SqlCommand commanddddd = new SqlCommand("SELECT [Pamat] FROM [dbo].[Notebok] WHERE [id_notebok] = 3", connection);
+                opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                win_nout.pr3.Text += $"Объем памяти {opisanie[0]}, \n";
+
+                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 3", connection);
+                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                win_nout.pr3.Text += $"Цена {opisanie[0]}, ";
+
+                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichectvo] FROM [dbo].[Notebok] WHERE [id_notebok] = 3", connection);
+                opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                win_nout.pr3.Text += $"Количество на складе {opisanie[0]} ";
+
+            }
+            kor.Show();
+            kor.pokupka.Text = win_nout.pr3.Text;
+            kor.oform.Click += Oform_Click;
+        }
+
+        private void Kyp100_Click(object sender, RoutedEventArgs e)
+        {
+            katalog win_nout = new katalog();
+            string[] opisanie = new string[6];
+            korzina kor = new korzina();
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri(@"https://sun9-23.userapi.com/s/v1/if2/_FdVIkdbPixk4uJtLENMyH8zup19VZgTS7UZQ2UKRfvWk8b1ocqbXNSloJOQTqxv4o0-ZFlgn5g0sRreC5CLVECI.jpg?size=504x362&quality=96&type=album", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
+            this.Close();
+            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 4", connection);
+                opisanie[0] = command.ExecuteScalar().ToString();
+                win_nout.pr4.Text = $"{opisanie[0]}, \n";
+
+                SqlCommand commandd = new SqlCommand("SELECT [Volume_operativ] FROM [dbo].[Notebok] WHERE [id_notebok] = 4", connection);
+                opisanie[0] = commandd.ExecuteScalar().ToString();
+                win_nout.pr4.Text += $"Объем оперативной памяти {opisanie[0]}, \n";
+
+                SqlCommand commandddd = new SqlCommand("SELECT [procesor] FROM [dbo].[Notebok] WHERE [id_notebok] = 4", connection);
+                opisanie[0] = commandddd.ExecuteScalar().ToString();
+                win_nout.pr4.Text += $"Процессор {opisanie[0]}, \n";
+
+                SqlCommand commanddddd = new SqlCommand("SELECT [Pamat] FROM [dbo].[Notebok] WHERE [id_notebok] = 4", connection);
+                opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                win_nout.pr4.Text += $"Объем памяти {opisanie[0]}, \n";
+
+                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 4", connection);
+                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                win_nout.pr4.Text += $"Цена {opisanie[0]}, ";
+
+                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichectvo] FROM [dbo].[Notebok] WHERE [id_notebok] = 4", connection);
+                opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                win_nout.pr4.Text += $"Количество на складе {opisanie[0]} ";
+
+            }
+            kor.Show();
+            kor.pokupka.Text = win_nout.pr4.Text;
+            kor.oform.Click += Oform_Click;
+        }
+
+        private void Kyp101_Click(object sender, RoutedEventArgs e)
+        {
+            katalog win_nout = new katalog();
+            string[] opisanie = new string[6];
+            korzina kor = new korzina();
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri(@"https://sun9-60.userapi.com/s/v1/if2/TDWR95AmME2GifgwC4J7qWQONj-1IdF8ipOiEt7-V5jp7QgeajuOSoqoCe2qQMrtINioc2gE6hBKH5Wo-tR4OMTm.jpg?size=320x240&quality=96&type=album", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
+            this.Close();
+            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 5", connection);
+                opisanie[0] = command.ExecuteScalar().ToString();
+                win_nout.pr5.Text = $"{opisanie[0]}, \n";
+
+                SqlCommand commandd = new SqlCommand("SELECT [Volume_operativ] FROM [dbo].[Notebok] WHERE [id_notebok] = 5", connection);
+                opisanie[0] = commandd.ExecuteScalar().ToString();
+                win_nout.pr5.Text += $"Объем оперативной памяти {opisanie[0]}, \n";
+
+                SqlCommand commandddd = new SqlCommand("SELECT [procesor] FROM [dbo].[Notebok] WHERE [id_notebok] = 5", connection);
+                opisanie[0] = commandddd.ExecuteScalar().ToString();
+                win_nout.pr5.Text += $"Процессор {opisanie[0]}, \n";
+
+                SqlCommand commanddddd = new SqlCommand("SELECT [Pamat] FROM [dbo].[Notebok] WHERE [id_notebok] = 5", connection);
+                opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                win_nout.pr5.Text += $"Объем памяти {opisanie[0]}, \n";
+
+                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 5", connection);
+                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                win_nout.pr5.Text += $"Цена {opisanie[0]}, ";
+
+                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichectvo] FROM [dbo].[Notebok] WHERE [id_notebok] = 5", connection);
+                opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                win_nout.pr5.Text += $"Количество на складе {opisanie[0]} ";
+
+            }
+            kor.Show();
+            kor.pokupka.Text = win_nout.pr5.Text;
+            kor.oform.Click += Oform_Click;
+        }
+
+        private void Kyp102_Click(object sender, RoutedEventArgs e)
+        {
+            katalog win_nout = new katalog();
+            string[] opisanie = new string[6];
+            korzina kor = new korzina();
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri(@"https://sun9-49.userapi.com/s/v1/if2/F6BwJ4slyGTGiB9Zsa86fXCmQ3vNXq_-rbX1QQUlKO-8uwYjhtAHsDtP5y4HYytueUCt4YgRwcpp1nSQUql0OuMJ.jpg?size=320x240&quality=96&type=album", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
+            this.Close();
+            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 6", connection);
+                opisanie[0] = command.ExecuteScalar().ToString();
+                win_nout.pr6.Text = $"{opisanie[0]}, \n";
+
+                SqlCommand commandd = new SqlCommand("SELECT [Volume_operativ] FROM [dbo].[Notebok] WHERE [id_notebok] = 6", connection);
+                opisanie[0] = commandd.ExecuteScalar().ToString();
+                win_nout.pr6.Text += $"Объем оперативной памяти {opisanie[0]}, \n";
+
+                SqlCommand commandddd = new SqlCommand("SELECT [procesor] FROM [dbo].[Notebok] WHERE [id_notebok] = 6", connection);
+                opisanie[0] = commandddd.ExecuteScalar().ToString();
+                win_nout.pr6.Text += $"Процессор {opisanie[0]}, \n";
+
+                SqlCommand commanddddd = new SqlCommand("SELECT [Pamat] FROM [dbo].[Notebok] WHERE [id_notebok] = 6", connection);
+                opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                win_nout.pr6.Text += $"Объем памяти {opisanie[0]}, \n";
+
+                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 6", connection);
+                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                win_nout.pr6.Text += $"Цена {opisanie[0]}, ";
+
+                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichectvo] FROM [dbo].[Notebok] WHERE [id_notebok] = 6", connection);
+                opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                win_nout.pr6.Text += $"Количество на складе {opisanie[0]} ";
+
+            }
+            kor.Show();
+            kor.pokupka.Text = win_nout.pr6.Text;
+            kor.oform.Click += Oform_Click;
         }
 
         private void Admin_panel_Click(object sender, RoutedEventArgs e)

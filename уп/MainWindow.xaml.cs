@@ -28,16 +28,15 @@ namespace уп
         {
             InitializeComponent();
         }
-
         private void vxod_Click(object sender, RoutedEventArgs e)
         {
             string login_vx = login_vxod.Text;
-            string password_vx = password_vxod.Text;
+            string password_vx = password_vxod.Password;
             if (login_vx != "") // проверяем введён ли логин     
             {
                 if (password_vx != "" ) // проверяем введён ли пароль         
                 {             // ищем в базе данных пользователя с такими данными         
-                    DataTable dt_user = Select("SELECT * FROM [dbo].[Users] WHERE [Login] = '" + login_vxod.Text + "' AND [password] = '" + password_vxod.Text  + "'");
+                    DataTable dt_user = Select("SELECT * FROM [dbo].[Users] WHERE [Login] = '" + login_vxod.Text + "' AND [password] = '" + password_vxod.Password + "'");
                     if (dt_user.Rows.Count > 0) // если такая запись существует       
                     {
                         DataTable dt_admin = Select("SELECT * FROM [dbo].[Admin] WHERE [Login] = '" + login_vxod.Text + "'");
@@ -75,10 +74,6 @@ namespace уп
 
         }
 
-        private void password_vxod_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
         public DataTable Select(string selectSQL) // функция подключения к базе данных и обработка запросов
         {
             DataTable dataTable = new DataTable("dataBase"); // создаём таблицу в приложении

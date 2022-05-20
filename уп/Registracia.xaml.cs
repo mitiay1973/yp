@@ -35,21 +35,11 @@ namespace уп
 
         }
 
-        private void password_reg_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void password_reg_Copy_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
         private void zaregistrirovatsia_Click(object sender, RoutedEventArgs e)
         {
             login = login_reg.Text;
-            password = password_reg.Text;
-            password1 = password_reg_Copy.Text;
+            password = password_reg.Password;
+            password1 = password_reg_Copy.Password;
             if(login == "")
             {
                 MessageBox.Show("Введите логин");
@@ -74,11 +64,19 @@ namespace уп
                         }
                         else
                         {
-                            MessageBox.Show("Регистрация успешно завершена");
-                            DataTable dt_user = Select("insert into [dbo].[Users] ([Login], [password]) values('" + login_reg.Text + "','" + password_reg.Text  + "')");
-                            MainWindow win_gl = new MainWindow();
-                            this.Close();
-                            win_gl.Show();
+                            DataTable dt_user1 = Select("SELECT * FROM [dbo].[Users] WHERE [Login] = '" + login_reg.Text + "' AND [password] = '" + login_reg.Text + "'");
+                            if (dt_user1.Rows.Count > 0) // если такая запись существует       
+                            {
+                                MessageBox.Show("Регистрация успешно завершена");
+                                DataTable dt_user = Select("insert into [dbo].[Users] ([Login], [password]) values('" + login_reg.Text + "','" + password_reg.Password + "')");
+                                MainWindow win_gl = new MainWindow();
+                                this.Close();
+                                win_gl.Show();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Такой аккаунт уже существует");
+                            }
                         }
                     }
                 }
