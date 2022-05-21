@@ -27,6 +27,7 @@ namespace уп
         public MainWindow()
         {
             InitializeComponent();
+
         }
         private void vxod_Click(object sender, RoutedEventArgs e)
         {

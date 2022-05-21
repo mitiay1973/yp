@@ -53,6 +53,14 @@ namespace уп
             glavnaya.kabeli.Visibility = Visibility.Visible;
             glavnaya.kovriki.Visibility = Visibility.Visible;
             glavnaya.noutbuki.Visibility = Visibility.Visible;
+            if (Admin_panel.IsVisible == true)
+            {
+                Admin_panel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+
+            }
         }
         private void kyp1_Click(object sender, RoutedEventArgs e)
         {

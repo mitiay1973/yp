@@ -256,5 +256,8 @@
   <ItemGroup>
     <Resource Include="превью.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="лого2.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

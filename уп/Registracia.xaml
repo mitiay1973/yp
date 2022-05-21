@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:уп"
         mc:Ignorable="d"
-        Title="Регистрация" Height="254.476" Width="304.152" MaxHeight="254.476" MaxWidth="304.152" MinHeight="254.476" MinWidth="304.152">
+        Title="Регистрация" Height="254.476" Width="304.152" MaxHeight="254.476" MaxWidth="304.152" MinHeight="254.476" MinWidth="304.152" Icon="лого2.jpg">
     <Grid Background="#FFEEC5A4">
         <TextBox x:Name="login_reg" HorizontalAlignment="Left" Margin="52,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="19" Width="194" Background="White" TextChanged="login_reg_TextChanged"/>
         <PasswordBox x:Name="password_reg" HorizontalAlignment="Left" Margin="52,78,0,0"  VerticalAlignment="Top" Height="19" Width="194" Background="White" />

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:уп"
         mc:Ignorable="d"
-        Title="Наушники" Height="450" Width="800"  MaxHeight="450" MaxWidth="800" MinHeight="450" MinWidth="800">
+        Title="Наушники" Height="450" Width="800"  MaxHeight="450" MaxWidth="800" MinHeight="450" MinWidth="800" Icon="лого2.jpg">
     
     <Grid Background="#FFE4E4E4">
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="41" Width="792" Background="#FFEEC5A4" Foreground="Black"/>

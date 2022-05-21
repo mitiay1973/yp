@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:уп"
         mc:Ignorable="d"
-        Title="Вход" Height="276.873" Width="261.506"  MaxHeight="276.873" MaxWidth="261.506" MinHeight="276.873" MinWidth="261.506">
+        Title="Вход" Height="276.873" Width="261.506"  MaxHeight="276.873" MaxWidth="261.506" MinHeight="276.873" MinWidth="261.506" Icon="лого2.jpg">
     <Grid Background="#FFEEC5A4">
         <Grid.ColumnDefinitions>
 

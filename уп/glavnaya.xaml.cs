@@ -44,6 +44,14 @@ namespace уп
             kabeli.Visibility = Visibility.Hidden;
             kovriki.Visibility = Visibility.Hidden;
             noutbuki.Visibility = Visibility.Hidden;
+            if (Admin_panel.IsVisible == true)
+            {
+                Admin_panel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+
+            }
         }
 
         private void Vxod_Click(object sender, RoutedEventArgs e)
@@ -73,6 +81,14 @@ namespace уп
             kabeli.Visibility = Visibility.Hidden;
             kovriki.Visibility = Visibility.Hidden;
             noutbuki.Visibility = Visibility.Hidden;
+            if (Admin_panel.IsVisible == true)
+            {
+                Admin_panel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+
+            }
         }
 
         private void katalog_Click(object sender, RoutedEventArgs e)
@@ -97,6 +113,14 @@ namespace уп
             kabeli.Visibility = Visibility.Visible;
             kovriki.Visibility = Visibility.Visible;
             noutbuki.Visibility = Visibility.Visible;
+            if (Admin_panel.IsVisible == true)
+            {
+                Admin_panel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+
+            }
         }
         private void processori_Click(object sender, RoutedEventArgs e)
         {
