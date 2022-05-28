@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -63,6 +65,7 @@ namespace уп
                     if(pochta.Text!="")
                     {
                         MessageBox.Show("Заказ успешно оформлен");
+
                         this.Close();
                     }
                     else
@@ -79,6 +82,19 @@ namespace уп
             {
                 MessageBox.Show("Введите имя");
             }
+        }
+        public DataTable Select(string selectSQL) // функция подключения к базе данных и обработка запросов
+        {
+            DataTable dataTable = new DataTable("dataBase"); // создаём таблицу в приложении
+                                                             // подключаемся к базе данных
+            SqlConnection sqlConnection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357");
+            sqlConnection.Open(); // открываем базу данных
+            SqlCommand sqlCommand = sqlConnection.CreateCommand(); // создаём команду
+            sqlCommand.CommandText = selectSQL; // присваиваем команде текст
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand); // создаём обработчик
+            sqlDataAdapter.Fill(dataTable);
+            sqlConnection.Close(); // возращаем таблицу с результатом
+            return dataTable;
         }
     }
 }

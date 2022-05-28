@@ -55,6 +55,7 @@ namespace уп
                             glavnaya.Admin_panel.Visibility = Visibility.Hidden;
                         }
                         this.Close();
+                        DataTable dt_koll = Select("UPDATE [dbo].[Activ_user] SET [Login] ='" + login_vxod.Text + "' WHERE [Id_activ] = 1");
                         glavnaya.Show();
                     }
                     else MessageBox.Show("Пользователя не найден"); // выводим ошибку  

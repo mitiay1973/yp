@@ -259,11 +259,8 @@ namespace уп
             katalog win_proc = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-74.userapi.com/s/v1/if2/3Ikf2tjE5mxY2bV8ttkWcsWUiIBBiVp_tW83eZLuG4tn_A62J06pET_KMwuYWbCeUurFzpWRpLCjyc6BBUHGpVss.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            int koll;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -290,23 +287,29 @@ namespace уп
 
                 SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Procesor] WHERE [Id_procesor] = 6", connection);
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                koll= Convert.ToInt32(commandddddd.ExecuteScalar().ToString());
                 win_proc.pr6.Text += $"Количество на складе {opisanie[0]} ";
+
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Procesor] WHERE [Id_procesor] = 6", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_proc.pr6.Text;
             kor.oform.Click += Oform_Click;
-        }
+
+            }
 
         private void Kyp5_Click(object sender, RoutedEventArgs e)
         {
             katalog win_proc = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-34.userapi.com/s/v1/if2/0TYM-PEZGh72r2M8oroqOFY0KVUPKZwYzVNdVEeh-ioIVMumx9CUYAtIVpHa96YmHo856qMJZkr5yGPACyFF4jYs.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -334,7 +337,15 @@ namespace уп
                 SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Procesor] WHERE [Id_procesor] = 5", connection);
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_proc.pr5.Text += $"Количество на складе {opisanie[0]} ";
+
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Procesor] WHERE [Id_procesor] = 5", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_proc.pr5.Text;
             kor.oform.Click += Oform_Click;
@@ -345,11 +356,7 @@ namespace уп
             katalog win_proc = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-17.userapi.com/s/v1/if2/oCg-0CjROmu95WqLpXyMuOV8TY5JQPoS4TNCSRpRGgc-ZpJ87SAaXO_5muU8XSZ71bEhOGDG49u8CVIamqjTvcQe.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -377,7 +384,15 @@ namespace уп
                 SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Procesor] WHERE [Id_procesor] = 4", connection);
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_proc.pr4.Text += $"Количество на складе {opisanie[0]} ";
+
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Procesor] WHERE [Id_procesor] = 4", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_proc.pr4.Text;
             kor.oform.Click += Oform_Click;
@@ -388,11 +403,7 @@ namespace уп
             katalog win_proc = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-65.userapi.com/s/v1/if2/FvEgKmvETB13D67sasyK-4gs3_JX2BurJRZf8E_HgVTn_mqBp3v1xFqZC0h7dgceU6406OgQeDYr7pHit7kItPuS.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -420,7 +431,15 @@ namespace уп
                 SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Procesor] WHERE [Id_procesor] = 3", connection);
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_proc.pr3.Text += $"Количество на складе {opisanie[0]} ";
+
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Procesor] WHERE [Id_procesor] = 3", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_proc.pr3.Text;
             kor.oform.Click += Oform_Click;
@@ -431,11 +450,7 @@ namespace уп
             katalog win_proc = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-83.userapi.com/s/v1/if2/ktFELEbfhwhEREc2SZ3afsrH5-J5fdIbEQvkZPiIdK3Faw4TfdE2lCE4UYzVhhunFFwh9iGY6N8szEqejUkMNHsd.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -463,7 +478,15 @@ namespace уп
                 SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Procesor] WHERE [Id_procesor] = 2", connection);
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_proc.pr2.Text += $"Количество на складе {opisanie[0]} ";
+
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Procesor] WHERE [Id_procesor] = 2", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_proc.pr2.Text;
             kor.oform.Click += Oform_Click;
@@ -473,13 +496,8 @@ namespace уп
         {
             katalog win_proc = new katalog();
             string[] opisanie = new string[6];
-
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-80.userapi.com/s/v1/if2/sna4Yhq4-nMWkbX8PP8IQbKKCDGFhxqGyvVtDrvzxbZyQfUG1uTTD99YnkTzJxZAqN1Qvq799RN-YcQiwWhQMktI.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -507,7 +525,15 @@ namespace уп
                 SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Procesor] WHERE [Id_procesor] = 1", connection);
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_proc.pr1.Text += $"Количество на складе {opisanie[0]} ";
+
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Procesor] WHERE [Id_procesor] = 1", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_proc.pr1.Text;
             kor.oform.Click += Oform_Click;
@@ -673,11 +699,7 @@ namespace уп
             katalog win_mat = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-15.userapi.com/s/v1/if2/fDNvcx3UF1g5IBQwDZQUr0HRbVpWtbXNfnvY9BBR1YFCQkI7y9nEAFfa7WX-vd9R40s2qu0qDdeECsVBU551RQme.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -709,7 +731,15 @@ namespace уп
                 SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 1", connection);
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_mat.pr1.Text += $"Количество на складе {opisanie[0]} ";
+
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 1", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_mat.pr1.Text;
             kor.oform.Click += Oform_Click;
@@ -720,11 +750,7 @@ namespace уп
             katalog win_mat = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-87.userapi.com/s/v1/if2/rsxPi6cd-a9YYoYDMjt_xEusKyIYx1bFE9Zld2gF3q0jeEnjv0NThDcXGSPAr2dX3bKuV3TDa2AdT34_7amHzHik.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -756,7 +782,15 @@ namespace уп
                 SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 2", connection);
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_mat.pr2.Text += $"Количество на складе {opisanie[0]} ";
+
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 2", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_mat.pr2.Text;
             kor.oform.Click += Oform_Click;
@@ -767,11 +801,7 @@ namespace уп
             katalog win_mat = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-68.userapi.com/s/v1/if2/nm4-4Yn12MoUjNTFWBKj9pNTsbVh4uVrKpLRWyeFbrtixnJ6A2RXdPx-CN3jWQnvZuiO4YGBcLiPcFe6_r7I9_AI.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -803,7 +833,15 @@ namespace уп
                 SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 3", connection);
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_mat.pr3.Text += $"Количество на складе {opisanie[0]} ";
+
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 3", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_mat.pr3.Text;
             kor.oform.Click += Oform_Click;
@@ -814,11 +852,7 @@ namespace уп
             katalog win_mat = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-33.userapi.com/s/v1/if2/jnnamoYkmds9lhlMdnpv_IV0AatX_fyekn6lVmLvKk9_nMm3sQJocmyo2CKGgyYnH5DB8uMZdHiiRnjxHz8SnPk9.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -850,7 +884,15 @@ namespace уп
                 SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 4", connection);
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_mat.pr4.Text += $"Количество на складе {opisanie[0]} ";
+
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 4", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_mat.pr4.Text;
             kor.oform.Click += Oform_Click;
@@ -861,11 +903,7 @@ namespace уп
             katalog win_mat = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-81.userapi.com/s/v1/if2/VUrr8yGLTb322ei65tORsw0zxgrG71tXJ6p7_JtFPyt3sX5IIjsVxwIuKfUE3CZ0vHyE3eGpzuvPV2PX9rwACcrr.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -897,7 +935,15 @@ namespace уп
                 SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 5", connection);
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_mat.pr5.Text += $"Количество на складе {opisanie[0]} ";
+
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 5", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_mat.pr5.Text;
             kor.oform.Click += Oform_Click;
@@ -908,11 +954,7 @@ namespace уп
             katalog win_mat = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-20.userapi.com/s/v1/if2/uUW2ikgtZ6yOtXF6bKbsTzv5mRYZINK2Ssgz73Bs1TlLe4Ij2-aT1WrjFPnPUcJG6Z26QxeowYhgBBsOsKYqNqYI.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -944,7 +986,15 @@ namespace уп
                 SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 6", connection);
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_mat.pr6.Text += $"Количество на складе {opisanie[0]} ";
+
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 6", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_mat.pr6.Text;
             kor.oform.Click += Oform_Click;
@@ -1087,11 +1137,7 @@ namespace уп
             katalog win_videokart = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-60.userapi.com/s/v1/if2/QzM_40yzR7zo4qAPQ8rW1oIi_HuuW6VUOm909ejhJi8Ch6dS6i3yqErO29TyV7mgSL3RcNZFMfXPTZTiRxyvhrfh.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -1120,7 +1166,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_videokart.pr1.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Videocart] WHERE [Id_videocart] = 1", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_videokart.pr1.Text;
             kor.oform.Click += Oform_Click;
@@ -1131,11 +1184,7 @@ namespace уп
             katalog win_videokart = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-22.userapi.com/s/v1/if2/XTXnW68A_o1qjbZmEGAPtPj98C6zYCYWJkXogFTQ-mRVyv01kYZw-0lb0WDN8oyTIRmuZonDFppUBG-TJWSuLyD3.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -1164,7 +1213,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_videokart.pr2.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Videocart] WHERE [Id_videocart] = 2", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_videokart.pr2.Text;
             kor.oform.Click += Oform_Click;
@@ -1175,11 +1231,7 @@ namespace уп
             katalog win_videokart = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-7.userapi.com/s/v1/if2/pnPsyq_HPq21K-d4-o45yyi4mhtt0cE42BdvD5_bvBFp7hzZcMa4NRoGMZ-btgN89uwlZ_HPh_ld60pPJgyrIvoL.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -1208,7 +1260,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_videokart.pr3.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Videocart] WHERE [Id_videocart] = 3", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_videokart.pr3.Text;
             kor.oform.Click += Oform_Click;
@@ -1219,11 +1278,7 @@ namespace уп
             katalog win_videokart = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-86.userapi.com/s/v1/if2/w-kgXQ5Hjlgiad72LjLAdSvEPz66UVjik3jVGqUA8L3Q1uDYhH2xbVyY3IQ2wzDpyKJrCUuIohy04jcvP3eZz1_4.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -1252,7 +1307,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_videokart.pr4.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Videocart] WHERE [Id_videocart] = 4", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_videokart.pr4.Text;
             kor.oform.Click += Oform_Click;
@@ -1263,11 +1325,7 @@ namespace уп
             katalog win_videokart = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-42.userapi.com/s/v1/if2/KmKkatBwnHI83A9rDHiav2f8SVfH8nxOy2f8IIqspJrtobz4U74kPsbDeaHbxPLei58_WA-VTp_GYhtue9co41AY.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -1296,7 +1354,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_videokart.pr5.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Videocart] WHERE [Id_videocart] = 5", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_videokart.pr5.Text;
             kor.oform.Click += Oform_Click;
@@ -1307,11 +1372,7 @@ namespace уп
             katalog win_videokart = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-22.userapi.com/s/v1/if2/fHNLf6K54J0SeEcpRj9xtxNAtE4X5z8wayvxqLUIcvd2GUYzgnHWZYWZ5ri5F3U5R6DYPWQrrnWLvQ-8_wya4ky0.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -1340,7 +1401,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_videokart.pr6.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Videocart] WHERE [Id_videocart] = 6", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_videokart.pr6.Text;
             kor.oform.Click += Oform_Click;
@@ -1501,11 +1569,7 @@ namespace уп
             katalog win_opera = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-7.userapi.com/s/v1/if2/c9CaRdAyJ5G5Ne3W2UsGPQEn9eZw_nxlTYwKA1-8FOH4rlredolBRLJm0-5NL-Vv5HQqJ6he8oK_lngI3cuuYJYJ.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -1538,7 +1602,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_opera.pr1.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 1", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_opera.pr1.Text;
             kor.oform.Click += Oform_Click;
@@ -1549,11 +1620,7 @@ namespace уп
             katalog win_opera = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-14.userapi.com/s/v1/if2/CiGG-4WVgLPgHBt3bf5vH7J46hcS_X2th-sf2bCCxKBWBV_3RHla2xJcIzQKcXNgNGWelRfJSie0BIJmmqRBTxaK.jpg?size=320x87&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -1586,7 +1653,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_opera.pr2.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 2", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_opera.pr2.Text;
             kor.oform.Click += Oform_Click;
@@ -1597,11 +1671,7 @@ namespace уп
             katalog win_opera = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-38.userapi.com/s/v1/if2/FczrBoz5pjkdkxi0ij5Xwwgjr0IgZUE3_hY-Sz2V4VrRCV7T_JdK9PL5KoS2LhBL5r9dDih8iditR7Nc-yfQLOXX.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -1634,7 +1704,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_opera.pr3.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 3", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_opera.pr3.Text;
             kor.oform.Click += Oform_Click;
@@ -1645,11 +1722,7 @@ namespace уп
             katalog win_opera = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-29.userapi.com/s/v1/if2/wQggFVH1XaWI1VqkrEFGRIMu7fs11eZgKa_9dhJfdfe7EzNJPoyMSWT5Ocw2PbywyCLvDUdKNGxyYC9B86ZshOax.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -1682,7 +1755,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_opera.pr4.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 4", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_opera.pr4.Text;
             kor.oform.Click += Oform_Click;
@@ -1693,11 +1773,7 @@ namespace уп
             katalog win_opera = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-45.userapi.com/s/v1/if2/pod4L3FQNG48n2slZqj61Isi9_WrupV8SecsE-u09eoWvaWpH3ZJgQ7dlvsO906U0pv-r8jEwSciEEjg6pTlxZOW.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -1730,7 +1806,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_opera.pr5.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 5", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_opera.pr5.Text;
             kor.oform.Click += Oform_Click;
@@ -1741,11 +1824,7 @@ namespace уп
             katalog win_opera = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-49.userapi.com/s/v1/if2/xMkEOX9XDtCjh-EcMJHdS27B_U_9dlLCwNwM1JhxJwJ2tjTJD_w2aGbmiMNDXVO8nd9IQ1amWEugjHupGeTLc13U.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -1778,7 +1857,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_opera.pr6.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 6", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_opera.pr6.Text;
             kor.oform.Click += Oform_Click;
@@ -1901,11 +1987,7 @@ namespace уп
             katalog win_bloki = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-12.userapi.com/s/v1/if2/dcYPjMtGADxWN0KO7wTmaxtp9LekbLeMAWKlO0b1CFHpwzLQf6N7sk5BoNsnudpCeL8Jtfjt2T-NICs8sQ6XvLTz.jpg?size=280x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -1930,7 +2012,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_bloki.pr1.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 1", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_bloki.pr1.Text;
             kor.oform.Click += Oform_Click;
@@ -1941,11 +2030,7 @@ namespace уп
             katalog win_bloki = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-69.userapi.com/s/v1/if2/tmclKh1FAHCBn85DusRICwm7RbA3da5R8yulNCxBmcGyPCUz79SpNtKrO_x5ZFKIGAgY4Xm5Lo3xAARz155zdpYp.jpg?size=298x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -1970,7 +2055,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_bloki.pr2.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 2", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_bloki.pr2.Text;
             kor.oform.Click += Oform_Click;
@@ -1981,11 +2073,7 @@ namespace уп
             katalog win_bloki = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-77.userapi.com/s/v1/if2/R_Q-sBQhkev7C1F06AH835nSlHudS-F90-wNUhG5VIzKeLaqH49PKdLWzbQCgNWdynmO5HpWd9EYhWoni3tFsruo.jpg?size=2000x2000&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -2010,7 +2098,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_bloki.pr3.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 3", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_bloki.pr3.Text;
             kor.oform.Click += Oform_Click;
@@ -2021,11 +2116,7 @@ namespace уп
             katalog win_bloki = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-18.userapi.com/s/v1/if2/DSHrl9jfH69Fz4cfKdf7Z8XS_653Rhiu_nKHsEb-KniDqjpxdok4t_WUHSBj4G3XBdhUaMMMvl1xx37ciKhHJkhx.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -2050,7 +2141,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_bloki.pr4.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 4", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_bloki.pr4.Text;
             kor.oform.Click += Oform_Click;
@@ -2061,11 +2159,7 @@ namespace уп
             katalog win_bloki = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-14.userapi.com/s/v1/if2/bNz5ku5DktKLetgTNAuT3NF5YcXkKdi02rw_YuAkSYD0zB5VX96UlbnnceKk54d8rPOx0w56LezGLSh7Hh6kw7Wk.jpg?size=2000x2000&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -2090,7 +2184,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_bloki.pr5.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 5", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_bloki.pr5.Text;
             kor.oform.Click += Oform_Click;
@@ -2101,11 +2202,7 @@ namespace уп
             katalog win_bloki = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-61.userapi.com/s/v1/if2/x0pOf-h18vR3hY0W_25HTez8rekLvjWXu5fjUJTZgc55JXSfJlN2sxIqEX0MfguQzBQUwaZmwVPakG9v5x2T9jGV.jpg?size=293x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -2130,7 +2227,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_bloki.pr6.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 6", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_bloki.pr6.Text;
             kor.oform.Click += Oform_Click;
@@ -2253,11 +2357,7 @@ namespace уп
             katalog win_korp = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-50.userapi.com/s/v1/if2/zvpBspSe3oQf98Ch-wdxtGXaJzVx0etyqFSXXYJt8deH0hQx9BjSpbi2WAgko3U-M6yZaiiMqP_HGXaSIaJYJrVN.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -2282,7 +2382,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_korp.pr1.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 1", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_korp.pr1.Text;
             kor.oform.Click += Oform_Click;
@@ -2293,11 +2400,7 @@ namespace уп
             katalog win_korp = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-23.userapi.com/s/v1/if2/Dq3vj1JOWcbkgJMOh1M9TT1ESTPNId2WNcmziKWg0TYCB2SoaZaaer3c6hwYgaZmGfs6JjKaymcMn1O2_ulofXWy.jpg?size=212x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -2322,7 +2425,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_korp.pr2.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 2", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_korp.pr2.Text;
             kor.oform.Click += Oform_Click;
@@ -2333,11 +2443,7 @@ namespace уп
             katalog win_korp = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-62.userapi.com/s/v1/if2/WgFEyfIF2kGQay4wTv2lviEgLeVcHMsQibOrcIo28m2N_LUUq2r4zz01Sh1JWkT2B0A8BdOymMIP-Yo2JCwuAHG4.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -2362,7 +2468,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_korp.pr3.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 3", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_korp.pr3.Text;
             kor.oform.Click += Oform_Click;
@@ -2373,11 +2486,7 @@ namespace уп
             katalog win_korp = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-57.userapi.com/s/v1/if2/jJTQdQLq_z9SkqSNShCxI_pxCL7YS_ZedN2iiPWz8Vhu1xn02c6siOUdLB23IwbN3kDsSp8jcBl-irKJuIncmQpQ.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -2402,7 +2511,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_korp.pr4.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 4", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_korp.pr4.Text;
             kor.oform.Click += Oform_Click;
@@ -2413,11 +2529,7 @@ namespace уп
             katalog win_korp = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-14.userapi.com/s/v1/if2/hRxqO3132f4KuJUxIDCF5NsfI7tXmhkl9dxQU-_bOyFg3pl3pAiJz3_GjYWWw4uM9tztrGzG_Aw8UyySD4vsFQzA.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -2442,7 +2554,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_korp.pr5.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 5", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_korp.pr5.Text;
             kor.oform.Click += Oform_Click;
@@ -2453,11 +2572,7 @@ namespace уп
             katalog win_korp = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-13.userapi.com/s/v1/if2/N3fFSOfXDKzUC-vx8tQx5zzQwMOkHXR7oS5Xa8jA3DlEAkt0Vwyd98ltMD_8S8I1Xxka7LYH6bPl4k0Qotg15GLf.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -2482,7 +2597,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_korp.pr6.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 6", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_korp.pr6.Text;
             kor.oform.Click += Oform_Click;
@@ -2605,11 +2727,7 @@ namespace уп
             katalog win_oxl = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-28.userapi.com/s/v1/if2/IhHfCR-OUXQickpAkTpc7cAFcHipA_103XCd9U6N4D6-P_2SGUbjZw-HyScZup1i2yesj42eN_n4pZwGpEF-QcVP.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -2634,7 +2752,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_oxl.pr1.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 1", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_oxl.pr1.Text;
             kor.oform.Click += Oform_Click;
@@ -2645,11 +2770,7 @@ namespace уп
             katalog win_oxl = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-77.userapi.com/s/v1/if2/OygmTg3QcTzUCzfBIKVUYEeE7lCNbMYLqgVorvmhdrYBEvhL--vNQkfNAQ1TEHF6X7IeNGKF-paqbjj_3jtoBU8k.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -2674,7 +2795,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_oxl.pr2.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 2", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_oxl.pr2.Text;
             kor.oform.Click += Oform_Click;
@@ -2685,11 +2813,7 @@ namespace уп
             katalog win_oxl = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-30.userapi.com/s/v1/if2/W4h1thqBYkTrEVg0HlIFg03cMPW5d_5r4r1uuNKwztXXEvm-DUDpO_px6-27vY0m62LcL-xjaqluYnLO0SD6QnjG.jpg?size=451x500&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -2714,7 +2838,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_oxl.pr3.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 3", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_oxl.pr3.Text;
             kor.oform.Click += Oform_Click;
@@ -2725,11 +2856,7 @@ namespace уп
             katalog win_oxl = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-24.userapi.com/s/v1/if2/B3S4rlCA59noC2Ts1UlUogGBXZ1tlU74X7lfiVMF17shbHKdZATHsdItINr41oITNe-9qB-6ozQp2T3m1supY7HV.jpg?size=369x500&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -2754,7 +2881,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_oxl.pr4.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 4", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_oxl.pr4.Text;
             kor.oform.Click += Oform_Click;
@@ -2765,11 +2899,7 @@ namespace уп
             katalog win_oxl = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-73.userapi.com/s/v1/if2/KcpmXdvFK4_vMaGJJhCwJIgkQa4Y3xoYIbLEhU3IiKGa25dSzbhX1PklQ1rNupgGLjRq9HmEUUzef9HqxaYl_4c-.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -2794,7 +2924,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_oxl.pr5.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 5", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_oxl.pr5.Text;
             kor.oform.Click += Oform_Click;
@@ -2805,11 +2942,7 @@ namespace уп
             katalog win_oxl = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-33.userapi.com/s/v1/if2/dY5T2kyWN5Jd4sa2QKW6PYc8oH2kmjBdxFT8DOW-vdRW9NeqAGGaJmWxVjR55sHOLMBXm5bi2OuMmzTOyn8WxJro.jpg?size=320x240&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -2834,7 +2967,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_oxl.pr6.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 6", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_oxl.pr6.Text;
             kor.oform.Click += Oform_Click;
@@ -2976,11 +3116,7 @@ namespace уп
             katalog win_ssd = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-58.userapi.com/s/v1/if2/dZFnrd2GB21VHL-7n44G72PmsX6BOgu0zUj9-vEFwGPHpdDkrHYun3IzrAnA46tAi4Drug82-JEx_81xMF9fiIVv.jpg?size=188x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -3008,7 +3144,15 @@ namespace уп
                 SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 1", connection);
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_ssd.pr1.Text += $"Количество на складе {opisanie[0]} ";
+
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 1", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_ssd.pr1.Text;
             kor.oform.Click += Oform_Click;
@@ -3019,11 +3163,7 @@ namespace уп
             katalog win_ssd = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-80.userapi.com/s/v1/if2/MrBbvzEVQ0NwTyECcxThzwVXvLPZWfwCGfaCsKLU9b32Bpk2lWD_KBg_U8AbNripGCbO4fQzH2JDOYf6FEHL4aMT.jpg?size=174x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -3051,7 +3191,15 @@ namespace уп
                 SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 2", connection);
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_ssd.pr2.Text += $"Количество на складе {opisanie[0]} ";
+
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 2", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_ssd.pr2.Text;
             kor.oform.Click += Oform_Click;
@@ -3062,11 +3210,7 @@ namespace уп
             katalog win_ssd = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-86.userapi.com/s/v1/if2/CuJ5SfMEr7eturV1hLvmaaoqTkJ_lWx7mlNeAx6PNy13lO3J7E7tj7cKIDfHkV7Jovt4FAizjwsITsGrfzSGiuB_.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -3094,7 +3238,15 @@ namespace уп
                 SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 3", connection);
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_ssd.pr3.Text += $"Количество на складе {opisanie[0]} ";
+
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 3", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_ssd.pr3.Text;
             kor.oform.Click += Oform_Click;
@@ -3105,11 +3257,7 @@ namespace уп
             katalog win_ssd = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-21.userapi.com/s/v1/if2/gwcR8LaAyEmebOUatJ8uU6WHN1Asvx6gs0SuQJd5ewtDW28l9EctDEfjo2vypiRZQo5wCqRHzCwrcpUsTHaCCYev.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -3137,7 +3285,15 @@ namespace уп
                 SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 4", connection);
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_ssd.pr4.Text += $"Количество на складе {opisanie[0]} ";
+
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 4", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_ssd.pr4.Text;
             kor.oform.Click += Oform_Click;
@@ -3148,11 +3304,7 @@ namespace уп
             katalog win_ssd = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-38.userapi.com/s/v1/if2/M8-V5_a-a1xg_ASHIRbp6GOtw7GKhcttcPMN9uiXYWX3dx2KzSzA2egsCcjiRNeGZ6CfCyrrpDmzUXIn2xAXwCYU.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -3180,7 +3332,15 @@ namespace уп
                 SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 5", connection);
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_ssd.pr5.Text += $"Количество на складе {opisanie[0]} ";
+
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 5", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_ssd.pr5.Text;
             kor.oform.Click += Oform_Click;
@@ -3191,11 +3351,7 @@ namespace уп
             katalog win_ssd = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-81.userapi.com/s/v1/if2/I4ERhaBE-U0YErKYzxM2z2vN_If3xXGZKT6YbzeQOFJlgOT879hxY9hywO5QMTpAUsnv3DFBeOeBLlGiZi5d_BdY.jpg?size=175x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -3223,7 +3379,15 @@ namespace уп
                 SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 6", connection);
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_ssd.pr6.Text += $"Количество на складе {opisanie[0]} ";
+
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 6", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_ssd.pr6.Text;
             kor.oform.Click += Oform_Click;
@@ -3384,11 +3548,7 @@ namespace уп
             katalog win_monitor = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-54.userapi.com/s/v1/if2/-bRBabmQT9BGG6EO8LREQAWMwvEuD9JoezvkVr2hzgt06bYCeIHEXWz5pSX-sPrHq3P5UpDEL0O27Z1LVFpjPJ-I.jpg?size=500x394&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -3421,7 +3581,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_monitor.pr1.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Monitors] WHERE [Id_monitors] = 1", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_monitor.pr1.Text;
             kor.oform.Click += Oform_Click;
@@ -3432,11 +3599,7 @@ namespace уп
             katalog win_monitor = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-75.userapi.com/s/v1/if2/0cYrhIwPKkrbZjnwSJ3SK45PfxtCAYcWB7hEP7fJSWA2w7J2tJdHvImdpQQCax3jDbQfG73xklG6drDnexBxjy_a.jpg?size=500x383&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -3469,7 +3632,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_monitor.pr2.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Monitors] WHERE [Id_monitors] = 2", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_monitor.pr2.Text;
             kor.oform.Click += Oform_Click;
@@ -3480,11 +3650,7 @@ namespace уп
             katalog win_monitor = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-31.userapi.com/s/v1/if2/hl4rky3TDPEeto_fESC7JvnAwaqtMpIQgKFX7Fsx-mAHrZ9uijrO7lFPlg6VSxlDxOHyJKTJsV6p6KUWyIbFkIno.jpg?size=500x390&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -3517,7 +3683,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_monitor.pr3.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Monitors] WHERE [Id_monitors] = 3", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_monitor.pr3.Text;
             kor.oform.Click += Oform_Click;
@@ -3528,11 +3701,7 @@ namespace уп
             katalog win_monitor = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-76.userapi.com/s/v1/if2/kKhC4ZDaiVpha3WN616Bwagvi35vDDrPZIwv1agmgsjga42paa14GIjbxZuFH6jsTnvY99xJwC39m6h-n5hL3_Y6.jpg?size=500x427&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -3565,7 +3734,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_monitor.pr4.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Monitors] WHERE [Id_monitors] = 4", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_monitor.pr4.Text;
             kor.oform.Click += Oform_Click;
@@ -3576,11 +3752,7 @@ namespace уп
             katalog win_monitor = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-71.userapi.com/s/v1/if2/gFMe05IJtaf89_Jc_9Hyk1yE8vwFRe4djc1CUpo--iL1NY204LwNAV3bRkWswbWSr3pWGAtYX14VOpJl2xWRGNdq.jpg?size=279x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -3613,7 +3785,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_monitor.pr5.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Monitors] WHERE [Id_monitors] = 5", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_monitor.pr5.Text;
             kor.oform.Click += Oform_Click;
@@ -3624,11 +3803,7 @@ namespace уп
             katalog win_monitor = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-33.userapi.com/s/v1/if2/J6rtLRGlSDwIysZH8uiZjfTVP1MtjQ4laMJDwDYXohDgOzIjFjU0R4JETPgM8iJZklh6tZZAa2rZ0KqtxZohRzbB.jpg?size=500x387&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -3661,7 +3836,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_monitor.pr6.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Monitors] WHERE [Id_monitors] = 6", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_monitor.pr6.Text;
             kor.oform.Click += Oform_Click;
@@ -3803,11 +3985,7 @@ namespace уп
             katalog win_klav = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-15.userapi.com/s/v1/if2/hJluBPMcqOq88pgGGCMNQhuoO_Rai-i8PtGIJzohSlIi_e1eGwYtnuYKAriiqqgVkS67iGIc-cMWBDrNbzZWWsK1.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -3836,7 +4014,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_klav.pr1.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 1", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_klav.pr1.Text;
             kor.oform.Click += Oform_Click;
@@ -3847,11 +4032,7 @@ namespace уп
             katalog win_klav = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-5.userapi.com/s/v1/if2/hL5EkKfc49FOJFkh6eB98kHPoUpxZ51tSsNFmcb1z_wshua3uSOo6UU7RV2Va0o2C5DCXwmURTWMSax1_1819HvG.jpg?size=1920x646&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -3880,7 +4061,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_klav.pr2.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 2", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_klav.pr2.Text;
             kor.oform.Click += Oform_Click;
@@ -3891,11 +4079,7 @@ namespace уп
             katalog win_klav = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-65.userapi.com/s/v1/if2/rLjI83Xg8XxgqarX36jQwUZ5dpvYdtKCfzg6RDvt5FjsOwk-B4fwT840wTPBfQfKzSD92HdEXn5e63yOsLQ08wLc.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -3924,7 +4108,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_klav.pr3.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 3", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_klav.pr3.Text;
             kor.oform.Click += Oform_Click;
@@ -3935,11 +4126,7 @@ namespace уп
             katalog win_klav = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-12.userapi.com/s/v1/if2/WxNQqckFv_yfcN6quzDb17jh_gIonON1HYUdJ1QDdF7sEdTtNW2RasDCsUUuu-xeUX9NypDSYF7k42VXc_wYX_Lh.jpg?size=500x191&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -3968,7 +4155,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_klav.pr4.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 4", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_klav.pr4.Text;
             kor.oform.Click += Oform_Click;
@@ -3979,11 +4173,7 @@ namespace уп
             katalog win_klav = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-54.userapi.com/s/v1/if2/SCqkokFC4xrLx-uplEnb8BDqbjN-Mqowd__SSy0gbvVjucSFGMjNzflb8LUnAla4gY29C16lVAVcuflXGvfj71AV.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -4012,7 +4202,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_klav.pr5.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 5", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_klav.pr5.Text;
             kor.oform.Click += Oform_Click;
@@ -4023,11 +4220,7 @@ namespace уп
             katalog win_klav = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-60.userapi.com/s/v1/if2/9k76FXHcFTwIcUTyyvqoeRWtYRbgvf3ikIdrKC8EvBZDH9TeTvz50GJCeMrvzudPXXtk6TOS9O-VCzjDbIS_2o4m.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -4056,7 +4249,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_klav.pr6.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 6", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_klav.pr6.Text;
             kor.oform.Click += Oform_Click;
@@ -4179,11 +4379,7 @@ namespace уп
             katalog win_mish = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-27.userapi.com/s/v1/if2/go7NJ6qWLS_qvWpNCjfmU5fLNqzk-2bPmEnQwHaxwE005AQ4CZ-04oyGDoxphqokrevebDTzLToujH_kkuTreIto.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -4208,7 +4404,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_mish.pr1.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mouse] WHERE [id_mouse] = 1", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_mish.pr1.Text;
             kor.oform.Click += Oform_Click;
@@ -4219,11 +4422,7 @@ namespace уп
             katalog win_mish = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-40.userapi.com/s/v1/if2/YgFmhzCFOMvbBn0R8qzfg6m1MQG1vsTbjfiKGEAEA3NL02MF-w7tX23-2z7RuQLeG3vUdqQt52DX_Wm1ADpfGh6m.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -4248,7 +4447,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_mish.pr2.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mouse] WHERE [id_mouse] = 2", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_mish.pr2.Text;
             kor.oform.Click += Oform_Click;
@@ -4259,11 +4465,7 @@ namespace уп
             katalog win_mish = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-53.userapi.com/s/v1/if2/t1DJcCcMXau5VAgtRJlDvxhHD6B46xt0g3KWZ1qdkPiwYlTdBHG6bC9ITNAesC8YfxJwy0j_uTevKyDE1EN52NBq.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -4288,7 +4490,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_mish.pr3.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mouse] WHERE [id_mouse] = 3", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_mish.pr3.Text;
             kor.oform.Click += Oform_Click;
@@ -4299,11 +4508,7 @@ namespace уп
             katalog win_mish = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-31.userapi.com/s/v1/if2/wHi7A691E0Zdn-a0h3Pqb7KjOf6K7BbyndJVF3JxvslaagDw3ixlwhsWDwC06Hm8FCL8AS41-f6R8NzmJE_zZBIb.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -4328,7 +4533,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_mish.pr4.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mouse] WHERE [id_mouse] = 4", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_mish.pr4.Text;
             kor.oform.Click += Oform_Click;
@@ -4339,11 +4551,7 @@ namespace уп
             katalog win_mish = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-23.userapi.com/s/v1/if2/yZMcKfnv-AzVYc8SRI1qociiPIsygMIPWJXAp3eiVEVX4IrW8Asa95AoaIAYfQ2i6wuPmrCl46DEaneMHQ5qBdfQ.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -4368,7 +4576,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_mish.pr5.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mouse] WHERE [id_mouse] = 5", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_mish.pr5.Text;
             kor.oform.Click += Oform_Click;
@@ -4379,11 +4594,7 @@ namespace уп
             katalog win_mish = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-28.userapi.com/s/v1/if2/8KfGSFrrWVRnT4J71oaCN1GREeHEefER54zRYxHvr7CYi48tlMQsYyfpVwCqLdjXQZuLKT_RjKQP50sWhjdWJI9Q.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -4408,7 +4619,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_mish.pr6.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mouse] WHERE [id_mouse] = 6", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_mish.pr6.Text;
             kor.oform.Click += Oform_Click;
@@ -4550,11 +4768,7 @@ namespace уп
             katalog win_veb = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-58.userapi.com/s/v1/if2/YkQeYhFIyA5we1oXMBwuiIr4FqHV29loj9_urWRns4G-2L1NN-N-j9ZcpXI_eATrC0zKtf7FKTgnNiFBNKDSq4bk.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -4583,7 +4797,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_veb.pr1.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 1", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_veb.pr1.Text;
             kor.oform.Click += Oform_Click;
@@ -4594,11 +4815,7 @@ namespace уп
             katalog win_veb = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-81.userapi.com/s/v1/if2/n-zjCoQB9q0ySRsoooTZrk6i9oVULrQnRfnLuwyJ4UUvYOQeKggs4NcQKFZ5RmRW3fDuzsBlJFNXkGaStP-DiGp1.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -4627,7 +4844,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_veb.pr2.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 2", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_veb.pr2.Text;
             kor.oform.Click += Oform_Click;
@@ -4638,11 +4862,7 @@ namespace уп
             katalog win_veb = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-6.userapi.com/s/v1/if2/rualYTVJuYxBy5FnL7zueVjAmUD_XK7-WX0EuDEh_aa4TEo6UZaW-pEYbmUNcdtHRBsRGWjiiZ6bEWtSd0b6kV8O.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -4671,7 +4891,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_veb.pr3.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 3", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_veb.pr3.Text;
             kor.oform.Click += Oform_Click;
@@ -4682,11 +4909,7 @@ namespace уп
             katalog win_veb = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-19.userapi.com/s/v1/if2/_qO_83emTn4joJR3ApJRpdGbVidW1WhzSNioxFFbbuM0g137HpHtmB2vveS90sT2__yl5wIidUSbvptV2x7ORwOl.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -4715,7 +4938,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_veb.pr4.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 4", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_veb.pr4.Text;
             kor.oform.Click += Oform_Click;
@@ -4726,11 +4956,7 @@ namespace уп
             katalog win_veb = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-83.userapi.com/s/v1/if2/ycdvwdW4NAVKjJHUzxrnRa0cNZ4kWUaBfiU8WvIC5gOhCgAAyleJW-kUvsRaEMiGwdT0e2M2TuMuk6wGD2eNd_R8.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -4759,7 +4985,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_veb.pr5.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 5", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_veb.pr5.Text;
             kor.oform.Click += Oform_Click;
@@ -4770,11 +5003,7 @@ namespace уп
             katalog win_veb = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-88.userapi.com/s/v1/if2/1kpHNNbcgaUiSPZtQO5eK6hziR3YKW6AcEcRIXl06UZw1L5diAMO0Amdcfe6oQiKm3aTeXIOWfi4Zyt4EQhPiFqS.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -4803,7 +5032,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_veb.pr6.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 6", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_veb.pr6.Text;
             kor.oform.Click += Oform_Click;
@@ -4964,11 +5200,7 @@ namespace уп
             katalog win_dannie = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-24.userapi.com/s/v1/if2/4FGMxymh9yaiqb-eCgeISsks2-yj-Kar1M0Xd8jtVry9yGSgDOSqXwiofMP5o61fk-TEl66PSEzedlBVPTKe2qM-.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -5001,7 +5233,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_dannie.pr1.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 1", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_dannie.pr1.Text;
             kor.oform.Click += Oform_Click;
@@ -5012,11 +5251,7 @@ namespace уп
             katalog win_dannie = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-63.userapi.com/s/v1/if2/G4QEsyCk6oEN_lB5C7greQDGVdjq15zeNDWax0W775EAuhEWY4_jetBYQVZM9qkgdSoA49S_Hnl2ynHf1Fp9hdpT.jpg?size=174x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -5049,7 +5284,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_dannie.pr2.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 2", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_dannie.pr2.Text;
             kor.oform.Click += Oform_Click;
@@ -5060,11 +5302,7 @@ namespace уп
             katalog win_dannie = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-77.userapi.com/s/v1/if2/5ukpJQ2O_pYnouRRvxO2iFHdseIFRJLOluunZTkFizOnS2i20Vz_VzbWg8T_61d9tUm6iVTF4Fc12-VeZaG2W2am.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -5097,7 +5335,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_dannie.pr3.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 3", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_dannie.pr3.Text;
             kor.oform.Click += Oform_Click;
@@ -5108,11 +5353,7 @@ namespace уп
             katalog win_dannie = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-56.userapi.com/s/v1/if2/Be9xPJm5PLL3ckTOlNcjinoGBp3nlEMyZzwe1yde8Hm4cpmV-JMqjghJMoBq71u_omjVh1A7wgH7ETAI7fT1fBw6.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -5145,7 +5386,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_dannie.pr4.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 4", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_dannie.pr4.Text;
             kor.oform.Click += Oform_Click;
@@ -5156,11 +5404,7 @@ namespace уп
             katalog win_dannie = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-80.userapi.com/s/v1/if2/nvM3M0MAAXO43qnGXDgVV7yPlv5d1S7WG7im-BkCvZKDz7tyk7Ui8OU-t5dh1xNuhtUGUUVZ2n0Bnxxyn-u9nEig.jpg?size=249x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -5193,7 +5437,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_dannie.pr5.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 5", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_dannie.pr5.Text;
             kor.oform.Click += Oform_Click;
@@ -5204,11 +5455,7 @@ namespace уп
             katalog win_dannie = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-20.userapi.com/s/v1/if2/JN9qGdENQ-zKYiIIuF3Wnf9BJHsXxk-B_Bq-_Goylxoqd8d6XtqUnexHSeJCTJecWAdVoo9ENmOibVJ_zHAWRc5v.jpg?size=221x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -5241,7 +5488,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_dannie.pr6.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 6", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_dannie.pr6.Text;
             kor.oform.Click += Oform_Click;
@@ -5383,11 +5637,7 @@ namespace уп
             katalog win_naysh = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-79.userapi.com/s/v1/if2/Z_GzpkbT1cUMw0V4rpgc_UE4_aWyCHzsiQMT4NovIQMwk_FMxDQLetQggJP6PVmzawnTAS9feBxn-z5nknlF32Vf.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -5416,7 +5666,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_naysh.pr1.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 1", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_naysh.pr1.Text;
             kor.oform.Click += Oform_Click;
@@ -5427,11 +5684,7 @@ namespace уп
             katalog win_naysh = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-11.userapi.com/s/v1/if2/g4VrzqE9D6RaMx883kqxacr10vcrcJALONxpl66sMXH_NjfLbwdUZ_aG-kU7Em8MB0MwRz1rsU-cMeCPuYzCa_Gs.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -5460,7 +5713,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_naysh.pr2.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 2", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_naysh.pr2.Text;
             kor.oform.Click += Oform_Click;
@@ -5471,11 +5731,7 @@ namespace уп
             katalog win_naysh = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-44.userapi.com/s/v1/if2/rYplvlYeKlDN1FCdCvA9c7guAN1o00ciLsJHkFEXjzAudtD_sIabfHyHPMADMNJciIq3kDa8fMC66EGj81YzX4cE.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -5504,7 +5760,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_naysh.pr3.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 3", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_naysh.pr3.Text;
             kor.oform.Click += Oform_Click;
@@ -5515,11 +5778,7 @@ namespace уп
             katalog win_naysh = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-2.userapi.com/s/v1/if2/t90V9tGfeYueBd7QUwAZHyQlSRXCDO4OcV3H7djP9DftnGozugBQ50va57v2DX_gMSp0nG5m8oF2_z7aMtNIseeM.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -5548,7 +5807,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_naysh.pr4.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 4", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_naysh.pr4.Text;
             kor.oform.Click += Oform_Click;
@@ -5559,11 +5825,7 @@ namespace уп
             katalog win_naysh = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-21.userapi.com/s/v1/if2/GAxUmIkVMZzTstKxAPIB5GH4PmXCDfdscO4-IusXmPxLSP4bMx4n7ZT7wHvZgP3t8UX12UiZgCcgQB5Ufhr1RGeB.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -5592,7 +5854,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_naysh.pr5.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 5", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_naysh.pr5.Text;
             kor.oform.Click += Oform_Click;
@@ -5603,11 +5872,7 @@ namespace уп
             katalog win_naysh = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-41.userapi.com/s/v1/if2/z31XrGP6XQj7Ar2iNGvK3qeDYyVvQ8i3S9cKmWtUd3Ug9E36YXTB3KAUnuXeZ-_QB-0SuFaU1HesxnHbKbwgacak.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -5636,7 +5901,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_naysh.pr6.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 6", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_naysh.pr6.Text;
             kor.oform.Click += Oform_Click;
@@ -5777,11 +6049,7 @@ namespace уп
             katalog win_kabeli = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-45.userapi.com/s/v1/if2/6ihqLedokA4C4LZ2tWYrpF91G1wJ_02Dtd63cCU3U-vgcxlB7IPVIyUI4ENSVlQJoddGc2Twy5O0gn4JpcMvag2J.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -5810,7 +6078,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_kabeli.pr1.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 1", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_kabeli.pr1.Text;
             kor.oform.Click += Oform_Click;
@@ -5821,11 +6096,7 @@ namespace уп
             katalog win_kabeli = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-82.userapi.com/s/v1/if2/FGixl3BIusER6PWetWMY69uXqMbvm7g4YDbIJW2o_haXtUURcBCskMJabIJZ6zaMgNfkmNf05QNsq49YaQLyBmRd.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -5854,7 +6125,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_kabeli.pr2.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 2", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_kabeli.pr2.Text;
             kor.oform.Click += Oform_Click;
@@ -5865,11 +6143,7 @@ namespace уп
             katalog win_kabeli = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-71.userapi.com/s/v1/if2/hEk6FZrwYF5nhYmWBGr-mbq3i1IDo500vyBr0rHSqj4kAmGfJXJVD-NV1XRkSUK6GcvJieaodGS5YlxvzmW2q-UW.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -5898,7 +6172,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_kabeli.pr3.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 3", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_kabeli.pr3.Text;
             kor.oform.Click += Oform_Click;
@@ -5909,11 +6190,7 @@ namespace уп
             katalog win_kabeli = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-48.userapi.com/s/v1/if2/7h06Y55g0Np_jTzE7qLE5-tX26ezkzHju99UbYtjCsnKYv5HS6_e2_0nG6U6aCiu0Q2VTz5nbnsyMQhOGjWz6qoe.jpg?size=500x453&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -5942,7 +6219,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_kabeli.pr4.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 4", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_kabeli.pr4.Text;
             kor.oform.Click += Oform_Click;
@@ -5953,11 +6237,7 @@ namespace уп
             katalog win_kabeli = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-22.userapi.com/s/v1/if2/KMXGygT36VFTJ6xs2ehhj2Of1eT1qBRBNBpoz14HNVuaHnQzSNl5tA5e_4v0mf2QJY0waFL_vi7NGE4RBV9v4VR7.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -5986,7 +6266,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_kabeli.pr5.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 5", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_kabeli.pr5.Text;
             kor.oform.Click += Oform_Click;
@@ -5997,11 +6284,7 @@ namespace уп
             katalog win_kabeli = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-50.userapi.com/s/v1/if2/3FGe_xchFMuaWVHGPrw8qmsZCL2rVSx7a5X2Lg_RODNg0XJoOb4uptXMM5swd2fLXdyVdwZLkkLLnIAk8_v2VmJq.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -6030,7 +6313,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_kabeli.pr6.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 6", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_kabeli.pr6.Text;
             kor.oform.Click += Oform_Click;
@@ -6171,11 +6461,7 @@ namespace уп
             katalog win_kovriki = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-33.userapi.com/s/v1/if2/tCBAl939NUy-H1zG9iTv-6s6jm1FulouvSA1lvlYPU0gSyPWCwBnjqVhNnXex8FgSkW0yKIp9dE2jb78vMGeAWui.jpg?size=250x250&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -6204,7 +6490,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_kovriki.pr1.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 1", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_kovriki.pr1.Text;
             kor.oform.Click += Oform_Click;
@@ -6215,11 +6508,7 @@ namespace уп
             katalog win_kovriki = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-59.userapi.com/s/v1/if2/fEkogG8N6ea0IB7ekj3MNQRE-ZEjRwoQBChpKUtbOOBiz1CTNB1Jjfn64nyLlXydDQZG8Yt9KATstUNfCoTpLkGb.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -6248,7 +6537,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_kovriki.pr2.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 2", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_kovriki.pr2.Text;
             kor.oform.Click += Oform_Click;
@@ -6259,11 +6555,7 @@ namespace уп
             katalog win_kovriki = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-20.userapi.com/s/v1/if2/TTi6H1b4kDPc_R1h-wHdszjXyGpeceFSvP9qG3x2z1iToQn8A2uvwKwdFKRPXekDBKTaqyISApA2UWv6dOn8zKZ_.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -6292,7 +6584,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_kovriki.pr3.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 3", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_kovriki.pr3.Text;
             kor.oform.Click += Oform_Click;
@@ -6303,11 +6602,7 @@ namespace уп
             katalog win_kovriki = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-12.userapi.com/s/v1/if2/YuFIAQSf08TBX16J-g2fU2foWMHYlQ13ozSNEnosiL7ayIiC19ONdmZOdCSe-gaBjZ3fetIacw912WhVHMrNkY1I.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -6336,7 +6631,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_kovriki.pr4.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 4", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_kovriki.pr4.Text;
             kor.oform.Click += Oform_Click;
@@ -6347,11 +6649,7 @@ namespace уп
             katalog win_kovriki = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-82.userapi.com/s/v1/if2/Krlw_w9OHRBL7wEhGVlmpVoM31sVVR4_qQARmSYSiz6uliv6WJgKjS4QGKzTw1OaRp9BgkTWwMn8ErtrKccF6ifX.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -6380,7 +6678,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_kovriki.pr5.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 5", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_kovriki.pr5.Text;
             kor.oform.Click += Oform_Click;
@@ -6391,11 +6696,7 @@ namespace уп
             katalog win_kovriki = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-51.userapi.com/s/v1/if2/3izsdUxdCK9cWHWFXiRaDwisJLsSiI5xyDqCNsTB422No7he0nUCmkZbkht4Km-QHilbzu4tCkMVyUUg6cJqc1bd.jpg?size=500x500&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -6424,7 +6725,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_kovriki.pr6.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 6", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_kovriki.pr6.Text;
             kor.oform.Click += Oform_Click;
@@ -6566,11 +6874,7 @@ namespace уп
             katalog win_nout = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-65.userapi.com/s/v1/if2/lYsDWo8jt47w2OMOHxjuRwU3K7-S8DVpWKL1BgnYfh5zZtrhnUA75Jdhc7RPxqs9ynpj2hZRT5k2tOkh0Bb7ri9H.jpg?size=500x395&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -6599,7 +6903,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_nout.pr1.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Notebok] WHERE [id_notebok] = 1", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_nout.pr1.Text;
             kor.oform.Click += Oform_Click;
@@ -6610,11 +6921,7 @@ namespace уп
             katalog win_nout = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-76.userapi.com/s/v1/if2/139e4AtaYGc8SLZuOD-aesz6P2HOBPv7yJ5clEDR-Cyx9OLi9F12uDJpaCGDQMGw5jRICDuO6NRQcvSM2Kml_CL8.jpg?size=500x335&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -6643,7 +6950,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_nout.pr2.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Notebok] WHERE [id_notebok] = 2", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_nout.pr2.Text;
             kor.oform.Click += Oform_Click;
@@ -6654,11 +6968,7 @@ namespace уп
             katalog win_nout = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-29.userapi.com/s/v1/if2/t5Wj3W9rebcSyM-9ivtTcmg6QhPKB7pSVWhZZGr1xHWknPGw7_REaG6d7G-u3TW_VCF1sz8uV4KqSyYO-qg2RA9i.jpg?size=500x339&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -6687,7 +6997,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_nout.pr3.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Notebok] WHERE [id_notebok] = 3", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_nout.pr3.Text;
             kor.oform.Click += Oform_Click;
@@ -6698,11 +7015,7 @@ namespace уп
             katalog win_nout = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-23.userapi.com/s/v1/if2/_FdVIkdbPixk4uJtLENMyH8zup19VZgTS7UZQ2UKRfvWk8b1ocqbXNSloJOQTqxv4o0-ZFlgn5g0sRreC5CLVECI.jpg?size=504x362&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -6731,7 +7044,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_nout.pr4.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Notebok] WHERE [id_notebok] = 4", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_nout.pr4.Text;
             kor.oform.Click += Oform_Click;
@@ -6742,11 +7062,7 @@ namespace уп
             katalog win_nout = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-60.userapi.com/s/v1/if2/TDWR95AmME2GifgwC4J7qWQONj-1IdF8ipOiEt7-V5jp7QgeajuOSoqoCe2qQMrtINioc2gE6hBKH5Wo-tR4OMTm.jpg?size=320x240&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -6775,7 +7091,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_nout.pr5.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Notebok] WHERE [id_notebok] = 5", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_nout.pr5.Text;
             kor.oform.Click += Oform_Click;
@@ -6786,11 +7109,7 @@ namespace уп
             katalog win_nout = new katalog();
             string[] opisanie = new string[6];
             korzina kor = new korzina();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(@"https://sun9-49.userapi.com/s/v1/if2/F6BwJ4slyGTGiB9Zsa86fXCmQ3vNXq_-rbX1QQUlKO-8uwYjhtAHsDtP5y4HYytueUCt4YgRwcpp1nSQUql0OuMJ.jpg?size=320x240&quality=96&type=album", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
+            string url;
             this.Close();
             using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
@@ -6819,7 +7138,14 @@ namespace уп
                 opisanie[0] = commandddddd.ExecuteScalar().ToString();
                 win_nout.pr6.Text += $"Количество на складе {opisanie[0]} ";
 
+                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Notebok] WHERE [id_notebok] = 6", connection);
+                url = commandddddddd.ExecuteScalar().ToString();
             }
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+            image.EndInit();
+            kor.im.Source = image;
             kor.Show();
             kor.pokupka.Text = win_nout.pr6.Text;
             kor.oform.Click += Oform_Click;
@@ -6829,16 +7155,18 @@ namespace уп
         {
 
         }
-        public SqlCommand Select() // функция подключения к базе данных и обработка запросов
+        public DataTable Select(string selectSQL) // функция подключения к базе данных и обработка запросов
         {
-            SqlCommand dataTable = new SqlCommand("dataBase"); // создаём таблицу в приложении
+            DataTable dataTable = new DataTable("dataBase"); // создаём таблицу в приложении
                                                              // подключаемся к базе данных
             SqlConnection sqlConnection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357");
             sqlConnection.Open(); // открываем базу данных
             SqlCommand sqlCommand = sqlConnection.CreateCommand(); // создаём команду
+            sqlCommand.CommandText = selectSQL; // присваиваем команде текст
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand); // создаём обработчик
+            sqlDataAdapter.Fill(dataTable);
             sqlConnection.Close(); // возращаем таблицу с результатом
-            return sqlCommand;
+            return dataTable;
         }
     }
 }

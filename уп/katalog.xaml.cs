@@ -22,6 +22,11 @@ namespace уп
     /// </summary>
     public partial class katalog : Window
     {
+        public string zagolovok = "";
+        public Image[] image;
+        public string[] opisanie;
+        public string user = "";
+        public int Admin;
         public katalog()
         {
             InitializeComponent();
@@ -52,6 +57,25 @@ namespace уп
             glavnaya.kabeli.Visibility = Visibility.Visible;
             glavnaya.kovriki.Visibility = Visibility.Visible;
             glavnaya.noutbuki.Visibility = Visibility.Visible;
+            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                user = command.ExecuteScalar().ToString();
+                DataTable dt_admin = Select("SELECT * FROM [dbo].[Admin] WHERE [Login] = '" + user + "'");
+                if (dt_admin.Rows.Count > 0)
+                {
+                    Admin = 1;
+                }
+                if (Admin == 1)
+                {
+                    glavnaya.Admin_panel.Visibility = Visibility.Visible;
+                }
+                else
+                {
+
+                }
+            }
         }
 
 
@@ -82,6 +106,19 @@ namespace уп
         private void kyp6_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+        public DataTable Select(string selectSQL) // функция подключения к базе данных и обработка запросов
+        {
+            DataTable dataTable = new DataTable("dataBase"); // создаём таблицу в приложении
+                                                             // подключаемся к базе данных
+            SqlConnection sqlConnection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357");
+            sqlConnection.Open(); // открываем базу данных
+            SqlCommand sqlCommand = sqlConnection.CreateCommand(); // создаём команду
+            sqlCommand.CommandText = selectSQL; // присваиваем команде текст
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand); // создаём обработчик
+            sqlDataAdapter.Fill(dataTable);
+            sqlConnection.Close(); // возращаем таблицу с результатом
+            return dataTable;
         }
     }
 }
