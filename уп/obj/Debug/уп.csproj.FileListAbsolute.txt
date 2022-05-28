@@ -89,3 +89,5 @@ X:\уп\уп\obj\Debug\kat_ssd.baml
 \\main\RDP\33П\СорокинДА\Desktop\уп\уп\obj\Debug\korzina.g.cs
 \\main\RDP\33П\СорокинДА\Desktop\уп\уп\obj\Debug\korzina.baml
 \\main\RDP\33П\СорокинДА\Desktop\уп\уп\obj\Debug\уп.Resource1.resources
+\\main\RDP\33П\СорокинДА\Desktop\уп\уп\obj\Debug\adminka.g.cs
+\\main\RDP\33П\СорокинДА\Desktop\уп\уп\obj\Debug\adminka.baml

@@ -302,7 +302,7 @@ namespace уп
             kor.pokupka.Text = win_proc.pr6.Text;
             kor.oform.Click += Oform_Click;
 
-            }
+        }
 
         private void Kyp5_Click(object sender, RoutedEventArgs e)
         {
@@ -539,10 +539,555 @@ namespace уп
             kor.oform.Click += Oform_Click;
 
         }
-
+        private string table;
+        private string id;
+        public int idd;
         private void Oform_Click(object sender, RoutedEventArgs e)
         {
-
+            table = "[dbo].[Procesor]";
+            id = "[Id_procesor]";
+            idd = 6;
+            if (table == "[dbo].[Procesor]" & id == "[Id_procesor]" & idd==6)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Procesor] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_procesor] = 6");
+            }
+            idd = 5;
+            if (table == "[dbo].[Procesor]" & id == "[Id_procesor]" & idd == 5)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Procesor] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_procesor] = 5");
+            }
+            idd = 4;
+            if (table == "[dbo].[Procesor]" & id == "[Id_procesor]" & idd == 4)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Procesor] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_procesor] = 4");
+            }
+            idd = 3;
+            if (table == "[dbo].[Procesor]" & id == "[Id_procesor]" & idd == 3)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Procesor] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_procesor] = 3");
+            }
+            idd = 2;
+            if (table == "[dbo].[Procesor]" & id == "[Id_procesor]" & idd == 2)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Procesor] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_procesor] = 2");
+            }
+            idd = 1;
+            if (table == "[dbo].[Procesor]" & id == "[Id_procesor]" & idd == 1)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Procesor] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_procesor] = 1");
+            }
+            table = "[dbo].[Mat_plat]";
+            id = "[Id_Mat_plat]";
+            idd = 6;
+            if (table == "[dbo].[Mat_plat]" & id == "[Id_Mat_plat]" & idd == 6)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Mat_plat] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Mat_plat] = 6");
+            }
+            idd = 5;
+            if (table == "[dbo].[Mat_plat]" & id == "[Id_Mat_plat]" & idd == 5)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Mat_plat] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Mat_plat] = 5");
+            }
+            idd = 4;
+            if (table == "[dbo].[Mat_plat]" & id == "[Id_Mat_plat]" & idd == 4)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Mat_plat] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Mat_plat] = 4");
+            }
+            idd = 3;
+            if (table == "[dbo].[Mat_plat]" & id == "[Id_Mat_plat]" & idd == 3)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Mat_plat] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Mat_plat] = 3");
+            }
+            idd = 2;
+            if (table == "[dbo].[Mat_plat]" & id == "[Id_Mat_plat]" & idd == 2)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Mat_plat] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Mat_plat] = 2");
+            }
+            idd = 1;
+            if (table == "[dbo].[Mat_plat]" & id == "[Id_Mat_plat]" & idd == 1)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Mat_plat] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Mat_plat] = 1");
+            }
+            table = "[dbo].[Videocart]";
+            id = "[Id_videocart]";
+            idd = 6;
+            if (table == "[dbo].[Videocart]" & id == "[Id_videocart]" & idd == 6)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Videocart] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_videocart] = 6");
+            }
+            idd = 5;
+            if (table == "[dbo].[Videocart]" & id == "[Id_videocart]" & idd == 5)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Videocart] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_videocart] = 5");
+            }
+            idd = 4;
+            if (table == "[dbo].[Videocart]" & id == "[Id_videocart]" & idd == 4)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Videocart] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_videocart] = 4");
+            }
+            idd = 3;
+            if (table == "[dbo].[Videocart]" & id == "[Id_videocart]" & idd == 3)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Videocart] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_videocart] = 3");
+            }
+            idd = 2;
+            if (table == "[dbo].[Videocart]" & id == "[Id_videocart]" & idd == 2)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Videocart] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_videocart] = 2");
+            }
+            idd = 1;
+            if (table == "[dbo].[Videocart]" & id == "[Id_videocart]" & idd == 1)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Videocart] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_videocart] = 1");
+            }
+            table = "[dbo].[Operativka]";
+            id = "[Id_Operativ_pamat]";
+            idd = 6;
+            if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 6)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Operativka] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_Operativ_pamat] = 6");
+            }
+            idd = 5;
+            if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 5)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Operativka] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_Operativ_pamat] = 5");
+            }
+            idd = 4;
+            if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 4)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Operativka] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_Operativ_pamat] = 4");
+            }
+            idd = 3;
+            if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 3)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Operativka] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_Operativ_pamat] = 3");
+            }
+            idd = 2;
+            if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 2)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Operativka] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_Operativ_pamat] = 2");
+            }
+            idd = 1;
+            if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 1)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Operativka] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_Operativ_pamat] = 1");
+            }
+            table = "[dbo].[Blok_pitanie]";
+            id = "[Id_Blok_pitanie]";
+            idd = 6;
+            if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 6)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Blok_pitanie] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Blok_pitanie] = 6");
+            }
+            idd = 5;
+            if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 5)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Blok_pitanie] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Blok_pitanie] = 5");
+            }
+            idd = 4;
+            if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 4)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Blok_pitanie] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Blok_pitanie] = 4");
+            }
+            idd = 3;
+            if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 3)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Blok_pitanie] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Blok_pitanie] = 3");
+            }
+            idd = 2;
+            if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 2)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Blok_pitanie] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Blok_pitanie] = 2");
+            }
+            idd = 1;
+            if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 1)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Blok_pitanie] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Blok_pitanie] = 1");
+            }
+            table = "[dbo].[Korpusa]";
+            id = "[Id_korpusa]";
+            idd = 6;
+            if (table == "[dbo].[Korpusa]" & id == "[Id_korpusa]" & idd == 6)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Korpusa] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_korpusa] = 6");
+            }
+            idd = 5;
+            if (table == "[dbo].[Korpusa]" & id == "[Id_korpusa]" & idd == 5)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Korpusa] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_korpusa] = 5");
+            }
+            idd = 4;
+            if (table == "[dbo].[Korpusa]" & id == "[Id_korpusa]" & idd == 4)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Korpusa] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_korpusa] = 4");
+            }
+            idd = 3;
+            if (table == "[dbo].[Korpusa]" & id == "[Id_korpusa]" & idd == 3)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Korpusa] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_korpusa] = 3");
+            }
+            idd = 2;
+            if (table == "[dbo].[Korpusa]" & id == "[Id_korpusa]" & idd == 2)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Korpusa] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_korpusa] = 2");
+            }
+            idd = 1;
+            if (table == "[dbo].[Korpusa]" & id == "[Id_korpusa]" & idd == 1)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Korpusa] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_korpusa] = 1");
+            }
+            table = "[dbo].[Oxladd]";
+            id = "[Id_oxlad]";
+            idd = 6;
+            if (table == "[dbo].[Oxladd]" & id == "[Id_oxlad]" & idd == 6)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Oxladd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_oxlad] = 6");
+            }
+            idd = 5;
+            if (table == "[dbo].[Oxladd]" & id == "[Id_oxlad]" & idd == 5)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Oxladd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_oxlad] = 5");
+            }
+            idd = 4;
+            if (table == "[dbo].[Oxladd]" & id == "[Id_oxlad]" & idd == 4)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Oxladd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_oxlad] = 4");
+            }
+            idd = 3;
+            if (table == "[dbo].[Oxladd]" & id == "[Id_oxlad]" & idd == 3)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Oxladd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_oxlad] = 3");
+            }
+            idd = 2;
+            if (table == "[dbo].[Oxladd]" & id == "[Id_oxlad]" & idd == 2)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Oxladd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_oxlad] = 2");
+            }
+            idd = 1;
+            if (table == "[dbo].[Oxladd]" & id == "[Id_oxlad]" & idd == 1)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Oxladd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_oxlad] = 1");
+            }
+            table = "[dbo].[Ssd_and_Hdd]";
+            id = "[Id_SSD_HDD]";
+            idd = 6;
+            if (table == "[dbo].[Ssd_and_Hdd]" & id == "[Id_SSD_HDD]" & idd == 6)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Ssd_and_Hdd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_SSD_HDD] = 6");
+            }
+            idd = 5;
+            if (table == "[dbo].[Ssd_and_Hdd]" & id == "[Id_SSD_HDD]" & idd == 5)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Ssd_and_Hdd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_SSD_HDD] = 5");
+            }
+            idd = 4;
+            if (table == "[dbo].[Ssd_and_Hdd]" & id == "[Id_SSD_HDD]" & idd == 4)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Ssd_and_Hdd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_SSD_HDD] = 4");
+            }
+            idd = 3;
+            if (table == "[dbo].[Ssd_and_Hdd]" & id == "[Id_SSD_HDD]" & idd == 3)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Ssd_and_Hdd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_SSD_HDD] = 3");
+            }
+            idd = 2;
+            if (table == "[dbo].[Ssd_and_Hdd]" & id == "[Id_SSD_HDD]" & idd == 2)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Ssd_and_Hdd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_SSD_HDD] = 2");
+            }
+            idd = 1;
+            if (table == "[dbo].[Ssd_and_Hdd]" & id == "[Id_SSD_HDD]" & idd == 1)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Ssd_and_Hdd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_SSD_HDD] = 1");
+            }
+            table = "[dbo].[Monitors]";
+            id = "[Id_monitors]";
+            idd = 6;
+            if (table == "[dbo].[Monitors]" & id == "[Id_monitors]" & idd == 6)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Monitors] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_monitors] = 6");
+            }
+            idd = 5;
+            if (table == "[dbo].[Monitors]" & id == "[Id_monitors]" & idd == 5)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Monitors] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_monitors] = 5");
+            }
+            idd = 4;
+            if (table == "[dbo].[Monitors]" & id == "[Id_monitors]" & idd == 4)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Monitors] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_monitors] = 4");
+            }
+            idd = 3;
+            if (table == "[dbo].[Monitors]" & id == "[Id_monitors]" & idd == 3)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Monitors] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_monitors] = 3");
+            }
+            idd = 2;
+            if (table == "[dbo].[Monitors]" & id == "[Id_monitors]" & idd == 2)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Monitors] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_monitors] = 2");
+            }
+            idd = 1;
+            if (table == "[dbo].[Monitors]" & id == "[Id_monitors]" & idd == 1)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Monitors] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_monitors] = 1");
+            }
+            table = "[dbo].[Klaviatyra]";
+            id = "[id_klaviatyra]";
+            idd = 6;
+            if (table == "[dbo].[Klaviatyra]" & id == "[id_klaviatyra]" & idd == 6)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Klaviatyra] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_klaviatyra] = 6");
+            }
+            idd = 5;
+            if (table == "[dbo].[Klaviatyra]" & id == "[id_klaviatyra]" & idd == 5)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Klaviatyra] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_klaviatyra] = 5");
+            }
+            idd = 4;
+            if (table == "[dbo].[Klaviatyra]" & id == "[id_klaviatyra]" & idd == 4)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Klaviatyra] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_klaviatyra] = 4");
+            }
+            idd = 3;
+            if (table == "[dbo].[Klaviatyra]" & id == "[id_klaviatyra]" & idd == 3)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Klaviatyra] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_klaviatyra] = 3");
+            }
+            idd = 2;
+            if (table == "[dbo].[Klaviatyra]" & id == "[id_klaviatyra]" & idd == 2)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Klaviatyra] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_klaviatyra] = 2");
+            }
+            idd = 1;
+            if (table == "[dbo].[Klaviatyra]" & id == "[id_klaviatyra]" & idd == 1)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Klaviatyra] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_klaviatyra] = 1");
+            }
+            table = "[dbo].[Mouse]";
+            id = "[id_mouse]";
+            idd = 6;
+            if (table == "[dbo].[Mouse]" & id == "[id_mouse]" & idd == 6)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Mouse] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_mouse] = 6");
+            }
+            idd = 5;
+            if (table == "[dbo].[Mouse]" & id == "[id_mouse]" & idd == 5)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Mouse] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_mouse] = 5");
+            }
+            idd = 4;
+            if (table == "[dbo].[Mouse]" & id == "[id_mouse]" & idd == 4)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Mouse] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_mouse] = 4");
+            }
+            idd = 3;
+            if (table == "[dbo].[Mouse]" & id == "[id_mouse]" & idd == 3)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Mouse] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_mouse] = 3");
+            }
+            idd = 2;
+            if (table == "[dbo].[Mouse]" & id == "[id_mouse]" & idd == 2)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Mouse] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_mouse] = 2");
+            }
+            idd = 1;
+            if (table == "[dbo].[Mouse]" & id == "[id_mouse]" & idd == 1)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Mouse] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_mouse] = 1");
+            }
+            table = "[dbo].[Veb_camera]";
+            id = "[id_Veb_camera]";
+            idd = 6;
+            if (table == "[dbo].[Veb_camera]" & id == "[id_Veb_camera]" & idd == 6)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Veb_camera] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_Veb_camera] = 6");
+            }
+            idd = 5;
+            if (table == "[dbo].[Veb_camera]" & id == "[id_Veb_camera]" & idd == 5)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Veb_camera] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_Veb_camera] = 5");
+            }
+            idd = 4;
+            if (table == "[dbo].[Veb_camera]" & id == "[id_Veb_camera]" & idd == 4)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Veb_camera] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_Veb_camera] = 4");
+            }
+            idd = 3;
+            if (table == "[dbo].[Veb_camera]" & id == "[id_Veb_camera]" & idd == 3)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Veb_camera] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_Veb_camera] = 3");
+            }
+            idd = 2;
+            if (table == "[dbo].[Veb_camera]" & id == "[id_Veb_camera]" & idd == 2)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Veb_camera] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_Veb_camera] = 2");
+            }
+            idd = 1;
+            if (table == "[dbo].[Veb_camera]" & id == "[id_Veb_camera]" & idd == 1)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Veb_camera] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_Veb_camera] = 1");
+            }
+            table = "[dbo].[Vneshnie_nakopiteli]";
+            id = "[id_vneshnie_nakopiteli]";
+            idd = 6;
+            if (table == "[dbo].[Vneshnie_nakopiteli]" & id == "[id_vneshnie_nakopiteli]" & idd == 6)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Vneshnie_nakopiteli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_vneshnie_nakopiteli] = 6");
+            }
+            idd = 5;
+            if (table == "[dbo].[Vneshnie_nakopiteli]" & id == "[id_vneshnie_nakopiteli]" & idd == 5)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Vneshnie_nakopiteli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_vneshnie_nakopiteli] = 5");
+            }
+            idd = 4;
+            if (table == "[dbo].[Vneshnie_nakopiteli]" & id == "[id_vneshnie_nakopiteli]" & idd == 4)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Vneshnie_nakopiteli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_vneshnie_nakopiteli] = 4");
+            }
+            idd = 3;
+            if (table == "[dbo].[Vneshnie_nakopiteli]" & id == "[id_vneshnie_nakopiteli]" & idd == 3)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Vneshnie_nakopiteli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_vneshnie_nakopiteli] = 3");
+            }
+            idd = 2;
+            if (table == "[dbo].[Vneshnie_nakopiteli]" & id == "[id_vneshnie_nakopiteli]" & idd == 2)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Vneshnie_nakopiteli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_vneshnie_nakopiteli] = 2");
+            }
+            idd = 1;
+            if (table == "[dbo].[Vneshnie_nakopiteli]" & id == "[id_vneshnie_nakopiteli]" & idd == 1)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Vneshnie_nakopiteli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_vneshnie_nakopiteli] = 1");
+            }
+            table = "[dbo].[Nayshniki]";
+            id = "[id_nayshniki]";
+            idd = 6;
+            if (table == "[dbo].[Nayshniki]" & id == "[id_nayshniki]" & idd == 6)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Nayshniki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_nayshniki] = 6");
+            }
+            idd = 5;
+            if (table == "[dbo].[Nayshniki]" & id == "[id_nayshniki]" & idd == 5)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Nayshniki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_nayshniki] = 5");
+            }
+            idd = 4;
+            if (table == "[dbo].[Nayshniki]" & id == "[id_nayshniki]" & idd == 4)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Nayshniki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_nayshniki] = 4");
+            }
+            idd = 3;
+            if (table == "[dbo].[Nayshniki]" & id == "[id_nayshniki]" & idd == 3)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Nayshniki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_nayshniki] = 3");
+            }
+            idd = 2;
+            if (table == "[dbo].[Nayshniki]" & id == "[id_nayshniki]" & idd == 2)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Nayshniki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_nayshniki] = 2");
+            }
+            idd = 1;
+            if (table == "[dbo].[Nayshniki]" & id == "[id_nayshniki]" & idd == 1)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Nayshniki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_nayshniki] = 1");
+            }
+            table = "[dbo].[Kabeli]";
+            id = "[id_kabeli]";
+            idd = 6;
+            if (table == "[dbo].[Kabeli]" & id == "[id_nayshniki]" & idd == 6)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Kabeli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kabeli] = 6");
+            }
+            idd = 5;
+            if (table == "[dbo].[Kabeli]" & id == "[id_nayshniki]" & idd == 5)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Kabeli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kabeli] = 5");
+            }
+            idd = 4;
+            if (table == "[dbo].[Kabeli]" & id == "[id_nayshniki]" & idd == 4)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Kabeli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kabeli] = 4");
+            }
+            idd = 3;
+            if (table == "[dbo].[Kabeli]" & id == "[id_nayshniki]" & idd == 3)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Kabeli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kabeli] = 3");
+            }
+            idd = 2;
+            if (table == "[dbo].[Kabeli]" & id == "[id_nayshniki]" & idd == 2)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Kabeli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kabeli] = 2");
+            }
+            idd = 1;
+            if (table == "[dbo].[Kabeli]" & id == "[id_nayshniki]" & idd == 1)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Kabeli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kabeli] = 1");
+            }
+            table = "[dbo].[Kovriki]";
+            id = "[id_kovriki]";
+            idd = 6;
+            if (table == "[dbo].[Kovriki]" & id == "[id_kovriki]" & idd == 6)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Kovriki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kovriki] = 6");
+            }
+            idd = 5;
+            if (table == "[dbo].[Kovriki]" & id == "[id_kovriki]" & idd == 5)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Kovriki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kovriki] = 5");
+            }
+            idd = 4;
+            if (table == "[dbo].[Kovriki]" & id == "[id_kovriki]" & idd == 4)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Kovriki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kovriki] = 4");
+            }
+            idd = 3;
+            if (table == "[dbo].[Kovriki]" & id == "[id_kovriki]" & idd == 3)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Kovriki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kovriki] = 3");
+            }
+            idd = 2;
+            if (table == "[dbo].[Kovriki]" & id == "[id_kovriki]" & idd == 2)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Kovriki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kovriki] = 2");
+            }
+            idd = 1;
+            if (table == "[dbo].[Kovriki]" & id == "[id_kovriki]" & idd == 1)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Kovriki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kovriki] = 1");
+            }
+            table = "[dbo].[Notebok]";
+            id = "[id_notebok]";
+            idd = 6;
+            if (table == "[dbo].[Notebok]" & id == "[id_notebok]" & idd == 6)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Notebok] SET [Kolichectvo] = [Kolichectvo]-1 WHERE [id_notebok] = 6");
+            }
+            idd = 5;
+            if (table == "[dbo].[Notebok]" & id == "[id_notebok]" & idd == 5)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Notebok] SET [Kolichectvo] = [Kolichectvo]-1 WHERE [id_notebok] = 5");
+            }
+            idd = 4;
+            if (table == "[dbo].[Notebok]" & id == "[id_notebok]" & idd == 4)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Notebok] SET [Kolichectvo] = [Kolichectvo]-1 WHERE [id_notebok] = 4");
+            }
+            idd = 3;
+            if (table == "[dbo].[Notebok]" & id == "[id_notebok]" & idd == 3)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Notebok] SET [Kolichectvo] = [Kolichectvo]-1 WHERE [id_notebok] = 3");
+            }
+            idd = 2;
+            if (table == "[dbo].[Notebok]" & id == "[id_notebok]" & idd == 2)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Notebok] SET [Kolichectvo] = [Kolichectvo]-1 WHERE [id_notebok] = 2");
+            }
+            idd = 1;
+            if (table == "[dbo].[Notebok]" & id == "[id_notebok]" & idd == 1)
+            {
+                DataTable dt_koll = Select("UPDATE [dbo].[Notebok] SET [Kolichectvo] = [Kolichectvo]-1 WHERE [id_notebok] = 1");
+            }
         }
 
         private void mat_plati_Click(object sender, RoutedEventArgs e)
@@ -7153,7 +7698,8 @@ namespace уп
 
         private void Admin_panel_Click(object sender, RoutedEventArgs e)
         {
-
+            adminka adm = new adminka();
+            adm.Show();
         }
         public DataTable Select(string selectSQL) // функция подключения к базе данных и обработка запросов
         {
