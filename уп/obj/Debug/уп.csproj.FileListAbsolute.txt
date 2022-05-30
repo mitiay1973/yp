@@ -91,3 +91,6 @@ X:\уп\уп\obj\Debug\kat_ssd.baml
 \\main\RDP\33П\СорокинДА\Desktop\уп\уп\obj\Debug\уп.Resource1.resources
 \\main\RDP\33П\СорокинДА\Desktop\уп\уп\obj\Debug\adminka.g.cs
 \\main\RDP\33П\СорокинДА\Desktop\уп\уп\obj\Debug\adminka.baml
+\\main\RDP\33П\СорокинДА\Desktop\уп\уп\bin\Debug\System.Windows.Controls.DataVisualization.Toolkit.dll
+\\main\RDP\33П\СорокинДА\Desktop\уп\уп\bin\Debug\System.Windows.Controls.DataVisualization.Toolkit.xml
+\\main\RDP\33П\СорокинДА\Desktop\уп\уп\obj\Debug\уп.csproj.CopyComplete

@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -56,32 +57,11 @@ namespace уп
             glavnaya.noutbuki.Visibility = Visibility.Visible;
         }
 
-        private void oform_Click(object sender, RoutedEventArgs e)
+        private void oforml_Click(object sender, RoutedEventArgs e)
         {
-            if(name.Text !="")
-            {
-                if(nomer.Text!="")
-                {
-                    if(pochta.Text!="")
-                    {
-                        MessageBox.Show("Заказ успешно оформлен");
-
-                        this.Close();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Введите почту");
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Введите номер");
-                }
-            }
-            else
-            {
-                MessageBox.Show("Введите имя");
-            }
+            MessageBox.Show("Заказ успешно оформлен");
+            this.Close();
+            glavnaya glavnaya = new glavnaya();
         }
         public DataTable Select(string selectSQL) // функция подключения к базе данных и обработка запросов
         {

@@ -323,6 +323,7 @@ namespace уп
 
         }
 
+
         private void Kyp5_Click(object sender, RoutedEventArgs e)
         {
             using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
@@ -381,7 +382,6 @@ namespace уп
                     kor.Show();
                     kor.pokupka.Text = win_proc.pr5.Text;
                     idd = 5;
-
                     kor.oform.Click += Oform_Click;
                 }
             }
@@ -642,1563 +642,1563 @@ namespace уп
         public string log;
         public string nam;
         public string zena;
-        private void Oform_Click(object sender, RoutedEventArgs e)
+        public void Oform_Click(object sender, RoutedEventArgs e)
         {
 
-            if (table == "[dbo].[Procesor]" & id == "[Id_procesor]" & idd == 6)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Procesor] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_procesor] = 6");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Procesor]" & id == "[Id_procesor]" & idd == 6)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_procesor] FROM [dbo].[Procesor] WHERE [Id_procesor] = 6", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Procesor] WHERE [Id_procesor] = 6", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Procesor] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_procesor] = 6");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_procesor] FROM [dbo].[Procesor] WHERE [Id_procesor] = 6", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Procesor] WHERE [Id_procesor] = 6", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
 
-            if (table == "[dbo].[Procesor]" & id == "[Id_procesor]" & idd == 5)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Procesor] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_procesor] = 5");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Procesor]" & id == "[Id_procesor]" & idd == 5)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_procesor] FROM [dbo].[Procesor] WHERE [Id_procesor] = 5", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Procesor] WHERE [Id_procesor] = 5", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Procesor] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_procesor] = 5");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_procesor] FROM [dbo].[Procesor] WHERE [Id_procesor] = 5", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Procesor] WHERE [Id_procesor] = 5", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
 
-            if (table == "[dbo].[Procesor]" & id == "[Id_procesor]" & idd == 4)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Procesor] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_procesor] = 4");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Procesor]" & id == "[Id_procesor]" & idd == 4)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_procesor] FROM [dbo].[Procesor] WHERE [Id_procesor] = 4", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Procesor] WHERE [Id_procesor] = 4", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Procesor] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_procesor] = 4");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_procesor] FROM [dbo].[Procesor] WHERE [Id_procesor] = 4", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Procesor] WHERE [Id_procesor] = 4", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-
-
-            if (table == "[dbo].[Procesor]" & id == "[Id_procesor]" & idd == 3)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Procesor] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_procesor] = 3");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
-                {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_procesor] FROM [dbo].[Procesor] WHERE [Id_procesor] = 3", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Procesor] WHERE [Id_procesor] = 3", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
-                }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
 
 
-            if (table == "[dbo].[Procesor]" & id == "[Id_procesor]" & idd == 2)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Procesor] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_procesor] = 2");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Procesor]" & id == "[Id_procesor]" & idd == 3)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_procesor] FROM [dbo].[Procesor] WHERE [Id_procesor] = 2", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Procesor] WHERE [Id_procesor] = 2", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Procesor] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_procesor] = 3");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_procesor] FROM [dbo].[Procesor] WHERE [Id_procesor] = 3", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Procesor] WHERE [Id_procesor] = 3", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
 
-            if (table == "[dbo].[Procesor]" & id == "[Id_procesor]" & idd == 1)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Procesor] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_procesor] = 1");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
-                {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_procesor] FROM [dbo].[Procesor] WHERE [Id_procesor] = 1", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Procesor] WHERE [Id_procesor] = 1", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
-                }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
 
-            if (table == "[dbo].[Mat_plat]" & id == "[Id_Mat_plat]" & idd == 6)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Mat_plat] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Mat_plat] = 6");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Procesor]" & id == "[Id_procesor]" & idd == 2)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_Mat_plat] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 6", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 6", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Procesor] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_procesor] = 2");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_procesor] FROM [dbo].[Procesor] WHERE [Id_procesor] = 2", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Procesor] WHERE [Id_procesor] = 2", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Mat_plat]" & id == "[Id_Mat_plat]" & idd == 5)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Mat_plat] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Mat_plat] = 5");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
-                {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_Mat_plat] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 5", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 5", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
-                }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Mat_plat]" & id == "[Id_Mat_plat]" & idd == 4)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Mat_plat] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Mat_plat] = 4");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
-                {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_Mat_plat] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 4", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 4", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
-                }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Mat_plat]" & id == "[Id_Mat_plat]" & idd == 3)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Mat_plat] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Mat_plat] = 3");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
-                {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_Mat_plat] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 3", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 3", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
-                }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Mat_plat]" & id == "[Id_Mat_plat]" & idd == 2)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Mat_plat] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Mat_plat] = 2");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
-                {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_Mat_plat] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 2", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 2", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
-                }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Mat_plat]" & id == "[Id_Mat_plat]" & idd == 1)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Mat_plat] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Mat_plat] = 1");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
-                {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_Mat_plat] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 1", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 1", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
-                }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
 
-            if (table == "[dbo].[Videocart]" & id == "[Id_videocart]" & idd == 6)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Videocart] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_videocart] = 6");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Procesor]" & id == "[Id_procesor]" & idd == 1)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_videocart] FROM [dbo].[Videocart] WHERE [Id_videocart] = 6", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Videocart] WHERE [Id_videocart] = 6", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Procesor] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_procesor] = 1");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_procesor] FROM [dbo].[Procesor] WHERE [Id_procesor] = 1", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Procesor] WHERE [Id_procesor] = 1", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Videocart]" & id == "[Id_videocart]" & idd == 5)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Videocart] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_videocart] = 5");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
-                {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_videocart] FROM [dbo].[Videocart] WHERE [Id_videocart] = 5", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Videocart] WHERE [Id_videocart] = 5", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
-                }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Videocart]" & id == "[Id_videocart]" & idd == 4)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Videocart] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_videocart] = 4");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
-                {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_videocart] FROM [dbo].[Videocart] WHERE [Id_videocart] = 4", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Videocart] WHERE [Id_videocart] = 4", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
-                }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Videocart]" & id == "[Id_videocart]" & idd == 3)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Videocart] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_videocart] = 3");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
-                {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_videocart] FROM [dbo].[Videocart] WHERE [Id_videocart] = 3", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Videocart] WHERE [Id_videocart] = 3", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
-                }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Videocart]" & id == "[Id_videocart]" & idd == 2)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Videocart] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_videocart] = 2");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
-                {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_videocart] FROM [dbo].[Videocart] WHERE [Id_videocart] = 2", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Videocart] WHERE [Id_videocart] = 2", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
-                }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Videocart]" & id == "[Id_videocart]" & idd == 1)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Videocart] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_videocart] = 1");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
-                {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_videocart] FROM [dbo].[Videocart] WHERE [Id_videocart] = 1", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Videocart] WHERE [Id_videocart] = 1", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
-                }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
 
-            if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 6)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Operativka] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_Operativ_pamat] = 6");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Mat_plat]" & id == "[Id_Mat_plat]" & idd == 6)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_Operativ_pamat] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 6", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 6", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Mat_plat] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Mat_plat] = 6");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_Mat_plat] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 6", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 6", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 5)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Operativka] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_Operativ_pamat] = 5");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Mat_plat]" & id == "[Id_Mat_plat]" & idd == 5)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_Operativ_pamat] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 5", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 5", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Mat_plat] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Mat_plat] = 5");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_Mat_plat] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 5", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 5", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 4)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Operativka] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_Operativ_pamat] = 4");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Mat_plat]" & id == "[Id_Mat_plat]" & idd == 4)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_Operativ_pamat] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 4", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 4", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Mat_plat] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Mat_plat] = 4");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_Mat_plat] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 4", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 4", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 3)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Operativka] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_Operativ_pamat] = 3");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Mat_plat]" & id == "[Id_Mat_plat]" & idd == 3)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_Operativ_pamat] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 3", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 3", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Mat_plat] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Mat_plat] = 3");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_Mat_plat] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 3", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 3", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 2)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Operativka] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_Operativ_pamat] = 2");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Mat_plat]" & id == "[Id_Mat_plat]" & idd == 2)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_Operativ_pamat] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 2", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 2", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Mat_plat] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Mat_plat] = 2");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_Mat_plat] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 2", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 2", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 1)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Operativka] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_Operativ_pamat] = 1");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Mat_plat]" & id == "[Id_Mat_plat]" & idd == 1)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_Operativ_pamat] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 1", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 1", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Mat_plat] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Mat_plat] = 1");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_Mat_plat] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 1", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 1", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
 
-            if (table == "[dbo].[Blok_pitanie]" & id == "[Id_Blok_pitanie]" & idd == 6)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Blok_pitanie] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Blok_pitanie] = 6");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Videocart]" & id == "[Id_videocart]" & idd == 6)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_Blok_pitanie] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 6", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 6", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Videocart] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_videocart] = 6");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_videocart] FROM [dbo].[Videocart] WHERE [Id_videocart] = 6", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Videocart] WHERE [Id_videocart] = 6", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Blok_pitanie]" & id == "[Id_Blok_pitanie]" & idd == 5)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Blok_pitanie] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Blok_pitanie] = 5");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Videocart]" & id == "[Id_videocart]" & idd == 5)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_Blok_pitanie] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 5", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 5", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Videocart] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_videocart] = 5");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_videocart] FROM [dbo].[Videocart] WHERE [Id_videocart] = 5", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Videocart] WHERE [Id_videocart] = 5", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Blok_pitanie]" & id == "[Id_Blok_pitanie]" & idd == 4)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Blok_pitanie] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Blok_pitanie] = 4");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Videocart]" & id == "[Id_videocart]" & idd == 4)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_Blok_pitanie] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 4", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 4", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Videocart] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_videocart] = 4");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_videocart] FROM [dbo].[Videocart] WHERE [Id_videocart] = 4", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Videocart] WHERE [Id_videocart] = 4", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Blok_pitanie]" & id == "[Id_Blok_pitanie]" & idd == 3)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Blok_pitanie] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Blok_pitanie] = 3");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Videocart]" & id == "[Id_videocart]" & idd == 3)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_Blok_pitanie] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 3", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 3", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Videocart] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_videocart] = 3");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_videocart] FROM [dbo].[Videocart] WHERE [Id_videocart] = 3", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Videocart] WHERE [Id_videocart] = 3", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Blok_pitanie]" & id == "[Id_Blok_pitanie]" & idd == 2)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Blok_pitanie] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Blok_pitanie] = 2");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Videocart]" & id == "[Id_videocart]" & idd == 2)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_Blok_pitanie] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 2", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 2", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Videocart] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_videocart] = 2");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_videocart] FROM [dbo].[Videocart] WHERE [Id_videocart] = 2", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Videocart] WHERE [Id_videocart] = 2", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Blok_pitanie]" & id == "[Id_Blok_pitanie]" & idd == 1)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Blok_pitanie] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Blok_pitanie] = 1");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Videocart]" & id == "[Id_videocart]" & idd == 1)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_Blok_pitanie] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 1", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 1", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Videocart] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_videocart] = 1");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_videocart] FROM [dbo].[Videocart] WHERE [Id_videocart] = 1", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Videocart] WHERE [Id_videocart] = 1", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
 
-            if (table == "[dbo].[Korpusa]" & id == "[Id_korpusa]" & idd == 6)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Korpusa] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_korpusa] = 6");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 6)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Nazvanie] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 6", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 6", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Operativka] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_Operativ_pamat] = 6");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_Operativ_pamat] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 6", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 6", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Korpusa]" & id == "[Id_korpusa]" & idd == 5)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Korpusa] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_korpusa] = 5");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 5)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Nazvanie] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 5", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 5", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Operativka] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_Operativ_pamat] = 5");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_Operativ_pamat] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 5", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 5", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Korpusa]" & id == "[Id_korpusa]" & idd == 4)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Korpusa] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_korpusa] = 4");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 4)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Nazvanie] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 4", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 4", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Operativka] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_Operativ_pamat] = 4");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_Operativ_pamat] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 4", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 4", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Korpusa]" & id == "[Id_korpusa]" & idd == 3)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Korpusa] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_korpusa] = 3");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 3)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Nazvanie] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 3", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 3", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Operativka] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_Operativ_pamat] = 3");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_Operativ_pamat] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 3", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 3", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Korpusa]" & id == "[Id_korpusa]" & idd == 2)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Korpusa] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_korpusa] = 2");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 2)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Nazvanie] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 2", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 2", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Operativka] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_Operativ_pamat] = 2");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_Operativ_pamat] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 2", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 2", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Korpusa]" & id == "[Id_korpusa]" & idd == 1)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Korpusa] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_korpusa] = 1");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 1)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Nazvanie] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 1", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 1", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Operativka] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_Operativ_pamat] = 1");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_Operativ_pamat] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 1", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 1", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
 
-            if (table == "[dbo].[Oxladd]" & id == "[Id_oxlad]" & idd == 6)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Oxladd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_oxlad] = 6");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Blok_pitanie]" & id == "[Id_Blok_pitanie]" & idd == 6)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_oxlad] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 6", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 6", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Blok_pitanie] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Blok_pitanie] = 6");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_Blok_pitanie] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 6", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 6", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Oxladd]" & id == "[Id_oxlad]" & idd == 5)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Oxladd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_oxlad] = 5");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Blok_pitanie]" & id == "[Id_Blok_pitanie]" & idd == 5)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_oxlad] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 5", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 5", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Blok_pitanie] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Blok_pitanie] = 5");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_Blok_pitanie] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 5", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 5", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Oxladd]" & id == "[Id_oxlad]" & idd == 4)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Oxladd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_oxlad] = 4");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Blok_pitanie]" & id == "[Id_Blok_pitanie]" & idd == 4)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_oxlad] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 5", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 5", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Blok_pitanie] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Blok_pitanie] = 4");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_Blok_pitanie] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 4", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 4", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Oxladd]" & id == "[Id_oxlad]" & idd == 3)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Oxladd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_oxlad] = 3");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Blok_pitanie]" & id == "[Id_Blok_pitanie]" & idd == 3)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_oxlad] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 3", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 3", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Blok_pitanie] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Blok_pitanie] = 3");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_Blok_pitanie] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 3", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 3", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Oxladd]" & id == "[Id_oxlad]" & idd == 2)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Oxladd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_oxlad] = 2");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Blok_pitanie]" & id == "[Id_Blok_pitanie]" & idd == 2)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_oxlad] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 2", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 2", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Blok_pitanie] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Blok_pitanie] = 2");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_Blok_pitanie] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 2", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 2", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Oxladd]" & id == "[Id_oxlad]" & idd == 1)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Oxladd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_oxlad] = 1");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Blok_pitanie]" & id == "[Id_Blok_pitanie]" & idd == 1)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_oxlad] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 1", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 1", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Blok_pitanie] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Blok_pitanie] = 1");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_Blok_pitanie] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 1", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 1", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
 
-            if (table == "[dbo].[Ssd_and_Hdd]" & id == "[Id_SSD_HDD]" & idd == 6)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Ssd_and_Hdd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_SSD_HDD] = 6");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Korpusa]" & id == "[Id_korpusa]" & idd == 6)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_SSD_HDD] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 6", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 6", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Korpusa] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_korpusa] = 6");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Nazvanie] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 6", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 6", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Ssd_and_Hdd]" & id == "[Id_SSD_HDD]" & idd == 5)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Ssd_and_Hdd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_SSD_HDD] = 5");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Korpusa]" & id == "[Id_korpusa]" & idd == 5)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_SSD_HDD] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 5", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 5", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Korpusa] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_korpusa] = 5");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Nazvanie] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 5", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 5", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Ssd_and_Hdd]" & id == "[Id_SSD_HDD]" & idd == 4)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Ssd_and_Hdd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_SSD_HDD] = 4");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Korpusa]" & id == "[Id_korpusa]" & idd == 4)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_SSD_HDD] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 4", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 4", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Korpusa] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_korpusa] = 4");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Nazvanie] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 4", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 4", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Ssd_and_Hdd]" & id == "[Id_SSD_HDD]" & idd == 3)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Ssd_and_Hdd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_SSD_HDD] = 3");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Korpusa]" & id == "[Id_korpusa]" & idd == 3)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_SSD_HDD] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 3", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 3", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Korpusa] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_korpusa] = 3");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Nazvanie] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 3", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 3", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Ssd_and_Hdd]" & id == "[Id_SSD_HDD]" & idd == 2)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Ssd_and_Hdd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_SSD_HDD] = 2");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Korpusa]" & id == "[Id_korpusa]" & idd == 2)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_SSD_HDD] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 2", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 2", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Korpusa] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_korpusa] = 2");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Nazvanie] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 2", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 2", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Ssd_and_Hdd]" & id == "[Id_SSD_HDD]" & idd == 1)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Ssd_and_Hdd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_SSD_HDD] = 1");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Korpusa]" & id == "[Id_korpusa]" & idd == 1)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Name_SSD_HDD] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 1", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 1", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Korpusa] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_korpusa] = 1");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Nazvanie] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 1", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 1", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
 
-            if (table == "[dbo].[Monitors]" & id == "[Id_monitors]" & idd == 6)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Monitors] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_monitors] = 6");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Oxladd]" & id == "[Id_oxlad]" & idd == 6)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Monitors] WHERE [Id_monitors] = 6", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Monitors] WHERE [Id_monitors] = 6", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Oxladd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_oxlad] = 6");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_oxlad] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 6", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 6", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Monitors]" & id == "[Id_monitors]" & idd == 5)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Monitors] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_monitors] = 5");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Oxladd]" & id == "[Id_oxlad]" & idd == 5)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Monitors] WHERE [Id_monitors] = 5", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Monitors] WHERE [Id_monitors] = 5", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Oxladd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_oxlad] = 5");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_oxlad] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 5", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 5", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Monitors]" & id == "[Id_monitors]" & idd == 4)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Monitors] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_monitors] = 4");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Oxladd]" & id == "[Id_oxlad]" & idd == 4)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Monitors] WHERE [Id_monitors] = 4", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Monitors] WHERE [Id_monitors] = 4", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Oxladd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_oxlad] = 4");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_oxlad] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 5", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 5", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Monitors]" & id == "[Id_monitors]" & idd == 3)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Monitors] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_monitors] = 3");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Oxladd]" & id == "[Id_oxlad]" & idd == 3)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Monitors] WHERE [Id_monitors] = 3", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Monitors] WHERE [Id_monitors] = 3", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Oxladd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_oxlad] = 3");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_oxlad] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 3", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 3", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Monitors]" & id == "[Id_monitors]" & idd == 2)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Monitors] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_monitors] = 2");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Oxladd]" & id == "[Id_oxlad]" & idd == 2)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Monitors] WHERE [Id_monitors] = 2", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Monitors] WHERE [Id_monitors] = 2", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Oxladd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_oxlad] = 2");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_oxlad] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 2", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 2", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Monitors]" & id == "[Id_monitors]" & idd == 1)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Monitors] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_monitors] = 1");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Oxladd]" & id == "[Id_oxlad]" & idd == 1)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Monitors] WHERE [Id_monitors] = 1", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Monitors] WHERE [Id_monitors] = 1", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Oxladd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_oxlad] = 1");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_oxlad] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 1", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 1", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
 
-            if (table == "[dbo].[Klaviatyra]" & id == "[id_klaviatyra]" & idd == 6)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Klaviatyra] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_klaviatyra] = 6");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Ssd_and_Hdd]" & id == "[Id_SSD_HDD]" & idd == 6)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 6", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 6", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Ssd_and_Hdd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_SSD_HDD] = 6");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_SSD_HDD] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 6", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 6", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Klaviatyra]" & id == "[id_klaviatyra]" & idd == 5)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Klaviatyra] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_klaviatyra] = 5");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Ssd_and_Hdd]" & id == "[Id_SSD_HDD]" & idd == 5)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 5", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 5", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Ssd_and_Hdd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_SSD_HDD] = 5");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_SSD_HDD] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 5", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 5", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Klaviatyra]" & id == "[id_klaviatyra]" & idd == 4)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Klaviatyra] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_klaviatyra] = 4");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Ssd_and_Hdd]" & id == "[Id_SSD_HDD]" & idd == 4)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 4", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 4", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Ssd_and_Hdd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_SSD_HDD] = 4");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_SSD_HDD] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 4", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 4", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Klaviatyra]" & id == "[id_klaviatyra]" & idd == 3)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Klaviatyra] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_klaviatyra] = 3");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Ssd_and_Hdd]" & id == "[Id_SSD_HDD]" & idd == 3)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 3", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 3", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Ssd_and_Hdd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_SSD_HDD] = 3");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_SSD_HDD] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 3", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 3", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Klaviatyra]" & id == "[id_klaviatyra]" & idd == 2)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Klaviatyra] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_klaviatyra] = 2");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Ssd_and_Hdd]" & id == "[Id_SSD_HDD]" & idd == 2)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 2", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 2", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Ssd_and_Hdd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_SSD_HDD] = 2");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_SSD_HDD] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 2", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 2", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Klaviatyra]" & id == "[id_klaviatyra]" & idd == 1)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Klaviatyra] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_klaviatyra] = 1");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Ssd_and_Hdd]" & id == "[Id_SSD_HDD]" & idd == 1)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 1", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 1", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Ssd_and_Hdd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_SSD_HDD] = 1");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Name_SSD_HDD] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 1", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 1", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
 
-            if (table == "[dbo].[Mouse]" & id == "[id_mouse]" & idd == 6)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Mouse] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_mouse] = 6");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Monitors]" & id == "[Id_monitors]" & idd == 6)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Mouse] WHERE [id_mouse] = 6", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mouse] WHERE [id_mouse] = 6", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Monitors] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_monitors] = 6");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Monitors] WHERE [Id_monitors] = 6", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Monitors] WHERE [Id_monitors] = 6", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Mouse]" & id == "[id_mouse]" & idd == 5)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Mouse] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_mouse] = 5");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Monitors]" & id == "[Id_monitors]" & idd == 5)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Mouse] WHERE [id_mouse] = 5", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mouse] WHERE [id_mouse] = 5", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Monitors] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_monitors] = 5");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Monitors] WHERE [Id_monitors] = 5", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Monitors] WHERE [Id_monitors] = 5", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Mouse]" & id == "[id_mouse]" & idd == 4)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Mouse] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_mouse] = 4");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Monitors]" & id == "[Id_monitors]" & idd == 4)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Mouse] WHERE [id_mouse] = 4", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mouse] WHERE [id_mouse] = 4", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Monitors] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_monitors] = 4");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Monitors] WHERE [Id_monitors] = 4", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Monitors] WHERE [Id_monitors] = 4", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Mouse]" & id == "[id_mouse]" & idd == 3)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Mouse] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_mouse] = 3");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Monitors]" & id == "[Id_monitors]" & idd == 3)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Mouse] WHERE [id_mouse] = 3", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mouse] WHERE [id_mouse] = 3", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Monitors] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_monitors] = 3");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Monitors] WHERE [Id_monitors] = 3", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Monitors] WHERE [Id_monitors] = 3", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Mouse]" & id == "[id_mouse]" & idd == 2)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Mouse] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_mouse] = 2");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Monitors]" & id == "[Id_monitors]" & idd == 2)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Mouse] WHERE [id_mouse] = 2", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mouse] WHERE [id_mouse] = 2", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Monitors] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_monitors] = 2");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Monitors] WHERE [Id_monitors] = 2", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Monitors] WHERE [Id_monitors] = 2", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Mouse]" & id == "[id_mouse]" & idd == 1)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Mouse] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_mouse] = 1");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Monitors]" & id == "[Id_monitors]" & idd == 1)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Mouse] WHERE [id_mouse] = 1", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mouse] WHERE [id_mouse] = 1", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Monitors] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_monitors] = 1");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Monitors] WHERE [Id_monitors] = 1", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Monitors] WHERE [Id_monitors] = 1", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
 
-            if (table == "[dbo].[Veb_camera]" & id == "[id_Veb_camera]" & idd == 6)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Veb_camera] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_Veb_camera] = 6");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Klaviatyra]" & id == "[id_klaviatyra]" & idd == 6)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 6", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 6", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Klaviatyra] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_klaviatyra] = 6");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 6", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 6", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Veb_camera]" & id == "[id_Veb_camera]" & idd == 5)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Veb_camera] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_Veb_camera] = 5");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Klaviatyra]" & id == "[id_klaviatyra]" & idd == 5)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 5", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 5", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Klaviatyra] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_klaviatyra] = 5");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 5", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 5", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Veb_camera]" & id == "[id_Veb_camera]" & idd == 4)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Veb_camera] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_Veb_camera] = 4");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Klaviatyra]" & id == "[id_klaviatyra]" & idd == 4)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 4", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 4", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Klaviatyra] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_klaviatyra] = 4");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 4", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 4", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Veb_camera]" & id == "[id_Veb_camera]" & idd == 3)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Veb_camera] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_Veb_camera] = 3");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Klaviatyra]" & id == "[id_klaviatyra]" & idd == 3)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 3", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 3", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Klaviatyra] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_klaviatyra] = 3");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 3", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 3", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Veb_camera]" & id == "[id_Veb_camera]" & idd == 2)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Veb_camera] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_Veb_camera] = 2");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Klaviatyra]" & id == "[id_klaviatyra]" & idd == 2)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 2", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 2", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Klaviatyra] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_klaviatyra] = 2");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 2", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 2", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Veb_camera]" & id == "[id_Veb_camera]" & idd == 1)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Veb_camera] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_Veb_camera] = 1");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Klaviatyra]" & id == "[id_klaviatyra]" & idd == 1)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 1", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 1", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Klaviatyra] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_klaviatyra] = 1");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 1", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 1", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
 
-            if (table == "[dbo].[Vneshnie_nakopiteli]" & id == "[id_vneshnie_nakopiteli]" & idd == 6)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Vneshnie_nakopiteli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_vneshnie_nakopiteli] = 6");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Mouse]" & id == "[id_mouse]" & idd == 6)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 6", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 6", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Mouse] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_mouse] = 6");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Mouse] WHERE [id_mouse] = 6", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mouse] WHERE [id_mouse] = 6", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Vneshnie_nakopiteli]" & id == "[id_vneshnie_nakopiteli]" & idd == 5)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Vneshnie_nakopiteli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_vneshnie_nakopiteli] = 5");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Mouse]" & id == "[id_mouse]" & idd == 5)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 5", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 5", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Mouse] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_mouse] = 5");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Mouse] WHERE [id_mouse] = 5", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mouse] WHERE [id_mouse] = 5", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Vneshnie_nakopiteli]" & id == "[id_vneshnie_nakopiteli]" & idd == 4)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Vneshnie_nakopiteli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_vneshnie_nakopiteli] = 4");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Mouse]" & id == "[id_mouse]" & idd == 4)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 4", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 4", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Mouse] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_mouse] = 4");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Mouse] WHERE [id_mouse] = 4", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mouse] WHERE [id_mouse] = 4", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Vneshnie_nakopiteli]" & id == "[id_vneshnie_nakopiteli]" & idd == 3)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Vneshnie_nakopiteli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_vneshnie_nakopiteli] = 3");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Mouse]" & id == "[id_mouse]" & idd == 3)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 3", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 3", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Mouse] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_mouse] = 3");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Mouse] WHERE [id_mouse] = 3", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mouse] WHERE [id_mouse] = 3", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Vneshnie_nakopiteli]" & id == "[id_vneshnie_nakopiteli]" & idd == 2)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Vneshnie_nakopiteli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_vneshnie_nakopiteli] = 2");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Mouse]" & id == "[id_mouse]" & idd == 2)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 2", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 2", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Mouse] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_mouse] = 2");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Mouse] WHERE [id_mouse] = 2", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mouse] WHERE [id_mouse] = 2", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Vneshnie_nakopiteli]" & id == "[id_vneshnie_nakopiteli]" & idd == 1)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Vneshnie_nakopiteli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_vneshnie_nakopiteli] = 1");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Mouse]" & id == "[id_mouse]" & idd == 1)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 1", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 1", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Mouse] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_mouse] = 1");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Mouse] WHERE [id_mouse] = 1", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mouse] WHERE [id_mouse] = 1", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
 
-            if (table == "[dbo].[Nayshniki]" & id == "[id_nayshniki]" & idd == 6)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Nayshniki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_nayshniki] = 6");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Veb_camera]" & id == "[id_Veb_camera]" & idd == 6)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 6", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 6", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Veb_camera] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_Veb_camera] = 6");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 6", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 6", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Nayshniki]" & id == "[id_nayshniki]" & idd == 5)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Nayshniki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_nayshniki] = 5");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Veb_camera]" & id == "[id_Veb_camera]" & idd == 5)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 5", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 5", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Veb_camera] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_Veb_camera] = 5");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 5", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 5", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
+                if (table == "[dbo].[Veb_camera]" & id == "[id_Veb_camera]" & idd == 4)
+                {
+                    DataTable dt_koll = Select("UPDATE [dbo].[Veb_camera] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_Veb_camera] = 4");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 4", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 4", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
+                }
+                if (table == "[dbo].[Veb_camera]" & id == "[id_Veb_camera]" & idd == 3)
+                {
+                    DataTable dt_koll = Select("UPDATE [dbo].[Veb_camera] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_Veb_camera] = 3");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 3", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 3", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
+                }
+                if (table == "[dbo].[Veb_camera]" & id == "[id_Veb_camera]" & idd == 2)
+                {
+                    DataTable dt_koll = Select("UPDATE [dbo].[Veb_camera] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_Veb_camera] = 2");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 2", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 2", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
+                }
+                if (table == "[dbo].[Veb_camera]" & id == "[id_Veb_camera]" & idd == 1)
+                {
+                    DataTable dt_koll = Select("UPDATE [dbo].[Veb_camera] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_Veb_camera] = 1");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 1", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 1", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
+                }
 
-            if (table == "[dbo].[Nayshniki]" & id == "[id_nayshniki]" & idd == 4)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Nayshniki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_nayshniki] = 4");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Vneshnie_nakopiteli]" & id == "[id_vneshnie_nakopiteli]" & idd == 6)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 4", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 4", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Vneshnie_nakopiteli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_vneshnie_nakopiteli] = 6");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 6", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 6", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Nayshniki]" & id == "[id_nayshniki]" & idd == 3)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Nayshniki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_nayshniki] = 3");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Vneshnie_nakopiteli]" & id == "[id_vneshnie_nakopiteli]" & idd == 5)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 3", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 3", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Vneshnie_nakopiteli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_vneshnie_nakopiteli] = 5");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 5", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 5", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Nayshniki]" & id == "[id_nayshniki]" & idd == 2)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Nayshniki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_nayshniki] = 2");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Vneshnie_nakopiteli]" & id == "[id_vneshnie_nakopiteli]" & idd == 4)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 2", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 2", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Vneshnie_nakopiteli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_vneshnie_nakopiteli] = 4");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 4", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 4", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Nayshniki]" & id == "[id_nayshniki]" & idd == 1)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Nayshniki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_nayshniki] = 1");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Vneshnie_nakopiteli]" & id == "[id_vneshnie_nakopiteli]" & idd == 3)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 1", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 1", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Vneshnie_nakopiteli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_vneshnie_nakopiteli] = 3");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 3", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 3", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
+                if (table == "[dbo].[Vneshnie_nakopiteli]" & id == "[id_vneshnie_nakopiteli]" & idd == 2)
+                {
+                    DataTable dt_koll = Select("UPDATE [dbo].[Vneshnie_nakopiteli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_vneshnie_nakopiteli] = 2");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 2", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 2", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
+                }
+                if (table == "[dbo].[Vneshnie_nakopiteli]" & id == "[id_vneshnie_nakopiteli]" & idd == 1)
+                {
+                    DataTable dt_koll = Select("UPDATE [dbo].[Vneshnie_nakopiteli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_vneshnie_nakopiteli] = 1");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 1", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 1", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
+                }
 
-            if (table == "[dbo].[Kabeli]" & id == "[id_kabeli]" & idd == 6)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Kabeli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kabeli] = 6");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Nayshniki]" & id == "[id_nayshniki]" & idd == 6)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 6", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 6", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Nayshniki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_nayshniki] = 6");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 6", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 6", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Kabeli]" & id == "[id_kabeli]" & idd == 5)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Kabeli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kabeli] = 5");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Nayshniki]" & id == "[id_nayshniki]" & idd == 5)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 5", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 5", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Nayshniki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_nayshniki] = 5");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 5", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 5", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Kabeli]" & id == "[id_kabeli]" & idd == 4)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Kabeli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kabeli] = 4");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
-                {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 4", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 4", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
-                }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Kabeli]" & id == "[id_kabeli]" & idd == 3)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Kabeli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kabeli] = 3");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
-                {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 3", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 3", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
-                }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Kabeli]" & id == "[id_kabeli]" & idd == 2)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Kabeli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kabeli] = 2");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
-                {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 2", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 2", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
-                }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Kabeli]" & id == "[id_kabeli]" & idd == 1)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Kabeli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kabeli] = 1");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
-                {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 1", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 1", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
-                }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
 
-            if (table == "[dbo].[Kovriki]" & id == "[id_kovriki]" & idd == 6)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Kovriki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kovriki] = 6");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Nayshniki]" & id == "[id_nayshniki]" & idd == 4)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 6", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 6", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Nayshniki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_nayshniki] = 4");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 4", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 4", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Kovriki]" & id == "[id_kovriki]" & idd == 5)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Kovriki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kovriki] = 5");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Nayshniki]" & id == "[id_nayshniki]" & idd == 3)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 5", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 5", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Nayshniki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_nayshniki] = 3");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 3", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 3", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Kovriki]" & id == "[id_kovriki]" & idd == 4)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Kovriki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kovriki] = 4");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Nayshniki]" & id == "[id_nayshniki]" & idd == 2)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 4", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 4", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Nayshniki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_nayshniki] = 2");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 2", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 2", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Kovriki]" & id == "[id_kovriki]" & idd == 3)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Kovriki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kovriki] = 3");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Nayshniki]" & id == "[id_nayshniki]" & idd == 1)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 3", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 3", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Nayshniki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_nayshniki] = 1");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 1", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 1", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Kovriki]" & id == "[id_kovriki]" & idd == 2)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Kovriki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kovriki] = 2");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
-                {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 2", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 2", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
-                }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Kovriki]" & id == "[id_kovriki]" & idd == 1)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Kovriki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kovriki] = 1");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
-                {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 1", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 1", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
-                }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
 
-            if (table == "[dbo].[Notebok]" & id == "[id_notebok]" & idd == 6)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Notebok] SET [Kolichectvo] = [Kolichectvo]-1 WHERE [id_notebok] = 6");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Kabeli]" & id == "[id_kabeli]" & idd == 6)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 6", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 6", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Kabeli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kabeli] = 6");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 6", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 6", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Notebok]" & id == "[id_notebok]" & idd == 5)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Notebok] SET [Kolichectvo] = [Kolichectvo]-1 WHERE [id_notebok] = 5");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Kabeli]" & id == "[id_kabeli]" & idd == 5)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 5", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 5", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Kabeli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kabeli] = 5");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 5", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 5", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Notebok]" & id == "[id_notebok]" & idd == 4)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Notebok] SET [Kolichectvo] = [Kolichectvo]-1 WHERE [id_notebok] = 4");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Kabeli]" & id == "[id_kabeli]" & idd == 4)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 4", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 4", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Kabeli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kabeli] = 4");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 4", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 4", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Notebok]" & id == "[id_notebok]" & idd == 3)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Notebok] SET [Kolichectvo] = [Kolichectvo]-1 WHERE [id_notebok] = 3");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Kabeli]" & id == "[id_kabeli]" & idd == 3)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 3", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 3", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Kabeli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kabeli] = 3");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 3", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 3", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Notebok]" & id == "[id_notebok]" & idd == 2)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Notebok] SET [Kolichectvo] = [Kolichectvo]-1 WHERE [id_notebok] = 2");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Kabeli]" & id == "[id_kabeli]" & idd == 2)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 2", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 2", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Kabeli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kabeli] = 2");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 2", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 2", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
-            if (table == "[dbo].[Notebok]" & id == "[id_notebok]" & idd == 1)
-            {
-                DataTable dt_koll = Select("UPDATE [dbo].[Notebok] SET [Kolichectvo] = [Kolichectvo]-1 WHERE [id_notebok] = 1");
-                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                if (table == "[dbo].[Kabeli]" & id == "[id_kabeli]" & idd == 1)
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
-                    log = command.ExecuteScalar().ToString();
-                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 1", connection);
-                    nam = commandd.ExecuteScalar().ToString();
-                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 1", connection);
-                    zena = commanddd.ExecuteScalar().ToString();
+                    DataTable dt_koll = Select("UPDATE [dbo].[Kabeli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kabeli] = 1");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 1", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 1", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
                 }
-                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
-            }
+
+                if (table == "[dbo].[Kovriki]" & id == "[id_kovriki]" & idd == 6)
+                {
+                    DataTable dt_koll = Select("UPDATE [dbo].[Kovriki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kovriki] = 6");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 6", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 6", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
+                }
+                if (table == "[dbo].[Kovriki]" & id == "[id_kovriki]" & idd == 5)
+                {
+                    DataTable dt_koll = Select("UPDATE [dbo].[Kovriki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kovriki] = 5");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 5", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 5", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
+                }
+                if (table == "[dbo].[Kovriki]" & id == "[id_kovriki]" & idd == 4)
+                {
+                    DataTable dt_koll = Select("UPDATE [dbo].[Kovriki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kovriki] = 4");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 4", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 4", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
+                }
+                if (table == "[dbo].[Kovriki]" & id == "[id_kovriki]" & idd == 3)
+                {
+                    DataTable dt_koll = Select("UPDATE [dbo].[Kovriki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kovriki] = 3");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 3", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 3", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
+                }
+                if (table == "[dbo].[Kovriki]" & id == "[id_kovriki]" & idd == 2)
+                {
+                    DataTable dt_koll = Select("UPDATE [dbo].[Kovriki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kovriki] = 2");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 2", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 2", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
+                }
+                if (table == "[dbo].[Kovriki]" & id == "[id_kovriki]" & idd == 1)
+                {
+                    DataTable dt_koll = Select("UPDATE [dbo].[Kovriki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kovriki] = 1");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 1", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 1", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
+                }
+
+                if (table == "[dbo].[Notebok]" & id == "[id_notebok]" & idd == 6)
+                {
+                    DataTable dt_koll = Select("UPDATE [dbo].[Notebok] SET [Kolichectvo] = [Kolichectvo]-1 WHERE [id_notebok] = 6");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 6", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 6", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
+                }
+                if (table == "[dbo].[Notebok]" & id == "[id_notebok]" & idd == 5)
+                {
+                    DataTable dt_koll = Select("UPDATE [dbo].[Notebok] SET [Kolichectvo] = [Kolichectvo]-1 WHERE [id_notebok] = 5");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 5", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 5", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
+                }
+                if (table == "[dbo].[Notebok]" & id == "[id_notebok]" & idd == 4)
+                {
+                    DataTable dt_koll = Select("UPDATE [dbo].[Notebok] SET [Kolichectvo] = [Kolichectvo]-1 WHERE [id_notebok] = 4");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 4", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 4", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
+                }
+                if (table == "[dbo].[Notebok]" & id == "[id_notebok]" & idd == 3)
+                {
+                    DataTable dt_koll = Select("UPDATE [dbo].[Notebok] SET [Kolichectvo] = [Kolichectvo]-1 WHERE [id_notebok] = 3");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 3", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 3", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
+                }
+                if (table == "[dbo].[Notebok]" & id == "[id_notebok]" & idd == 2)
+                {
+                    DataTable dt_koll = Select("UPDATE [dbo].[Notebok] SET [Kolichectvo] = [Kolichectvo]-1 WHERE [id_notebok] = 2");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 2", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 2", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
+                }
+                if (table == "[dbo].[Notebok]" & id == "[id_notebok]" & idd == 1)
+                {
+                    DataTable dt_koll = Select("UPDATE [dbo].[Notebok] SET [Kolichectvo] = [Kolichectvo]-1 WHERE [id_notebok] = 1");
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                        log = command.ExecuteScalar().ToString();
+                        SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 1", connection);
+                        nam = commandd.ExecuteScalar().ToString();
+                        SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 1", connection);
+                        zena = commanddd.ExecuteScalar().ToString();
+                    }
+                    DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
+                }
         }
 
         private void mat_plati_Click(object sender, RoutedEventArgs e)

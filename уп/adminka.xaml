@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:DV="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"  
-        xmlns:DVC="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit" 
+        xmlns:DVC="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"  
         xmlns:local="clr-namespace:уп"
         mc:Ignorable="d"
         Title="Админ панель" Height="450" Width="800"  MaxHeight="450" MaxWidth="800" MinHeight="450" MinWidth="800" Icon="лого2.jpg">
@@ -24,8 +24,15 @@
         </TextBlock>
         <Button x:Name="katalog2" Content="Выйти" HorizontalAlignment="Left" Margin="10,377,0,0" VerticalAlignment="Top" Width="105" Height="22" Background="#FFFDE9D6" BorderBrush="Black" Click="katalog_Click"/>
         <Image HorizontalAlignment="Left" Height="41" Margin="331,0,0,0" VerticalAlignment="Top" Width="129" Source="лого.jpg"/>
-        <Label x:Name="label3" Content="Админ панель" HorizontalAlignment="Center" Margin="331,74,208,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="24
+        <Label x:Name="label3" Content="Админ панель" HorizontalAlignment="Center" Margin="357,74,182,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="24
                " Height="44" Width="253"/>
         <Image x:Name="im" HorizontalAlignment="Left" Height="134" Margin="172,119,0,0" VerticalAlignment="Top" Width="164"/>
+        <DVC:Chart Margin="131,74,0,0" Name="mcChart">
+            <DVC:Chart.Series>
+                <DVC:ColumnSeries IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}">
+                    
+                </DVC:ColumnSeries>
+            </DVC:Chart.Series>
+        </DVC:Chart>
     </Grid>
 </Window>

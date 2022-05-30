@@ -5,8 +5,10 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI.DataVisualization.Charting;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.DataVisualization.Charting;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -22,10 +24,48 @@ namespace уп
     /// </summary>
     public partial class adminka : Window
     {
+
         public adminka()
         {
             InitializeComponent();
+            LoadBarChartData();
         }
+        private void LoadBarChartData()
+        {
+            DataTable dt_kol1 = Select("SELECT * FROM [dbo].[Users]");
+            int kol = dt_kol1.Rows.Count;
+            int[] kol1 = new int[kol+1];
+            string[] log = new string[kol+1];
+            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            {
+                connection.Open();
+                for (int i = 1; i <= kol; i++)
+                {
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Users] WHERE [id_user]='" + i + "'", connection);
+                    log[i] = command.ExecuteScalar().ToString();
+                    DataTable dt_kol = Select("SELECT * FROM [dbo].[Zakaz] WHERE [Login]= '" + log[i] + "'");
+                    if (dt_kol.Rows.Count > 0)
+                    {
+                        kol1[i] = dt_kol.Rows.Count;
+                    }
+                    else
+                    {
+                        kol1[i] = 0;
+                    }
+
+                    ((ColumnSeries)mcChart.Series[0]).ItemsSource =
+                     new KeyValuePair<string, int>[]
+                    {
+                    new KeyValuePair<string, int>(log[1], kol1[1]),
+                    new KeyValuePair<string, int>(log[2], kol1[2]),
+                    new KeyValuePair<string, int>(log[3], kol1[3]),
+                    new KeyValuePair<string, int>(log[4], kol1[4])
+                    };
+                }
+            }
+        }
+
+
 
         private void katalog_Click(object sender, RoutedEventArgs e)
         {

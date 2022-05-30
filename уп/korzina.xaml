@@ -24,14 +24,8 @@
         <Image HorizontalAlignment="Left" Height="41" Margin="331,0,0,0" VerticalAlignment="Top" Width="129" Source="лого.jpg"/>
         <Label x:Name="label3" Content="Оформление заказа" HorizontalAlignment="Center" Margin="316,75,223,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="24
                " Height="44" Width="253"/>
-        <TextBox x:Name="pokupka"  HorizontalAlignment="Left" Margin="147,269,0,0" VerticalAlignment="Top" FontSize="10" Height="76" Width="215" Background="{x:Null}" IsEnabled="False"/>
-        <Button x:Name="oform" Content="Оформить" HorizontalAlignment="Left" Margin="391,377,0,0" VerticalAlignment="Top" Width="105" Height="22" Click="oform_Click"  />
-        <Image x:Name="im" HorizontalAlignment="Left" Height="134" Margin="172,119,0,0" VerticalAlignment="Top" Width="164"/>
-        <TextBox x:Name="name"  HorizontalAlignment="Left" Margin="523,137,0,0" VerticalAlignment="Top" FontSize="10" Height="30" Width="222" Background="{x:Null}" />
-        <TextBox x:Name="nomer"  HorizontalAlignment="Left" Margin="523,213,0,0" VerticalAlignment="Top" FontSize="10" Height="30" Width="222" Background="{x:Null}" />
-        <TextBox x:Name="pochta"  HorizontalAlignment="Left" Margin="523,287,0,0" VerticalAlignment="Top" FontSize="10" Height="30" Width="222" Background="{x:Null}" />
-        <Label Content="Введите имя" HorizontalAlignment="Left" Margin="596,111,0,0" VerticalAlignment="Top"/>
-        <Label Content="Введите телефон" HorizontalAlignment="Left" Margin="585,187,0,0" VerticalAlignment="Top"/>
-        <Label Content="Введите почту" HorizontalAlignment="Left" Margin="592,261,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="pokupka"  HorizontalAlignment="Left" Margin="331,279,0,0" VerticalAlignment="Top" FontSize="10" Height="76" Width="215" Background="{x:Null}" IsEnabled="False"/>
+        <Button x:Name="oform" Content="Оформить" HorizontalAlignment="Left" Margin="391,377,0,0" VerticalAlignment="Top" Width="105" Height="22" Click="oforml_Click"  />
+        <Image x:Name="im" HorizontalAlignment="Left" Height="134" Margin="365,124,0,0" VerticalAlignment="Top" Width="164"/>
     </Grid>
 </Window>
