@@ -52,8 +52,9 @@ namespace уп
             {
 
             }
-        }
 
+        }
+        public int idd;
         private void Vxod_Click(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();
@@ -122,6 +123,8 @@ namespace уп
 
             }
         }
+        private string table;
+        private string id;
         private void processori_Click(object sender, RoutedEventArgs e)
         {
             string[] opisanie = new string[6];
@@ -256,837 +259,1945 @@ namespace уп
 
         private void Kyp6_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_proc = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            int koll;
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_procesor] FROM [dbo].[Procesor] WHERE [Id_procesor] = 6", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_proc.pr6.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Procesor] WHERE [Id_procesor] = 6", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_proc = new katalog();
+                    this.Close();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    int koll;
+                    string url;
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_procesor] FROM [dbo].[Procesor] WHERE [Id_procesor] = 6", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Procesor]";
+                        id = "[Id_procesor]";
+                        win_proc.pr6.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Coket] FROM [dbo].[Procesor] WHERE [Id_procesor] = 6", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_proc.pr6.Text += $"Сокет {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Coket] FROM [dbo].[Procesor] WHERE [Id_procesor] = 6", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_proc.pr6.Text += $"Сокет {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Chislo_yader] FROM [dbo].[Procesor] WHERE [Id_procesor] = 6", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_proc.pr6.Text += $"Число ядер {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Chislo_yader] FROM [dbo].[Procesor] WHERE [Id_procesor] = 6", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_proc.pr6.Text += $"Число ядер {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Chislo_potokov] FROM [dbo].[Procesor] WHERE [Id_procesor] = 6", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_proc.pr6.Text += $"Число потоков {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Chislo_potokov] FROM [dbo].[Procesor] WHERE [Id_procesor] = 6", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_proc.pr6.Text += $"Число потоков {opisanie[0]}, \n";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Procesor] WHERE [Id_procesor] = 6", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_proc.pr6.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Procesor] WHERE [Id_procesor] = 6", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_proc.pr6.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Procesor] WHERE [Id_procesor] = 6", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                koll= Convert.ToInt32(commandddddd.ExecuteScalar().ToString());
-                win_proc.pr6.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Procesor] WHERE [Id_procesor] = 6", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        koll = Convert.ToInt32(commandddddd.ExecuteScalar().ToString());
+                        win_proc.pr6.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Procesor] WHERE [Id_procesor] = 6", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Procesor] WHERE [Id_procesor] = 6", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_proc.pr6.Text;
+                    idd = 6;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_proc.pr6.Text;
-            kor.oform.Click += Oform_Click;
 
         }
 
         private void Kyp5_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_proc = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_procesor] FROM [dbo].[Procesor] WHERE [Id_procesor] = 5", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_proc.pr5.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Procesor] WHERE [Id_procesor] = 5", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_proc = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_procesor] FROM [dbo].[Procesor] WHERE [Id_procesor] = 5", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Procesor]";
+                        id = "[Id_procesor]";
+                        win_proc.pr5.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Coket] FROM [dbo].[Procesor] WHERE [Id_procesor] = 5", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_proc.pr5.Text += $"Сокет {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Coket] FROM [dbo].[Procesor] WHERE [Id_procesor] = 5", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_proc.pr5.Text += $"Сокет {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Chislo_yader] FROM [dbo].[Procesor] WHERE [Id_procesor] = 5", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_proc.pr5.Text += $"Число ядер {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Chislo_yader] FROM [dbo].[Procesor] WHERE [Id_procesor] = 5", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_proc.pr5.Text += $"Число ядер {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Chislo_potokov] FROM [dbo].[Procesor] WHERE [Id_procesor] = 5", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_proc.pr5.Text += $"Число потоков {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Chislo_potokov] FROM [dbo].[Procesor] WHERE [Id_procesor] = 5", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_proc.pr5.Text += $"Число потоков {opisanie[0]}, \n";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Procesor] WHERE [Id_procesor] = 5", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_proc.pr5.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Procesor] WHERE [Id_procesor] = 5", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_proc.pr5.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Procesor] WHERE [Id_procesor] = 5", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_proc.pr5.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Procesor] WHERE [Id_procesor] = 5", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_proc.pr5.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Procesor] WHERE [Id_procesor] = 5", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Procesor] WHERE [Id_procesor] = 5", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_proc.pr5.Text;
+                    idd = 5;
+
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_proc.pr5.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp4_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_proc = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_procesor] FROM [dbo].[Procesor] WHERE [Id_procesor] = 4", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_proc.pr4.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Procesor] WHERE [Id_procesor] = 4", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_proc = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_procesor] FROM [dbo].[Procesor] WHERE [Id_procesor] = 4", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Procesor]";
+                        id = "[Id_procesor]";
+                        win_proc.pr4.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Coket] FROM [dbo].[Procesor] WHERE [Id_procesor] = 4", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_proc.pr4.Text += $"Сокет {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Coket] FROM [dbo].[Procesor] WHERE [Id_procesor] = 4", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_proc.pr4.Text += $"Сокет {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Chislo_yader] FROM [dbo].[Procesor] WHERE [Id_procesor] = 4", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_proc.pr4.Text += $"Число ядер {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Chislo_yader] FROM [dbo].[Procesor] WHERE [Id_procesor] = 4", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_proc.pr4.Text += $"Число ядер {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Chislo_potokov] FROM [dbo].[Procesor] WHERE [Id_procesor] = 4", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_proc.pr4.Text += $"Число потоков {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Chislo_potokov] FROM [dbo].[Procesor] WHERE [Id_procesor] = 4", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_proc.pr4.Text += $"Число потоков {opisanie[0]}, \n";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Procesor] WHERE [Id_procesor] = 4", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_proc.pr4.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Procesor] WHERE [Id_procesor] = 4", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_proc.pr4.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Procesor] WHERE [Id_procesor] = 4", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_proc.pr4.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Procesor] WHERE [Id_procesor] = 4", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_proc.pr4.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Procesor] WHERE [Id_procesor] = 4", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Procesor] WHERE [Id_procesor] = 4", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_proc.pr4.Text;
+                    idd = 4;
+
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_proc.pr4.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp3_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_proc = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_procesor] FROM [dbo].[Procesor] WHERE [Id_procesor] = 3", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_proc.pr3.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Procesor] WHERE [Id_procesor] = 3", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_proc = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_procesor] FROM [dbo].[Procesor] WHERE [Id_procesor] = 3", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Procesor]";
+                        id = "[Id_procesor]";
+                        win_proc.pr3.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Coket] FROM [dbo].[Procesor] WHERE [Id_procesor] = 3", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_proc.pr3.Text += $"Сокет {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Coket] FROM [dbo].[Procesor] WHERE [Id_procesor] = 3", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_proc.pr3.Text += $"Сокет {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Chislo_yader] FROM [dbo].[Procesor] WHERE [Id_procesor] = 3", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_proc.pr3.Text += $"Число ядер {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Chislo_yader] FROM [dbo].[Procesor] WHERE [Id_procesor] = 3", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_proc.pr3.Text += $"Число ядер {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Chislo_potokov] FROM [dbo].[Procesor] WHERE [Id_procesor] = 3", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_proc.pr3.Text += $"Число потоков {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Chislo_potokov] FROM [dbo].[Procesor] WHERE [Id_procesor] = 3", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_proc.pr3.Text += $"Число потоков {opisanie[0]}, \n";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Procesor] WHERE [Id_procesor] = 3", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_proc.pr3.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Procesor] WHERE [Id_procesor] = 3", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_proc.pr3.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Procesor] WHERE [Id_procesor] = 3", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_proc.pr3.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Procesor] WHERE [Id_procesor] = 3", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_proc.pr3.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Procesor] WHERE [Id_procesor] = 3", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Procesor] WHERE [Id_procesor] = 3", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_proc.pr3.Text;
+                    idd = 3;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_proc.pr3.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp2_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_proc = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_procesor] FROM [dbo].[Procesor] WHERE [Id_procesor] = 2", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_proc.pr2.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Procesor] WHERE [Id_procesor] = 2", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_proc = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_procesor] FROM [dbo].[Procesor] WHERE [Id_procesor] = 2", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Procesor]";
+                        id = "[Id_procesor]";
+                        win_proc.pr2.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Coket] FROM [dbo].[Procesor] WHERE [Id_procesor] = 2", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_proc.pr2.Text += $"Сокет {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Coket] FROM [dbo].[Procesor] WHERE [Id_procesor] = 2", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_proc.pr2.Text += $"Сокет {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Chislo_yader] FROM [dbo].[Procesor] WHERE [Id_procesor] = 2", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_proc.pr2.Text += $"Число ядер {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Chislo_yader] FROM [dbo].[Procesor] WHERE [Id_procesor] = 2", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_proc.pr2.Text += $"Число ядер {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Chislo_potokov] FROM [dbo].[Procesor] WHERE [Id_procesor] = 2", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_proc.pr2.Text += $"Число потоков {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Chislo_potokov] FROM [dbo].[Procesor] WHERE [Id_procesor] = 2", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_proc.pr2.Text += $"Число потоков {opisanie[0]}, \n";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Procesor] WHERE [Id_procesor] = 2", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_proc.pr2.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Procesor] WHERE [Id_procesor] = 2", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_proc.pr2.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Procesor] WHERE [Id_procesor] = 2", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_proc.pr2.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Procesor] WHERE [Id_procesor] = 2", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_proc.pr2.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Procesor] WHERE [Id_procesor] = 2", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Procesor] WHERE [Id_procesor] = 2", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_proc.pr2.Text;
+                    idd = 2;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_proc.pr2.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp1_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_proc = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_procesor] FROM [dbo].[Procesor] WHERE [Id_procesor] = 1", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_proc.pr1.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Procesor] WHERE [Id_procesor] = 1", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_proc = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_procesor] FROM [dbo].[Procesor] WHERE [Id_procesor] = 1", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Procesor]";
+                        id = "[Id_procesor]";
+                        win_proc.pr1.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Coket] FROM [dbo].[Procesor] WHERE [Id_procesor] = 1", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_proc.pr1.Text += $"Сокет {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Coket] FROM [dbo].[Procesor] WHERE [Id_procesor] = 1", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_proc.pr1.Text += $"Сокет {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Chislo_yader] FROM [dbo].[Procesor] WHERE [Id_procesor] = 1", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_proc.pr1.Text += $"Число ядер {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Chislo_yader] FROM [dbo].[Procesor] WHERE [Id_procesor] = 1", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_proc.pr1.Text += $"Число ядер {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Chislo_potokov] FROM [dbo].[Procesor] WHERE [Id_procesor] = 1", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_proc.pr1.Text += $"Число потоков {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Chislo_potokov] FROM [dbo].[Procesor] WHERE [Id_procesor] = 1", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_proc.pr1.Text += $"Число потоков {opisanie[0]}, \n";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Procesor] WHERE [Id_procesor] = 1", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_proc.pr1.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Procesor] WHERE [Id_procesor] = 1", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_proc.pr1.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Procesor] WHERE [Id_procesor] = 1", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_proc.pr1.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Procesor] WHERE [Id_procesor] = 1", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_proc.pr1.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Procesor] WHERE [Id_procesor] = 1", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Procesor] WHERE [Id_procesor] = 1", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_proc.pr1.Text;
+                    idd = 1;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_proc.pr1.Text;
-            kor.oform.Click += Oform_Click;
-
         }
-        private string table;
-        private string id;
-        public int idd;
+        public string log;
+        public string nam;
+        public string zena;
         private void Oform_Click(object sender, RoutedEventArgs e)
         {
-            table = "[dbo].[Procesor]";
-            id = "[Id_procesor]";
-            idd = 6;
-            if (table == "[dbo].[Procesor]" & id == "[Id_procesor]" & idd==6)
+
+            if (table == "[dbo].[Procesor]" & id == "[Id_procesor]" & idd == 6)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Procesor] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_procesor] = 6");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_procesor] FROM [dbo].[Procesor] WHERE [Id_procesor] = 6", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Procesor] WHERE [Id_procesor] = 6", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 5;
+
             if (table == "[dbo].[Procesor]" & id == "[Id_procesor]" & idd == 5)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Procesor] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_procesor] = 5");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_procesor] FROM [dbo].[Procesor] WHERE [Id_procesor] = 5", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Procesor] WHERE [Id_procesor] = 5", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 4;
+
             if (table == "[dbo].[Procesor]" & id == "[Id_procesor]" & idd == 4)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Procesor] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_procesor] = 4");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_procesor] FROM [dbo].[Procesor] WHERE [Id_procesor] = 4", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Procesor] WHERE [Id_procesor] = 4", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 3;
+
+
             if (table == "[dbo].[Procesor]" & id == "[Id_procesor]" & idd == 3)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Procesor] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_procesor] = 3");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_procesor] FROM [dbo].[Procesor] WHERE [Id_procesor] = 3", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Procesor] WHERE [Id_procesor] = 3", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 2;
+
+
             if (table == "[dbo].[Procesor]" & id == "[Id_procesor]" & idd == 2)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Procesor] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_procesor] = 2");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_procesor] FROM [dbo].[Procesor] WHERE [Id_procesor] = 2", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Procesor] WHERE [Id_procesor] = 2", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 1;
+
             if (table == "[dbo].[Procesor]" & id == "[Id_procesor]" & idd == 1)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Procesor] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_procesor] = 1");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_procesor] FROM [dbo].[Procesor] WHERE [Id_procesor] = 1", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Procesor] WHERE [Id_procesor] = 1", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            table = "[dbo].[Mat_plat]";
-            id = "[Id_Mat_plat]";
-            idd = 6;
+
             if (table == "[dbo].[Mat_plat]" & id == "[Id_Mat_plat]" & idd == 6)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Mat_plat] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Mat_plat] = 6");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_Mat_plat] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 6", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 6", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 5;
             if (table == "[dbo].[Mat_plat]" & id == "[Id_Mat_plat]" & idd == 5)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Mat_plat] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Mat_plat] = 5");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_Mat_plat] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 5", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 5", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 4;
             if (table == "[dbo].[Mat_plat]" & id == "[Id_Mat_plat]" & idd == 4)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Mat_plat] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Mat_plat] = 4");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_Mat_plat] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 4", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 4", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 3;
             if (table == "[dbo].[Mat_plat]" & id == "[Id_Mat_plat]" & idd == 3)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Mat_plat] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Mat_plat] = 3");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_Mat_plat] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 3", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 3", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 2;
             if (table == "[dbo].[Mat_plat]" & id == "[Id_Mat_plat]" & idd == 2)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Mat_plat] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Mat_plat] = 2");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_Mat_plat] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 2", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 2", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 1;
             if (table == "[dbo].[Mat_plat]" & id == "[Id_Mat_plat]" & idd == 1)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Mat_plat] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Mat_plat] = 1");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_Mat_plat] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 1", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 1", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            table = "[dbo].[Videocart]";
-            id = "[Id_videocart]";
-            idd = 6;
+
             if (table == "[dbo].[Videocart]" & id == "[Id_videocart]" & idd == 6)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Videocart] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_videocart] = 6");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_videocart] FROM [dbo].[Videocart] WHERE [Id_videocart] = 6", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Videocart] WHERE [Id_videocart] = 6", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 5;
             if (table == "[dbo].[Videocart]" & id == "[Id_videocart]" & idd == 5)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Videocart] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_videocart] = 5");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_videocart] FROM [dbo].[Videocart] WHERE [Id_videocart] = 5", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Videocart] WHERE [Id_videocart] = 5", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 4;
             if (table == "[dbo].[Videocart]" & id == "[Id_videocart]" & idd == 4)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Videocart] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_videocart] = 4");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_videocart] FROM [dbo].[Videocart] WHERE [Id_videocart] = 4", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Videocart] WHERE [Id_videocart] = 4", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 3;
             if (table == "[dbo].[Videocart]" & id == "[Id_videocart]" & idd == 3)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Videocart] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_videocart] = 3");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_videocart] FROM [dbo].[Videocart] WHERE [Id_videocart] = 3", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Videocart] WHERE [Id_videocart] = 3", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 2;
             if (table == "[dbo].[Videocart]" & id == "[Id_videocart]" & idd == 2)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Videocart] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_videocart] = 2");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_videocart] FROM [dbo].[Videocart] WHERE [Id_videocart] = 2", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Videocart] WHERE [Id_videocart] = 2", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 1;
             if (table == "[dbo].[Videocart]" & id == "[Id_videocart]" & idd == 1)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Videocart] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_videocart] = 1");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_videocart] FROM [dbo].[Videocart] WHERE [Id_videocart] = 1", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Videocart] WHERE [Id_videocart] = 1", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            table = "[dbo].[Operativka]";
-            id = "[Id_Operativ_pamat]";
-            idd = 6;
+
             if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 6)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Operativka] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_Operativ_pamat] = 6");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_Operativ_pamat] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 6", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 6", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 5;
             if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 5)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Operativka] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_Operativ_pamat] = 5");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_Operativ_pamat] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 5", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 5", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 4;
             if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 4)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Operativka] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_Operativ_pamat] = 4");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_Operativ_pamat] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 4", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 4", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 3;
             if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 3)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Operativka] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_Operativ_pamat] = 3");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_Operativ_pamat] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 3", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 3", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 2;
             if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 2)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Operativka] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_Operativ_pamat] = 2");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_Operativ_pamat] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 2", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 2", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 1;
             if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 1)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Operativka] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_Operativ_pamat] = 1");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_Operativ_pamat] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 1", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 1", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            table = "[dbo].[Blok_pitanie]";
-            id = "[Id_Blok_pitanie]";
-            idd = 6;
-            if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 6)
+
+            if (table == "[dbo].[Blok_pitanie]" & id == "[Id_Blok_pitanie]" & idd == 6)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Blok_pitanie] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Blok_pitanie] = 6");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_Blok_pitanie] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 6", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 6", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 5;
-            if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 5)
+            if (table == "[dbo].[Blok_pitanie]" & id == "[Id_Blok_pitanie]" & idd == 5)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Blok_pitanie] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Blok_pitanie] = 5");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_Blok_pitanie] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 5", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 5", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 4;
-            if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 4)
+            if (table == "[dbo].[Blok_pitanie]" & id == "[Id_Blok_pitanie]" & idd == 4)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Blok_pitanie] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Blok_pitanie] = 4");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_Blok_pitanie] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 4", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 4", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 3;
-            if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 3)
+            if (table == "[dbo].[Blok_pitanie]" & id == "[Id_Blok_pitanie]" & idd == 3)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Blok_pitanie] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Blok_pitanie] = 3");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_Blok_pitanie] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 3", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 3", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 2;
-            if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 2)
+            if (table == "[dbo].[Blok_pitanie]" & id == "[Id_Blok_pitanie]" & idd == 2)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Blok_pitanie] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Blok_pitanie] = 2");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_Blok_pitanie] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 2", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 2", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 1;
-            if (table == "[dbo].[Operativka]" & id == "[Id_Operativ_pamat]" & idd == 1)
+            if (table == "[dbo].[Blok_pitanie]" & id == "[Id_Blok_pitanie]" & idd == 1)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Blok_pitanie] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_Blok_pitanie] = 1");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_Blok_pitanie] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 1", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 1", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            table = "[dbo].[Korpusa]";
-            id = "[Id_korpusa]";
-            idd = 6;
+
             if (table == "[dbo].[Korpusa]" & id == "[Id_korpusa]" & idd == 6)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Korpusa] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_korpusa] = 6");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Nazvanie] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 6", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 6", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 5;
             if (table == "[dbo].[Korpusa]" & id == "[Id_korpusa]" & idd == 5)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Korpusa] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_korpusa] = 5");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Nazvanie] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 5", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 5", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 4;
             if (table == "[dbo].[Korpusa]" & id == "[Id_korpusa]" & idd == 4)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Korpusa] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_korpusa] = 4");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Nazvanie] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 4", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 4", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 3;
             if (table == "[dbo].[Korpusa]" & id == "[Id_korpusa]" & idd == 3)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Korpusa] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_korpusa] = 3");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Nazvanie] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 3", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 3", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 2;
             if (table == "[dbo].[Korpusa]" & id == "[Id_korpusa]" & idd == 2)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Korpusa] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_korpusa] = 2");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Nazvanie] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 2", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 2", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 1;
             if (table == "[dbo].[Korpusa]" & id == "[Id_korpusa]" & idd == 1)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Korpusa] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_korpusa] = 1");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Nazvanie] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 1", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 1", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            table = "[dbo].[Oxladd]";
-            id = "[Id_oxlad]";
-            idd = 6;
+
             if (table == "[dbo].[Oxladd]" & id == "[Id_oxlad]" & idd == 6)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Oxladd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_oxlad] = 6");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_oxlad] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 6", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 6", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 5;
             if (table == "[dbo].[Oxladd]" & id == "[Id_oxlad]" & idd == 5)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Oxladd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_oxlad] = 5");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_oxlad] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 5", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 5", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 4;
             if (table == "[dbo].[Oxladd]" & id == "[Id_oxlad]" & idd == 4)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Oxladd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_oxlad] = 4");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_oxlad] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 5", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 5", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 3;
             if (table == "[dbo].[Oxladd]" & id == "[Id_oxlad]" & idd == 3)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Oxladd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_oxlad] = 3");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_oxlad] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 3", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 3", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 2;
             if (table == "[dbo].[Oxladd]" & id == "[Id_oxlad]" & idd == 2)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Oxladd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_oxlad] = 2");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_oxlad] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 2", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 2", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 1;
             if (table == "[dbo].[Oxladd]" & id == "[Id_oxlad]" & idd == 1)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Oxladd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_oxlad] = 1");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_oxlad] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 1", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 1", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            table = "[dbo].[Ssd_and_Hdd]";
-            id = "[Id_SSD_HDD]";
-            idd = 6;
+
             if (table == "[dbo].[Ssd_and_Hdd]" & id == "[Id_SSD_HDD]" & idd == 6)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Ssd_and_Hdd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_SSD_HDD] = 6");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_SSD_HDD] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 6", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 6", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 5;
             if (table == "[dbo].[Ssd_and_Hdd]" & id == "[Id_SSD_HDD]" & idd == 5)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Ssd_and_Hdd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_SSD_HDD] = 5");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_SSD_HDD] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 5", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 5", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 4;
             if (table == "[dbo].[Ssd_and_Hdd]" & id == "[Id_SSD_HDD]" & idd == 4)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Ssd_and_Hdd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_SSD_HDD] = 4");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_SSD_HDD] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 4", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 4", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 3;
             if (table == "[dbo].[Ssd_and_Hdd]" & id == "[Id_SSD_HDD]" & idd == 3)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Ssd_and_Hdd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_SSD_HDD] = 3");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_SSD_HDD] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 3", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 3", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 2;
             if (table == "[dbo].[Ssd_and_Hdd]" & id == "[Id_SSD_HDD]" & idd == 2)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Ssd_and_Hdd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_SSD_HDD] = 2");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_SSD_HDD] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 2", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 2", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 1;
             if (table == "[dbo].[Ssd_and_Hdd]" & id == "[Id_SSD_HDD]" & idd == 1)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Ssd_and_Hdd] SET [Kolishestvo] = [Kolishestvo]-1 WHERE [Id_SSD_HDD] = 1");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Name_SSD_HDD] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 1", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 1", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            table = "[dbo].[Monitors]";
-            id = "[Id_monitors]";
-            idd = 6;
+
             if (table == "[dbo].[Monitors]" & id == "[Id_monitors]" & idd == 6)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Monitors] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_monitors] = 6");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Monitors] WHERE [Id_monitors] = 6", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Monitors] WHERE [Id_monitors] = 6", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 5;
             if (table == "[dbo].[Monitors]" & id == "[Id_monitors]" & idd == 5)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Monitors] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_monitors] = 5");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Monitors] WHERE [Id_monitors] = 5", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Monitors] WHERE [Id_monitors] = 5", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 4;
             if (table == "[dbo].[Monitors]" & id == "[Id_monitors]" & idd == 4)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Monitors] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_monitors] = 4");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Monitors] WHERE [Id_monitors] = 4", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Monitors] WHERE [Id_monitors] = 4", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 3;
             if (table == "[dbo].[Monitors]" & id == "[Id_monitors]" & idd == 3)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Monitors] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_monitors] = 3");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Monitors] WHERE [Id_monitors] = 3", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Monitors] WHERE [Id_monitors] = 3", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 2;
             if (table == "[dbo].[Monitors]" & id == "[Id_monitors]" & idd == 2)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Monitors] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_monitors] = 2");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Monitors] WHERE [Id_monitors] = 2", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Monitors] WHERE [Id_monitors] = 2", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 1;
             if (table == "[dbo].[Monitors]" & id == "[Id_monitors]" & idd == 1)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Monitors] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [Id_monitors] = 1");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Monitors] WHERE [Id_monitors] = 1", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Monitors] WHERE [Id_monitors] = 1", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            table = "[dbo].[Klaviatyra]";
-            id = "[id_klaviatyra]";
-            idd = 6;
+
             if (table == "[dbo].[Klaviatyra]" & id == "[id_klaviatyra]" & idd == 6)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Klaviatyra] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_klaviatyra] = 6");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 6", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 6", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 5;
             if (table == "[dbo].[Klaviatyra]" & id == "[id_klaviatyra]" & idd == 5)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Klaviatyra] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_klaviatyra] = 5");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 5", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 5", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 4;
             if (table == "[dbo].[Klaviatyra]" & id == "[id_klaviatyra]" & idd == 4)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Klaviatyra] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_klaviatyra] = 4");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 4", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 4", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 3;
             if (table == "[dbo].[Klaviatyra]" & id == "[id_klaviatyra]" & idd == 3)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Klaviatyra] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_klaviatyra] = 3");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 3", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 3", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 2;
             if (table == "[dbo].[Klaviatyra]" & id == "[id_klaviatyra]" & idd == 2)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Klaviatyra] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_klaviatyra] = 2");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 2", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 2", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 1;
             if (table == "[dbo].[Klaviatyra]" & id == "[id_klaviatyra]" & idd == 1)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Klaviatyra] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_klaviatyra] = 1");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 1", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 1", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            table = "[dbo].[Mouse]";
-            id = "[id_mouse]";
-            idd = 6;
+
             if (table == "[dbo].[Mouse]" & id == "[id_mouse]" & idd == 6)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Mouse] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_mouse] = 6");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Mouse] WHERE [id_mouse] = 6", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mouse] WHERE [id_mouse] = 6", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 5;
             if (table == "[dbo].[Mouse]" & id == "[id_mouse]" & idd == 5)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Mouse] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_mouse] = 5");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Mouse] WHERE [id_mouse] = 5", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mouse] WHERE [id_mouse] = 5", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 4;
             if (table == "[dbo].[Mouse]" & id == "[id_mouse]" & idd == 4)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Mouse] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_mouse] = 4");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Mouse] WHERE [id_mouse] = 4", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mouse] WHERE [id_mouse] = 4", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 3;
             if (table == "[dbo].[Mouse]" & id == "[id_mouse]" & idd == 3)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Mouse] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_mouse] = 3");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Mouse] WHERE [id_mouse] = 3", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mouse] WHERE [id_mouse] = 3", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 2;
             if (table == "[dbo].[Mouse]" & id == "[id_mouse]" & idd == 2)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Mouse] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_mouse] = 2");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Mouse] WHERE [id_mouse] = 2", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mouse] WHERE [id_mouse] = 2", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 1;
             if (table == "[dbo].[Mouse]" & id == "[id_mouse]" & idd == 1)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Mouse] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_mouse] = 1");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Mouse] WHERE [id_mouse] = 1", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mouse] WHERE [id_mouse] = 1", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            table = "[dbo].[Veb_camera]";
-            id = "[id_Veb_camera]";
-            idd = 6;
+
             if (table == "[dbo].[Veb_camera]" & id == "[id_Veb_camera]" & idd == 6)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Veb_camera] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_Veb_camera] = 6");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 6", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 6", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 5;
             if (table == "[dbo].[Veb_camera]" & id == "[id_Veb_camera]" & idd == 5)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Veb_camera] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_Veb_camera] = 5");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 5", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 5", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 4;
             if (table == "[dbo].[Veb_camera]" & id == "[id_Veb_camera]" & idd == 4)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Veb_camera] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_Veb_camera] = 4");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 4", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 4", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 3;
             if (table == "[dbo].[Veb_camera]" & id == "[id_Veb_camera]" & idd == 3)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Veb_camera] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_Veb_camera] = 3");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 3", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 3", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 2;
             if (table == "[dbo].[Veb_camera]" & id == "[id_Veb_camera]" & idd == 2)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Veb_camera] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_Veb_camera] = 2");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 2", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 2", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 1;
             if (table == "[dbo].[Veb_camera]" & id == "[id_Veb_camera]" & idd == 1)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Veb_camera] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_Veb_camera] = 1");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 1", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 1", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            table = "[dbo].[Vneshnie_nakopiteli]";
-            id = "[id_vneshnie_nakopiteli]";
-            idd = 6;
+
             if (table == "[dbo].[Vneshnie_nakopiteli]" & id == "[id_vneshnie_nakopiteli]" & idd == 6)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Vneshnie_nakopiteli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_vneshnie_nakopiteli] = 6");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 6", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 6", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 5;
             if (table == "[dbo].[Vneshnie_nakopiteli]" & id == "[id_vneshnie_nakopiteli]" & idd == 5)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Vneshnie_nakopiteli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_vneshnie_nakopiteli] = 5");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 5", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 5", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 4;
             if (table == "[dbo].[Vneshnie_nakopiteli]" & id == "[id_vneshnie_nakopiteli]" & idd == 4)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Vneshnie_nakopiteli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_vneshnie_nakopiteli] = 4");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 4", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 4", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 3;
             if (table == "[dbo].[Vneshnie_nakopiteli]" & id == "[id_vneshnie_nakopiteli]" & idd == 3)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Vneshnie_nakopiteli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_vneshnie_nakopiteli] = 3");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 3", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 3", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 2;
             if (table == "[dbo].[Vneshnie_nakopiteli]" & id == "[id_vneshnie_nakopiteli]" & idd == 2)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Vneshnie_nakopiteli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_vneshnie_nakopiteli] = 2");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 2", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 2", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 1;
             if (table == "[dbo].[Vneshnie_nakopiteli]" & id == "[id_vneshnie_nakopiteli]" & idd == 1)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Vneshnie_nakopiteli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_vneshnie_nakopiteli] = 1");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 1", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 1", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            table = "[dbo].[Nayshniki]";
-            id = "[id_nayshniki]";
-            idd = 6;
+
             if (table == "[dbo].[Nayshniki]" & id == "[id_nayshniki]" & idd == 6)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Nayshniki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_nayshniki] = 6");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 6", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 6", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 5;
             if (table == "[dbo].[Nayshniki]" & id == "[id_nayshniki]" & idd == 5)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Nayshniki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_nayshniki] = 5");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 5", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 5", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 4;
+
             if (table == "[dbo].[Nayshniki]" & id == "[id_nayshniki]" & idd == 4)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Nayshniki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_nayshniki] = 4");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 4", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 4", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 3;
             if (table == "[dbo].[Nayshniki]" & id == "[id_nayshniki]" & idd == 3)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Nayshniki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_nayshniki] = 3");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 3", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 3", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 2;
             if (table == "[dbo].[Nayshniki]" & id == "[id_nayshniki]" & idd == 2)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Nayshniki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_nayshniki] = 2");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 2", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 2", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 1;
             if (table == "[dbo].[Nayshniki]" & id == "[id_nayshniki]" & idd == 1)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Nayshniki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_nayshniki] = 1");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 1", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 1", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            table = "[dbo].[Kabeli]";
-            id = "[id_kabeli]";
-            idd = 6;
-            if (table == "[dbo].[Kabeli]" & id == "[id_nayshniki]" & idd == 6)
+
+            if (table == "[dbo].[Kabeli]" & id == "[id_kabeli]" & idd == 6)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Kabeli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kabeli] = 6");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 6", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 6", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 5;
-            if (table == "[dbo].[Kabeli]" & id == "[id_nayshniki]" & idd == 5)
+            if (table == "[dbo].[Kabeli]" & id == "[id_kabeli]" & idd == 5)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Kabeli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kabeli] = 5");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 5", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 5", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 4;
-            if (table == "[dbo].[Kabeli]" & id == "[id_nayshniki]" & idd == 4)
+            if (table == "[dbo].[Kabeli]" & id == "[id_kabeli]" & idd == 4)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Kabeli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kabeli] = 4");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 4", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 4", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 3;
-            if (table == "[dbo].[Kabeli]" & id == "[id_nayshniki]" & idd == 3)
+            if (table == "[dbo].[Kabeli]" & id == "[id_kabeli]" & idd == 3)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Kabeli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kabeli] = 3");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 3", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 3", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 2;
-            if (table == "[dbo].[Kabeli]" & id == "[id_nayshniki]" & idd == 2)
+            if (table == "[dbo].[Kabeli]" & id == "[id_kabeli]" & idd == 2)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Kabeli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kabeli] = 2");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 2", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 2", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 1;
-            if (table == "[dbo].[Kabeli]" & id == "[id_nayshniki]" & idd == 1)
+            if (table == "[dbo].[Kabeli]" & id == "[id_kabeli]" & idd == 1)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Kabeli] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kabeli] = 1");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 1", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 1", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            table = "[dbo].[Kovriki]";
-            id = "[id_kovriki]";
-            idd = 6;
+
             if (table == "[dbo].[Kovriki]" & id == "[id_kovriki]" & idd == 6)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Kovriki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kovriki] = 6");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 6", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 6", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 5;
             if (table == "[dbo].[Kovriki]" & id == "[id_kovriki]" & idd == 5)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Kovriki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kovriki] = 5");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 5", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 5", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 4;
             if (table == "[dbo].[Kovriki]" & id == "[id_kovriki]" & idd == 4)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Kovriki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kovriki] = 4");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 4", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 4", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 3;
             if (table == "[dbo].[Kovriki]" & id == "[id_kovriki]" & idd == 3)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Kovriki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kovriki] = 3");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 3", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 3", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 2;
             if (table == "[dbo].[Kovriki]" & id == "[id_kovriki]" & idd == 2)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Kovriki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kovriki] = 2");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 2", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 2", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 1;
             if (table == "[dbo].[Kovriki]" & id == "[id_kovriki]" & idd == 1)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Kovriki] SET [Kolichestvo] = [Kolichestvo]-1 WHERE [id_kovriki] = 1");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 1", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 1", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            table = "[dbo].[Notebok]";
-            id = "[id_notebok]";
-            idd = 6;
+
             if (table == "[dbo].[Notebok]" & id == "[id_notebok]" & idd == 6)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Notebok] SET [Kolichectvo] = [Kolichectvo]-1 WHERE [id_notebok] = 6");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 6", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 6", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 5;
             if (table == "[dbo].[Notebok]" & id == "[id_notebok]" & idd == 5)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Notebok] SET [Kolichectvo] = [Kolichectvo]-1 WHERE [id_notebok] = 5");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 5", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 5", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 4;
             if (table == "[dbo].[Notebok]" & id == "[id_notebok]" & idd == 4)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Notebok] SET [Kolichectvo] = [Kolichectvo]-1 WHERE [id_notebok] = 4");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 4", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 4", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 3;
             if (table == "[dbo].[Notebok]" & id == "[id_notebok]" & idd == 3)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Notebok] SET [Kolichectvo] = [Kolichectvo]-1 WHERE [id_notebok] = 3");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 3", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 3", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 2;
             if (table == "[dbo].[Notebok]" & id == "[id_notebok]" & idd == 2)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Notebok] SET [Kolichectvo] = [Kolichectvo]-1 WHERE [id_notebok] = 2");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 2", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 2", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
-            idd = 1;
             if (table == "[dbo].[Notebok]" & id == "[id_notebok]" & idd == 1)
             {
                 DataTable dt_koll = Select("UPDATE [dbo].[Notebok] SET [Kolichectvo] = [Kolichectvo]-1 WHERE [id_notebok] = 1");
+                using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("SELECT [Login] FROM [dbo].[Activ_user] WHERE [Id_activ] = 1", connection);
+                    log = command.ExecuteScalar().ToString();
+                    SqlCommand commandd = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 1", connection);
+                    nam = commandd.ExecuteScalar().ToString();
+                    SqlCommand commanddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 1", connection);
+                    zena = commanddd.ExecuteScalar().ToString();
+                }
+                DataTable dt_z1 = Select("INSERT INTO [dbo].[Zakaz] (Login, Nazvanie, Zena) VALUES ('" + log + "','" + nam + "','" + zena + "')");
             }
         }
 
@@ -1241,308 +2352,404 @@ namespace уп
         }
         private void Kyp7_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_mat = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_Mat_plat] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 1", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_mat.pr1.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 1", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_mat = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_Mat_plat] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 1", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Mat_plat]";
+                        id = "[Id_Mat_plat]";
+                        win_mat.pr1.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Form_factor] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 1", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_mat.pr1.Text += $"Форм-фактор {opisanie[0]}, ";
+                        SqlCommand commandd = new SqlCommand("SELECT [Form_factor] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 1", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_mat.pr1.Text += $"Форм-фактор {opisanie[0]}, ";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Coket] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 1", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_mat.pr1.Text += $"Сокет {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Coket] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 1", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_mat.pr1.Text += $"Сокет {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [ChipSet] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 1", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_mat.pr1.Text += $"Чипсет {opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [ChipSet] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 1", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_mat.pr1.Text += $"Чипсет {opisanie[0]}, ";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Kolvo_pamati] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 1", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_mat.pr1.Text += $"Количество памяти {opisanie[0]}, \n";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Kolvo_pamati] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 1", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_mat.pr1.Text += $"Количество памяти {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 1", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_mat.pr1.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 1", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_mat.pr1.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 1", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_mat.pr1.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 1", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_mat.pr1.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 1", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 1", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_mat.pr1.Text;
+                    idd = 1;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_mat.pr1.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp8_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_mat = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_Mat_plat] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 2", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_mat.pr2.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 2", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_mat = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_Mat_plat] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 2", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Mat_plat]";
+                        id = "[Id_Mat_plat]";
+                        win_mat.pr2.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Form_factor] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 2", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_mat.pr2.Text += $"Форм-фактор {opisanie[0]}, ";
+                        SqlCommand commandd = new SqlCommand("SELECT [Form_factor] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 2", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_mat.pr2.Text += $"Форм-фактор {opisanie[0]}, ";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Coket] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 2", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_mat.pr2.Text += $"Сокет {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Coket] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 2", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_mat.pr2.Text += $"Сокет {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [ChipSet] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 2", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_mat.pr2.Text += $"Чипсет {opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [ChipSet] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 2", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_mat.pr2.Text += $"Чипсет {opisanie[0]}, ";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Kolvo_pamati] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 2", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_mat.pr2.Text += $"Количество памяти {opisanie[0]}, \n";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Kolvo_pamati] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 2", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_mat.pr2.Text += $"Количество памяти {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 2", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_mat.pr2.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 2", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_mat.pr2.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 2", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_mat.pr2.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 2", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_mat.pr2.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 2", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 2", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_mat.pr2.Text;
+                    idd = 2;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_mat.pr2.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp9_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_mat = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_Mat_plat] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 3", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_mat.pr3.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 3", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_mat = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_Mat_plat] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 3", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Mat_plat]";
+                        id = "[Id_Mat_plat]";
+                        win_mat.pr3.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Form_factor] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 3", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_mat.pr3.Text += $"Форм-фактор {opisanie[0]}, ";
+                        SqlCommand commandd = new SqlCommand("SELECT [Form_factor] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 3", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_mat.pr3.Text += $"Форм-фактор {opisanie[0]}, ";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Coket] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 3", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_mat.pr3.Text += $"Сокет {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Coket] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 3", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_mat.pr3.Text += $"Сокет {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [ChipSet] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 3", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_mat.pr3.Text += $"Чипсет {opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [ChipSet] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 3", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_mat.pr3.Text += $"Чипсет {opisanie[0]}, ";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Kolvo_pamati] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 3", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_mat.pr3.Text += $"Количество памяти {opisanie[0]}, \n";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Kolvo_pamati] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 3", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_mat.pr3.Text += $"Количество памяти {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 3", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_mat.pr3.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 3", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_mat.pr3.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 3", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_mat.pr3.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 3", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_mat.pr3.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 3", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 3", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_mat.pr3.Text;
+                    idd = 3;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_mat.pr3.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp10_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_mat = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_Mat_plat] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 4", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_mat.pr4.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 4", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_mat = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_Mat_plat] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 4", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Mat_plat]";
+                        id = "[Id_Mat_plat]";
+                        win_mat.pr4.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Form_factor] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 4", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_mat.pr4.Text += $"Форм-фактор {opisanie[0]}, ";
+                        SqlCommand commandd = new SqlCommand("SELECT [Form_factor] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 4", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_mat.pr4.Text += $"Форм-фактор {opisanie[0]}, ";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Coket] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 4", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_mat.pr4.Text += $"Сокет {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Coket] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 4", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_mat.pr4.Text += $"Сокет {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [ChipSet] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 4", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_mat.pr4.Text += $"Чипсет {opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [ChipSet] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 4", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_mat.pr4.Text += $"Чипсет {opisanie[0]}, ";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Kolvo_pamati] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 4", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_mat.pr4.Text += $"Количество памяти {opisanie[0]}, \n";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Kolvo_pamati] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 4", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_mat.pr4.Text += $"Количество памяти {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 4", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_mat.pr4.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 4", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_mat.pr4.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 4", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_mat.pr4.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 4", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_mat.pr4.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 4", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 4", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_mat.pr4.Text;
+                    idd = 4;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_mat.pr4.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp11_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_mat = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_Mat_plat] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 5", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_mat.pr5.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 5", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_mat = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_Mat_plat] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 5", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Mat_plat]";
+                        id = "[Id_Mat_plat]";
+                        win_mat.pr5.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Form_factor] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 5", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_mat.pr5.Text += $"Форм-фактор {opisanie[0]}, ";
+                        SqlCommand commandd = new SqlCommand("SELECT [Form_factor] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 5", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_mat.pr5.Text += $"Форм-фактор {opisanie[0]}, ";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Coket] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 5", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_mat.pr5.Text += $"Сокет {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Coket] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 5", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_mat.pr5.Text += $"Сокет {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [ChipSet] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 5", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_mat.pr5.Text += $"Чипсет {opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [ChipSet] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 5", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_mat.pr5.Text += $"Чипсет {opisanie[0]}, ";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Kolvo_pamati] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 5", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_mat.pr5.Text += $"Количество памяти {opisanie[0]}, \n";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Kolvo_pamati] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 5", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_mat.pr5.Text += $"Количество памяти {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 5", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_mat.pr5.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 5", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_mat.pr5.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 5", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_mat.pr5.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 5", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_mat.pr5.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 5", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 5", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_mat.pr5.Text;
+                    idd = 5;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_mat.pr5.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp12_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_mat = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_Mat_plat] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 6", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_mat.pr6.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 6", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_mat = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_Mat_plat] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 6", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Mat_plat]";
+                        id = "[Id_Mat_plat]";
+                        win_mat.pr6.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Form_factor] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 6", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_mat.pr6.Text += $"Форм-фактор {opisanie[0]}, ";
+                        SqlCommand commandd = new SqlCommand("SELECT [Form_factor] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 6", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_mat.pr6.Text += $"Форм-фактор {opisanie[0]}, ";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Coket] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 6", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_mat.pr6.Text += $"Сокет {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Coket] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 6", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_mat.pr6.Text += $"Сокет {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [ChipSet] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 6", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_mat.pr6.Text += $"Чипсет {opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [ChipSet] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 6", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_mat.pr6.Text += $"Чипсет {opisanie[0]}, ";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Kolvo_pamati] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 6", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_mat.pr6.Text += $"Количество памяти {opisanie[0]}, \n";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Kolvo_pamati] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 6", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_mat.pr6.Text += $"Количество памяти {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 6", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_mat.pr6.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 6", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_mat.pr6.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 6", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_mat.pr6.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 6", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_mat.pr6.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 6", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mat_plat] WHERE [Id_Mat_plat] = 6", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_mat.pr6.Text;
+                    idd = 6;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_mat.pr6.Text;
-            kor.oform.Click += Oform_Click;
 
         }
         private void videokarti_Click(object sender, RoutedEventArgs e)
@@ -1679,284 +2886,380 @@ namespace уп
 
         private void Kyp13_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_videokart = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_videocart] FROM [dbo].[Videocart] WHERE [Id_videocart] = 1", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_videokart.pr1.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Videocart] WHERE [Id_videocart] = 1", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_videokart = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_videocart] FROM [dbo].[Videocart] WHERE [Id_videocart] = 1", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Videocart]";
+                        id = "[Id_videocart]";
+                        win_videokart.pr1.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Castota_yadra] FROM [dbo].[Videocart] WHERE [Id_videocart] = 1", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_videokart.pr1.Text += $"Частота ядра {opisanie[0]}, ";
+                        SqlCommand commandd = new SqlCommand("SELECT [Castota_yadra] FROM [dbo].[Videocart] WHERE [Id_videocart] = 1", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_videokart.pr1.Text += $"Частота ядра {opisanie[0]}, ";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Tip_pamati] FROM [dbo].[Videocart] WHERE [Id_videocart] = 1", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_videokart.pr1.Text += $"Тип памяти {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Tip_pamati] FROM [dbo].[Videocart] WHERE [Id_videocart] = 1", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_videokart.pr1.Text += $"Тип памяти {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Obem_pamati] FROM [dbo].[Videocart] WHERE [Id_videocart] = 1", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_videokart.pr1.Text += $"Объем памяти {opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Obem_pamati] FROM [dbo].[Videocart] WHERE [Id_videocart] = 1", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_videokart.pr1.Text += $"Объем памяти {opisanie[0]}, ";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Videocart] WHERE [Id_videocart] = 1", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_videokart.pr1.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Videocart] WHERE [Id_videocart] = 1", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_videokart.pr1.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Videocart] WHERE [Id_videocart] = 1", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_videokart.pr1.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Videocart] WHERE [Id_videocart] = 1", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_videokart.pr1.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Videocart] WHERE [Id_videocart] = 1", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Videocart] WHERE [Id_videocart] = 1", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_videokart.pr1.Text;
+                    idd = 1;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_videokart.pr1.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp14_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_videokart = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_videocart] FROM [dbo].[Videocart] WHERE [Id_videocart] = 2", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_videokart.pr2.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Videocart] WHERE [Id_videocart] = 2", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_videokart = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_videocart] FROM [dbo].[Videocart] WHERE [Id_videocart] = 2", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Videocart]";
+                        id = "[Id_videocart]";
+                        win_videokart.pr2.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Castota_yadra] FROM [dbo].[Videocart] WHERE [Id_videocart] = 2", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_videokart.pr2.Text += $"Частота ядра {opisanie[0]}, ";
+                        SqlCommand commandd = new SqlCommand("SELECT [Castota_yadra] FROM [dbo].[Videocart] WHERE [Id_videocart] = 2", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_videokart.pr2.Text += $"Частота ядра {opisanie[0]}, ";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Tip_pamati] FROM [dbo].[Videocart] WHERE [Id_videocart] = 2", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_videokart.pr2.Text += $"Тип памяти {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Tip_pamati] FROM [dbo].[Videocart] WHERE [Id_videocart] = 2", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_videokart.pr2.Text += $"Тип памяти {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Obem_pamati] FROM [dbo].[Videocart] WHERE [Id_videocart] = 2", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_videokart.pr2.Text += $"Объем памяти {opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Obem_pamati] FROM [dbo].[Videocart] WHERE [Id_videocart] = 2", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_videokart.pr2.Text += $"Объем памяти {opisanie[0]}, ";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Videocart] WHERE [Id_videocart] = 2", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_videokart.pr2.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Videocart] WHERE [Id_videocart] = 2", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_videokart.pr2.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Videocart] WHERE [Id_videocart] = 2", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_videokart.pr2.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Videocart] WHERE [Id_videocart] = 2", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_videokart.pr2.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Videocart] WHERE [Id_videocart] = 2", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Videocart] WHERE [Id_videocart] = 2", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_videokart.pr2.Text;
+                    idd = 2;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_videokart.pr2.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp15_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_videokart = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_videocart] FROM [dbo].[Videocart] WHERE [Id_videocart] = 3", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_videokart.pr3.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Videocart] WHERE [Id_videocart] = 3", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_videokart = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_videocart] FROM [dbo].[Videocart] WHERE [Id_videocart] = 3", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Videocart]";
+                        id = "[Id_videocart]";
+                        win_videokart.pr3.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Castota_yadra] FROM [dbo].[Videocart] WHERE [Id_videocart] = 3", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_videokart.pr3.Text += $"Частота ядра {opisanie[0]}, ";
+                        SqlCommand commandd = new SqlCommand("SELECT [Castota_yadra] FROM [dbo].[Videocart] WHERE [Id_videocart] = 3", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_videokart.pr3.Text += $"Частота ядра {opisanie[0]}, ";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Tip_pamati] FROM [dbo].[Videocart] WHERE [Id_videocart] = 3", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_videokart.pr3.Text += $"Тип памяти {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Tip_pamati] FROM [dbo].[Videocart] WHERE [Id_videocart] = 3", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_videokart.pr3.Text += $"Тип памяти {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Obem_pamati] FROM [dbo].[Videocart] WHERE [Id_videocart] = 3", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_videokart.pr3.Text += $"Объем памяти {opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Obem_pamati] FROM [dbo].[Videocart] WHERE [Id_videocart] = 3", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_videokart.pr3.Text += $"Объем памяти {opisanie[0]}, ";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Videocart] WHERE [Id_videocart] = 3", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_videokart.pr3.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Videocart] WHERE [Id_videocart] = 3", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_videokart.pr3.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Videocart] WHERE [Id_videocart] = 3", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_videokart.pr3.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Videocart] WHERE [Id_videocart] = 3", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_videokart.pr3.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Videocart] WHERE [Id_videocart] = 3", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Videocart] WHERE [Id_videocart] = 3", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_videokart.pr3.Text;
+                    idd = 3;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_videokart.pr3.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp16_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_videokart = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_videocart] FROM [dbo].[Videocart] WHERE [Id_videocart] = 4", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_videokart.pr4.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Videocart] WHERE [Id_videocart] = 4", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_videokart = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_videocart] FROM [dbo].[Videocart] WHERE [Id_videocart] = 4", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Videocart]";
+                        id = "[Id_videocart]";
+                        win_videokart.pr4.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Castota_yadra] FROM [dbo].[Videocart] WHERE [Id_videocart] = 4", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_videokart.pr4.Text += $"Частота ядра {opisanie[0]}, ";
+                        SqlCommand commandd = new SqlCommand("SELECT [Castota_yadra] FROM [dbo].[Videocart] WHERE [Id_videocart] = 4", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_videokart.pr4.Text += $"Частота ядра {opisanie[0]}, ";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Tip_pamati] FROM [dbo].[Videocart] WHERE [Id_videocart] = 4", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_videokart.pr4.Text += $"Тип памяти {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Tip_pamati] FROM [dbo].[Videocart] WHERE [Id_videocart] = 4", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_videokart.pr4.Text += $"Тип памяти {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Obem_pamati] FROM [dbo].[Videocart] WHERE [Id_videocart] = 4", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_videokart.pr4.Text += $"Объем памяти {opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Obem_pamati] FROM [dbo].[Videocart] WHERE [Id_videocart] = 4", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_videokart.pr4.Text += $"Объем памяти {opisanie[0]}, ";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Videocart] WHERE [Id_videocart] = 4", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_videokart.pr4.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Videocart] WHERE [Id_videocart] = 4", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_videokart.pr4.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Videocart] WHERE [Id_videocart] = 4", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_videokart.pr4.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Videocart] WHERE [Id_videocart] = 4", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_videokart.pr4.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Videocart] WHERE [Id_videocart] = 4", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Videocart] WHERE [Id_videocart] = 4", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_videokart.pr4.Text;
+                    idd = 4;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_videokart.pr4.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp17_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_videokart = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_videocart] FROM [dbo].[Videocart] WHERE [Id_videocart] = 5", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_videokart.pr5.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Videocart] WHERE [Id_videocart] = 5", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_videokart = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_videocart] FROM [dbo].[Videocart] WHERE [Id_videocart] = 5", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Videocart]";
+                        id = "[Id_videocart]";
+                        win_videokart.pr5.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Castota_yadra] FROM [dbo].[Videocart] WHERE [Id_videocart] = 5", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_videokart.pr5.Text += $"Частота ядра {opisanie[0]}, ";
+                        SqlCommand commandd = new SqlCommand("SELECT [Castota_yadra] FROM [dbo].[Videocart] WHERE [Id_videocart] = 5", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_videokart.pr5.Text += $"Частота ядра {opisanie[0]}, ";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Tip_pamati] FROM [dbo].[Videocart] WHERE [Id_videocart] = 5", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_videokart.pr5.Text += $"Тип памяти {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Tip_pamati] FROM [dbo].[Videocart] WHERE [Id_videocart] = 5", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_videokart.pr5.Text += $"Тип памяти {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Obem_pamati] FROM [dbo].[Videocart] WHERE [Id_videocart] = 5", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_videokart.pr5.Text += $"Объем памяти {opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Obem_pamati] FROM [dbo].[Videocart] WHERE [Id_videocart] = 5", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_videokart.pr5.Text += $"Объем памяти {opisanie[0]}, ";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Videocart] WHERE [Id_videocart] = 5", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_videokart.pr5.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Videocart] WHERE [Id_videocart] = 5", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_videokart.pr5.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Videocart] WHERE [Id_videocart] = 5", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_videokart.pr5.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Videocart] WHERE [Id_videocart] = 5", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_videokart.pr5.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Videocart] WHERE [Id_videocart] = 5", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Videocart] WHERE [Id_videocart] = 5", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_videokart.pr5.Text;
+                    idd = 5;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_videokart.pr5.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp18_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_videokart = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_videocart] FROM [dbo].[Videocart] WHERE [Id_videocart] = 6", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_videokart.pr6.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Videocart] WHERE [Id_videocart] = 6", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_videokart = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_videocart] FROM [dbo].[Videocart] WHERE [Id_videocart] = 6", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Videocart]";
+                        id = "[Id_videocart]";
+                        win_videokart.pr6.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Castota_yadra] FROM [dbo].[Videocart] WHERE [Id_videocart] = 6", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_videokart.pr6.Text += $"Частота ядра {opisanie[0]}, ";
+                        SqlCommand commandd = new SqlCommand("SELECT [Castota_yadra] FROM [dbo].[Videocart] WHERE [Id_videocart] = 6", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_videokart.pr6.Text += $"Частота ядра {opisanie[0]}, ";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Tip_pamati] FROM [dbo].[Videocart] WHERE [Id_videocart] = 6", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_videokart.pr6.Text += $"Тип памяти {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Tip_pamati] FROM [dbo].[Videocart] WHERE [Id_videocart] = 6", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_videokart.pr6.Text += $"Тип памяти {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Obem_pamati] FROM [dbo].[Videocart] WHERE [Id_videocart] = 6", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_videokart.pr6.Text += $"Объем памяти {opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Obem_pamati] FROM [dbo].[Videocart] WHERE [Id_videocart] = 6", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_videokart.pr6.Text += $"Объем памяти {opisanie[0]}, ";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Videocart] WHERE [Id_videocart] = 6", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_videokart.pr6.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Videocart] WHERE [Id_videocart] = 6", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_videokart.pr6.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Videocart] WHERE [Id_videocart] = 6", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_videokart.pr6.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Videocart] WHERE [Id_videocart] = 6", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_videokart.pr6.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Videocart] WHERE [Id_videocart] = 6", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Videocart] WHERE [Id_videocart] = 6", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_videokart.pr6.Text;
+                    idd = 6;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_videokart.pr6.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void operativka_Click(object sender, RoutedEventArgs e)
@@ -2111,308 +3414,404 @@ namespace уп
 
         private void Kyp19_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_opera = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_Operativ_pamat] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 1", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_opera.pr1.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 1", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_opera = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_Operativ_pamat] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 1", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Operativka]";
+                        id = "[Id_Operativ_pamat]";
+                        win_opera.pr1.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Tip_pamati] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 1", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_opera.pr1.Text += $"Тип памяти {opisanie[0]}, ";
+                        SqlCommand commandd = new SqlCommand("SELECT [Tip_pamati] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 1", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_opera.pr1.Text += $"Тип памяти {opisanie[0]}, ";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Chastota] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 1", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_opera.pr1.Text += $"Частота {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Chastota] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 1", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_opera.pr1.Text += $"Частота {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [obem] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 1", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_opera.pr1.Text += $"Объем {opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [obem] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 1", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_opera.pr1.Text += $"Объем {opisanie[0]}, ";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Kolishestvo_plashek] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 1", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_opera.pr1.Text += $"Количество плашек {opisanie[0]}, \n";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Kolishestvo_plashek] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 1", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_opera.pr1.Text += $"Количество плашек {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 1", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_opera.pr1.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 1", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_opera.pr1.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 1", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_opera.pr1.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 1", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_opera.pr1.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 1", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 1", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_opera.pr1.Text;
+                    idd = 1;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_opera.pr1.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp20_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_opera = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_Operativ_pamat] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 2", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_opera.pr2.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 2", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_opera = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_Operativ_pamat] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 2", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Operativka]";
+                        id = "[Id_Operativ_pamat]";
+                        win_opera.pr2.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Tip_pamati] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 2", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_opera.pr2.Text += $"Тип памяти {opisanie[0]}, ";
+                        SqlCommand commandd = new SqlCommand("SELECT [Tip_pamati] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 2", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_opera.pr2.Text += $"Тип памяти {opisanie[0]}, ";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Chastota] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 2", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_opera.pr2.Text += $"Частота {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Chastota] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 2", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_opera.pr2.Text += $"Частота {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [obem] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 2", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_opera.pr2.Text += $"Объем {opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [obem] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 2", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_opera.pr2.Text += $"Объем {opisanie[0]}, ";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Kolishestvo_plashek] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 2", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_opera.pr2.Text += $"Количество плашек {opisanie[0]}, \n";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Kolishestvo_plashek] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 2", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_opera.pr2.Text += $"Количество плашек {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 2", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_opera.pr2.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 2", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_opera.pr2.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 2", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_opera.pr2.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 2", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_opera.pr2.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 2", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 2", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_opera.pr2.Text;
+                    idd = 2;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_opera.pr2.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp21_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_opera = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_Operativ_pamat] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 3", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_opera.pr3.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 3", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_opera = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_Operativ_pamat] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 3", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Operativka]";
+                        id = "[Id_Operativ_pamat]";
+                        win_opera.pr3.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Tip_pamati] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 3", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_opera.pr3.Text += $"Тип памяти {opisanie[0]}, ";
+                        SqlCommand commandd = new SqlCommand("SELECT [Tip_pamati] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 3", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_opera.pr3.Text += $"Тип памяти {opisanie[0]}, ";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Chastota] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 3", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_opera.pr3.Text += $"Частота {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Chastota] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 3", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_opera.pr3.Text += $"Частота {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [obem] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 3", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_opera.pr3.Text += $"Объем {opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [obem] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 3", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_opera.pr3.Text += $"Объем {opisanie[0]}, ";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Kolishestvo_plashek] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 3", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_opera.pr3.Text += $"Количество плашек {opisanie[0]}, \n";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Kolishestvo_plashek] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 3", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_opera.pr3.Text += $"Количество плашек {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 3", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_opera.pr3.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 3", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_opera.pr3.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 3", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_opera.pr3.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 3", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_opera.pr3.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 3", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 3", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_opera.pr3.Text;
+                    idd = 3;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_opera.pr3.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp22_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_opera = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_Operativ_pamat] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 4", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_opera.pr4.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 4", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_opera = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_Operativ_pamat] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 4", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Operativka]";
+                        id = "[Id_Operativ_pamat]";
+                        win_opera.pr4.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Tip_pamati] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 4", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_opera.pr4.Text += $"Тип памяти {opisanie[0]}, ";
+                        SqlCommand commandd = new SqlCommand("SELECT [Tip_pamati] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 4", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_opera.pr4.Text += $"Тип памяти {opisanie[0]}, ";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Chastota] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 4", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_opera.pr4.Text += $"Частота {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Chastota] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 4", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_opera.pr4.Text += $"Частота {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [obem] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 4", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_opera.pr4.Text += $"Объем {opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [obem] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 4", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_opera.pr4.Text += $"Объем {opisanie[0]}, ";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Kolishestvo_plashek] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 4", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_opera.pr4.Text += $"Количество плашек {opisanie[0]}, \n";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Kolishestvo_plashek] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 4", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_opera.pr4.Text += $"Количество плашек {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 4", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_opera.pr4.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 4", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_opera.pr4.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 4", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_opera.pr4.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 4", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_opera.pr4.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 4", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 4", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_opera.pr4.Text;
+                    idd = 4;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_opera.pr4.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp23_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_opera = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_Operativ_pamat] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 5", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_opera.pr5.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 5", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_opera = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_Operativ_pamat] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 5", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Operativka]";
+                        id = "[Id_Operativ_pamat]";
+                        win_opera.pr5.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Tip_pamati] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 5", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_opera.pr5.Text += $"Тип памяти {opisanie[0]}, ";
+                        SqlCommand commandd = new SqlCommand("SELECT [Tip_pamati] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 5", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_opera.pr5.Text += $"Тип памяти {opisanie[0]}, ";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Chastota] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 5", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_opera.pr5.Text += $"Частота {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Chastota] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 5", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_opera.pr5.Text += $"Частота {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [obem] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 5", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_opera.pr5.Text += $"Объем {opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [obem] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 5", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_opera.pr5.Text += $"Объем {opisanie[0]}, ";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Kolishestvo_plashek] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 5", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_opera.pr5.Text += $"Количество плашек {opisanie[0]}, \n";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Kolishestvo_plashek] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 5", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_opera.pr5.Text += $"Количество плашек {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 5", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_opera.pr5.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 5", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_opera.pr5.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 5", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_opera.pr5.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 5", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_opera.pr5.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 5", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 5", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_opera.pr5.Text;
+                    idd = 5;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_opera.pr5.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp24_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_opera = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_Operativ_pamat] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 6", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_opera.pr6.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 6", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_opera = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_Operativ_pamat] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 6", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Operativka]";
+                        id = "[Id_Operativ_pamat]";
+                        win_opera.pr6.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Tip_pamati] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 6", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_opera.pr6.Text += $"Тип памяти {opisanie[0]}, ";
+                        SqlCommand commandd = new SqlCommand("SELECT [Tip_pamati] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 6", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_opera.pr6.Text += $"Тип памяти {opisanie[0]}, ";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Chastota] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 6", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_opera.pr6.Text += $"Частота {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Chastota] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 6", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_opera.pr6.Text += $"Частота {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [obem] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 6", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_opera.pr6.Text += $"Объем {opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [obem] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 6", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_opera.pr6.Text += $"Объем {opisanie[0]}, ";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Kolishestvo_plashek] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 6", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_opera.pr6.Text += $"Количество плашек {opisanie[0]}, \n";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Kolishestvo_plashek] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 6", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_opera.pr6.Text += $"Количество плашек {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 6", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_opera.pr6.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 6", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_opera.pr6.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 6", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_opera.pr6.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 6", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_opera.pr6.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 6", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Operativka] WHERE [Id_Operativ_pamat] = 6", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_opera.pr6.Text;
+                    idd = 6;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_opera.pr6.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void bloki_pit_Click(object sender, RoutedEventArgs e)
@@ -2529,260 +3928,356 @@ namespace уп
 
         private void Kyp25_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_bloki = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_Blok_pitanie] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 1", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_bloki.pr1.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 1", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_bloki = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_Blok_pitanie] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 1", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Blok_pitanie]";
+                        id = "[Id_Blok_pitanie]";
+                        win_bloki.pr1.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Form_Factor] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 1", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_bloki.pr1.Text += $"Форм-фактор {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Form_Factor] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 1", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_bloki.pr1.Text += $"Форм-фактор {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Power] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 1", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_bloki.pr1.Text += $"Мощность {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Power] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 1", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_bloki.pr1.Text += $"Мощность {opisanie[0]}, ";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 1", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_bloki.pr1.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 1", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_bloki.pr1.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 1", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_bloki.pr1.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 1", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_bloki.pr1.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 1", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 1", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_bloki.pr1.Text;
+                    idd = 1;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_bloki.pr1.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp26_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_bloki = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_Blok_pitanie] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 2", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_bloki.pr2.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 2", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_bloki = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_Blok_pitanie] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 2", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Blok_pitanie]";
+                        id = "[Id_Blok_pitanie]";
+                        win_bloki.pr2.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Form_Factor] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 2", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_bloki.pr2.Text += $"Форм-фактор {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Form_Factor] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 2", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_bloki.pr2.Text += $"Форм-фактор {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Power] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 2", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_bloki.pr2.Text += $"Мощность {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Power] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 2", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_bloki.pr2.Text += $"Мощность {opisanie[0]}, ";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 2", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_bloki.pr2.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 2", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_bloki.pr2.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 2", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_bloki.pr2.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 2", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_bloki.pr2.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 2", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 2", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_bloki.pr2.Text;
+                    idd = 2;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_bloki.pr2.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp27_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_bloki = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_Blok_pitanie] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 3", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_bloki.pr3.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 3", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_bloki = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_Blok_pitanie] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 3", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Blok_pitanie]";
+                        id = "[Id_Blok_pitanie]";
+                        win_bloki.pr3.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Form_Factor] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 3", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_bloki.pr3.Text += $"Форм-фактор {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Form_Factor] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 3", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_bloki.pr3.Text += $"Форм-фактор {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Power] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 3", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_bloki.pr3.Text += $"Мощность {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Power] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 3", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_bloki.pr3.Text += $"Мощность {opisanie[0]}, ";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 3", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_bloki.pr3.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 3", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_bloki.pr3.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 3", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_bloki.pr3.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 3", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_bloki.pr3.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 3", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 3", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_bloki.pr3.Text;
+                    idd = 3;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_bloki.pr3.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp28_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_bloki = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_Blok_pitanie] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 4", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_bloki.pr4.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 4", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_bloki = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_Blok_pitanie] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 4", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Blok_pitanie]";
+                        id = "[Id_Blok_pitanie]";
+                        win_bloki.pr4.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Form_Factor] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 4", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_bloki.pr4.Text += $"Форм-фактор {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Form_Factor] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 4", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_bloki.pr4.Text += $"Форм-фактор {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Power] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 4", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_bloki.pr4.Text += $"Мощность {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Power] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 4", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_bloki.pr4.Text += $"Мощность {opisanie[0]}, ";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 4", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_bloki.pr4.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 4", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_bloki.pr4.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 4", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_bloki.pr4.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 4", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_bloki.pr4.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 4", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 4", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_bloki.pr4.Text;
+                    idd = 4;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_bloki.pr4.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp29_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_bloki = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_Blok_pitanie] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 5", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_bloki.pr5.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 5", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_bloki = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_Blok_pitanie] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 5", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Blok_pitanie]";
+                        id = "[Id_Blok_pitanie]";
+                        win_bloki.pr5.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Form_Factor] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 5", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_bloki.pr5.Text += $"Форм-фактор {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Form_Factor] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 5", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_bloki.pr5.Text += $"Форм-фактор {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Power] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 5", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_bloki.pr5.Text += $"Мощность {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Power] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 5", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_bloki.pr5.Text += $"Мощность {opisanie[0]}, ";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 5", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_bloki.pr5.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 5", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_bloki.pr5.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 5", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_bloki.pr5.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 5", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_bloki.pr5.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 5", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 5", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_bloki.pr5.Text;
+                    idd = 5;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_bloki.pr5.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp30_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_bloki = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_Blok_pitanie] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 6", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_bloki.pr6.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 6", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_bloki = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_Blok_pitanie] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 6", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Blok_pitanie]";
+                        id = "[Id_Blok_pitanie]";
+                        win_bloki.pr6.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Form_Factor] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 6", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_bloki.pr6.Text += $"Форм-фактор {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Form_Factor] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 6", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_bloki.pr6.Text += $"Форм-фактор {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Power] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 6", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_bloki.pr6.Text += $"Мощность {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Power] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 6", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_bloki.pr6.Text += $"Мощность {opisanie[0]}, ";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 6", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_bloki.pr6.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 6", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_bloki.pr6.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 6", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_bloki.pr6.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 6", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_bloki.pr6.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 6", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Blok_pitanie] WHERE [Id_Blok_pitanie] = 6", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_bloki.pr6.Text;
+                    idd = 6;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_bloki.pr6.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void korpusa_Click(object sender, RoutedEventArgs e)
@@ -2899,260 +4394,356 @@ namespace уп
 
         private void Kyp31_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_korp = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Nazvanie] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 1", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_korp.pr1.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 1", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_korp = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Nazvanie] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 1", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Korpusa]";
+                        id = "[Id_korpusa]";
+                        win_korp.pr1.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Tiporazmer] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 1", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_korp.pr1.Text += $"Типоразмер {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Tiporazmer] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 1", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_korp.pr1.Text += $"Типоразмер {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [FormFactor] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 1", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_korp.pr1.Text += $"Форм-фактор {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [FormFactor] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 1", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_korp.pr1.Text += $"Форм-фактор {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 1", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_korp.pr1.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 1", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_korp.pr1.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 1", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_korp.pr1.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 1", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_korp.pr1.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 1", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 1", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_korp.pr1.Text;
+                    idd = 1;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_korp.pr1.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp32_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_korp = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Nazvanie] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 2", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_korp.pr2.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 2", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_korp = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Nazvanie] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 2", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Korpusa]";
+                        id = "[Id_korpusa]";
+                        win_korp.pr2.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Tiporazmer] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 2", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_korp.pr2.Text += $"Типоразмер {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Tiporazmer] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 2", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_korp.pr2.Text += $"Типоразмер {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [FormFactor] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 2", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_korp.pr2.Text += $"Форм-фактор {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [FormFactor] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 2", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_korp.pr2.Text += $"Форм-фактор {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 2", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_korp.pr2.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 2", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_korp.pr2.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 2", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_korp.pr2.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 2", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_korp.pr2.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 2", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 2", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_korp.pr2.Text;
+                    idd = 2;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_korp.pr2.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp33_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_korp = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Nazvanie] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 3", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_korp.pr3.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 3", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_korp = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Nazvanie] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 3", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Korpusa]";
+                        id = "[Id_korpusa]";
+                        win_korp.pr3.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Tiporazmer] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 3", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_korp.pr3.Text += $"Типоразмер {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Tiporazmer] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 3", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_korp.pr3.Text += $"Типоразмер {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [FormFactor] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 3", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_korp.pr3.Text += $"Форм-фактор {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [FormFactor] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 3", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_korp.pr3.Text += $"Форм-фактор {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 3", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_korp.pr3.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 3", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_korp.pr3.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 3", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_korp.pr3.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 3", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_korp.pr3.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 3", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 3", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_korp.pr3.Text;
+                    idd = 3;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_korp.pr3.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp34_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_korp = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Nazvanie] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 4", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_korp.pr4.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 4", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_korp = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Nazvanie] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 4", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Korpusa]";
+                        id = "[Id_korpusa]";
+                        win_korp.pr4.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Tiporazmer] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 4", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_korp.pr4.Text += $"Типоразмер {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Tiporazmer] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 4", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_korp.pr4.Text += $"Типоразмер {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [FormFactor] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 4", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_korp.pr4.Text += $"Форм-фактор {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [FormFactor] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 4", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_korp.pr4.Text += $"Форм-фактор {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 4", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_korp.pr4.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 4", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_korp.pr4.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 4", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_korp.pr4.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 4", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_korp.pr4.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 4", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 4", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_korp.pr4.Text;
+                    idd = 4;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_korp.pr4.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp35_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_korp = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Nazvanie] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 5", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_korp.pr5.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 5", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_korp = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Nazvanie] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 5", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Korpusa]";
+                        id = "[Id_korpusa]";
+                        win_korp.pr5.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Tiporazmer] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 5", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_korp.pr5.Text += $"Типоразмер {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Tiporazmer] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 5", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_korp.pr5.Text += $"Типоразмер {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [FormFactor] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 5", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_korp.pr5.Text += $"Форм-фактор {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [FormFactor] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 5", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_korp.pr5.Text += $"Форм-фактор {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 5", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_korp.pr5.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 5", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_korp.pr5.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 5", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_korp.pr5.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 5", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_korp.pr5.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 5", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 5", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_korp.pr5.Text;
+                    idd = 5;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_korp.pr5.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp36_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_korp = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Nazvanie] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 6", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_korp.pr6.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 6", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_korp = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Nazvanie] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 6", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Korpusa]";
+                        id = "[Id_korpusa]";
+                        win_korp.pr6.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Tiporazmer] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 6", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_korp.pr6.Text += $"Типоразмер {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Tiporazmer] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 6", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_korp.pr6.Text += $"Типоразмер {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [FormFactor] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 6", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_korp.pr6.Text += $"Форм-фактор {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [FormFactor] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 6", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_korp.pr6.Text += $"Форм-фактор {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 6", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_korp.pr6.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 6", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_korp.pr6.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 6", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_korp.pr6.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 6", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_korp.pr6.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 6", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Korpusa] WHERE [Id_korpusa] = 6", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_korp.pr6.Text;
+                    idd = 6;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_korp.pr6.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void oxlad_Click(object sender, RoutedEventArgs e)
@@ -3269,260 +4860,356 @@ namespace уп
 
         private void Kyp37_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_oxl = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_oxlad] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 1", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_oxl.pr1.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 1", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_oxl = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_oxlad] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 1", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Oxladd]";
+                        id = "[Id_oxlad]";
+                        win_oxl.pr1.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Oborotov/min] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 1", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_oxl.pr1.Text += $"Оборотов/мин {opisanie[0]}, ";
+                        SqlCommand commandd = new SqlCommand("SELECT [Oborotov/min] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 1", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_oxl.pr1.Text += $"Оборотов/мин {opisanie[0]}, ";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Power] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 1", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_oxl.pr1.Text += $"Мощность {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Power] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 1", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_oxl.pr1.Text += $"Мощность {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 1", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_oxl.pr1.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 1", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_oxl.pr1.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 1", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_oxl.pr1.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 1", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_oxl.pr1.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 1", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 1", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_oxl.pr1.Text;
+                    idd = 1;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_oxl.pr1.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp38_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_oxl = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_oxlad] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 2", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_oxl.pr2.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 2", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_oxl = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_oxlad] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 2", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Oxladd]";
+                        id = "[Id_oxlad]";
+                        win_oxl.pr2.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Oborotov/min] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 2", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_oxl.pr2.Text += $"Оборотов/мин {opisanie[0]}, ";
+                        SqlCommand commandd = new SqlCommand("SELECT [Oborotov/min] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 2", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_oxl.pr2.Text += $"Оборотов/мин {opisanie[0]}, ";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Power] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 2", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_oxl.pr2.Text += $"Мощность {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Power] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 2", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_oxl.pr2.Text += $"Мощность {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 2", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_oxl.pr2.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 2", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_oxl.pr2.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 2", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_oxl.pr2.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 2", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_oxl.pr2.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 2", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 2", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_oxl.pr2.Text;
+                    idd = 2;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_oxl.pr2.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp39_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_oxl = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_oxlad] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 3", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_oxl.pr3.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 3", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_oxl = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_oxlad] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 3", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Oxladd]";
+                        id = "[Id_oxlad]";
+                        win_oxl.pr3.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Oborotov/min] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 3", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_oxl.pr3.Text += $"Оборотов/мин {opisanie[0]}, ";
+                        SqlCommand commandd = new SqlCommand("SELECT [Oborotov/min] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 3", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_oxl.pr3.Text += $"Оборотов/мин {opisanie[0]}, ";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Power] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 3", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_oxl.pr3.Text += $"Мощность {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Power] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 3", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_oxl.pr3.Text += $"Мощность {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 3", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_oxl.pr3.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 3", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_oxl.pr3.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 3", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_oxl.pr3.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 3", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_oxl.pr3.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 3", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 3", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_oxl.pr3.Text;
+                    idd = 3;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_oxl.pr3.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp40_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_oxl = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_oxlad] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 4", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_oxl.pr4.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 4", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_oxl = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_oxlad] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 4", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Oxladd]";
+                        id = "[Id_oxlad]";
+                        win_oxl.pr4.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Oborotov/min] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 4", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_oxl.pr4.Text += $"Оборотов/мин {opisanie[0]}, ";
+                        SqlCommand commandd = new SqlCommand("SELECT [Oborotov/min] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 4", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_oxl.pr4.Text += $"Оборотов/мин {opisanie[0]}, ";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Power] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 4", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_oxl.pr4.Text += $"Мощность {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Power] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 4", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_oxl.pr4.Text += $"Мощность {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 4", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_oxl.pr4.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 4", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_oxl.pr4.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 4", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_oxl.pr4.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 4", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_oxl.pr4.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 4", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 4", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_oxl.pr4.Text;
+                    idd = 4;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_oxl.pr4.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp41_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_oxl = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_oxlad] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 5", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_oxl.pr5.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 5", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_oxl = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_oxlad] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 5", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Oxladd]";
+                        id = "[Id_oxlad]";
+                        win_oxl.pr5.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Oborotov/min] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 5", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_oxl.pr5.Text += $"Оборотов/мин {opisanie[0]}, ";
+                        SqlCommand commandd = new SqlCommand("SELECT [Oborotov/min] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 5", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_oxl.pr5.Text += $"Оборотов/мин {opisanie[0]}, ";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Power] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 5", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_oxl.pr5.Text += $"Мощность {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Power] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 5", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_oxl.pr5.Text += $"Мощность {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 5", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_oxl.pr5.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 5", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_oxl.pr5.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 5", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_oxl.pr5.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 5", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_oxl.pr5.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 5", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 5", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_oxl.pr5.Text;
+                    idd = 5;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_oxl.pr5.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp42_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_oxl = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_oxlad] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 6", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_oxl.pr6.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 6", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_oxl = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_oxlad] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 6", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Oxladd]";
+                        id = "[Id_oxlad]";
+                        win_oxl.pr6.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Oborotov/min] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 6", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_oxl.pr6.Text += $"Оборотов/мин {opisanie[0]}, ";
+                        SqlCommand commandd = new SqlCommand("SELECT [Oborotov/min] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 6", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_oxl.pr6.Text += $"Оборотов/мин {opisanie[0]}, ";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Power] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 6", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_oxl.pr6.Text += $"Мощность {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Power] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 6", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_oxl.pr6.Text += $"Мощность {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 6", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_oxl.pr6.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 6", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_oxl.pr6.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 6", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_oxl.pr6.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 6", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_oxl.pr6.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 6", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Oxladd] WHERE [Id_oxlad] = 6", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_oxl.pr6.Text;
+                    idd = 6;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_oxl.pr6.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void ssd_hdd_Click(object sender, RoutedEventArgs e)
@@ -3658,284 +5345,380 @@ namespace уп
 
         private void Kyp43_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_ssd = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_SSD_HDD] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 1", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_ssd.pr1.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 1", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_ssd = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_SSD_HDD] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 1", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Ssd_and_Hdd]";
+                        id = "[Id_SSD_HDD]";
+                        win_ssd.pr1.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [volume] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 1", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_ssd.pr1.Text += $"Объем {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [volume] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 1", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_ssd.pr1.Text += $"Объем {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [reading_speed] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 1", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_ssd.pr1.Text += $"Скорость чтения {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [reading_speed] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 1", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_ssd.pr1.Text += $"Скорость чтения {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [write_speed] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 1", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_ssd.pr1.Text += $"Скорость записи {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [write_speed] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 1", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_ssd.pr1.Text += $"Скорость записи {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 1", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_ssd.pr1.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 1", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_ssd.pr1.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 1", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_ssd.pr1.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 1", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_ssd.pr1.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 1", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 1", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_ssd.pr1.Text;
+                    idd = 1;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_ssd.pr1.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp44_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_ssd = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_SSD_HDD] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 2", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_ssd.pr2.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 2", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_ssd = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_SSD_HDD] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 2", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Ssd_and_Hdd]";
+                        id = "[Id_SSD_HDD]";
+                        win_ssd.pr2.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [volume] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 2", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_ssd.pr2.Text += $"Объем {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [volume] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 2", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_ssd.pr2.Text += $"Объем {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [reading_speed] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 2", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_ssd.pr2.Text += $"Скорость чтения {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [reading_speed] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 2", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_ssd.pr2.Text += $"Скорость чтения {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [write_speed] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 2", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_ssd.pr2.Text += $"Скорость записи {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [write_speed] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 2", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_ssd.pr2.Text += $"Скорость записи {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 2", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_ssd.pr2.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 2", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_ssd.pr2.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 2", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_ssd.pr2.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 2", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_ssd.pr2.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 2", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 2", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_ssd.pr2.Text;
+                    idd = 2;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_ssd.pr2.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp45_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_ssd = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_SSD_HDD] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 3", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_ssd.pr3.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 3", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_ssd = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_SSD_HDD] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 3", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Ssd_and_Hdd]";
+                        id = "[Id_SSD_HDD]";
+                        win_ssd.pr3.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [volume] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 3", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_ssd.pr3.Text += $"Объем {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [volume] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 3", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_ssd.pr3.Text += $"Объем {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [reading_speed] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 3", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_ssd.pr3.Text += $"Скорость чтения {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [reading_speed] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 3", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_ssd.pr3.Text += $"Скорость чтения {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [write_speed] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 3", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_ssd.pr3.Text += $"Скорость записи {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [write_speed] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 3", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_ssd.pr3.Text += $"Скорость записи {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 3", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_ssd.pr3.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 3", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_ssd.pr3.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 3", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_ssd.pr3.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 3", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_ssd.pr3.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 3", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 3", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_ssd.pr3.Text;
+                    idd = 3;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_ssd.pr3.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp46_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_ssd = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_SSD_HDD] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 4", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_ssd.pr4.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 4", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_ssd = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_SSD_HDD] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 4", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Ssd_and_Hdd]";
+                        id = "[Id_SSD_HDD]";
+                        win_ssd.pr4.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [volume] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 4", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_ssd.pr4.Text += $"Объем {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [volume] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 4", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_ssd.pr4.Text += $"Объем {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [reading_speed] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 4", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_ssd.pr4.Text += $"Скорость чтения {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [reading_speed] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 4", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_ssd.pr4.Text += $"Скорость чтения {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [write_speed] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 4", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_ssd.pr4.Text += $"Скорость записи {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [write_speed] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 4", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_ssd.pr4.Text += $"Скорость записи {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 4", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_ssd.pr4.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 4", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_ssd.pr4.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 4", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_ssd.pr4.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 4", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_ssd.pr4.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 4", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 4", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_ssd.pr4.Text;
+                    idd = 4;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_ssd.pr4.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp47_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_ssd = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_SSD_HDD] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 5", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_ssd.pr5.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 5", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_ssd = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_SSD_HDD] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 5", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Ssd_and_Hdd]";
+                        id = "[Id_SSD_HDD]";
+                        win_ssd.pr5.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [volume] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 5", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_ssd.pr5.Text += $"Объем {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [volume] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 5", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_ssd.pr5.Text += $"Объем {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [reading_speed] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 5", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_ssd.pr5.Text += $"Скорость чтения {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [reading_speed] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 5", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_ssd.pr5.Text += $"Скорость чтения {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [write_speed] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 5", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_ssd.pr5.Text += $"Скорость записи {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [write_speed] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 5", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_ssd.pr5.Text += $"Скорость записи {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 5", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_ssd.pr5.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 5", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_ssd.pr5.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 5", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_ssd.pr5.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 5", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_ssd.pr5.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 5", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 5", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_ssd.pr5.Text;
+                    idd = 5;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_ssd.pr5.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp48_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_ssd = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Name_SSD_HDD] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 6", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_ssd.pr6.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 6", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_ssd = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Name_SSD_HDD] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 6", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Ssd_and_Hdd]";
+                        id = "[Id_SSD_HDD]";
+                        win_ssd.pr6.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [volume] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 6", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_ssd.pr6.Text += $"Объем {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [volume] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 6", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_ssd.pr6.Text += $"Объем {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [reading_speed] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 6", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_ssd.pr6.Text += $"Скорость чтения {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [reading_speed] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 6", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_ssd.pr6.Text += $"Скорость чтения {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [write_speed] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 6", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_ssd.pr6.Text += $"Скорость записи {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [write_speed] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 6", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_ssd.pr6.Text += $"Скорость записи {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 6", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_ssd.pr6.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 6", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_ssd.pr6.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 6", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_ssd.pr6.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolishestvo] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 6", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_ssd.pr6.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 6", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Ssd_and_Hdd] WHERE [Id_SSD_HDD] = 6", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_ssd.pr6.Text;
+                    idd = 6;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_ssd.pr6.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void monitori_Click(object sender, RoutedEventArgs e)
@@ -4090,308 +5873,404 @@ namespace уп
 
         private void Kyp49_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_monitor = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Monitors] WHERE [Id_monitors] = 1", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_monitor.pr1.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Monitors] WHERE [Id_monitors] = 1", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_monitor = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Monitors] WHERE [Id_monitors] = 1", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Monitors]";
+                        id = "[Id_monitors]";
+                        win_monitor.pr1.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Resolution] FROM [dbo].[Monitors] WHERE [Id_monitors] = 1", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_monitor.pr1.Text += $"Разрешение {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Resolution] FROM [dbo].[Monitors] WHERE [Id_monitors] = 1", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_monitor.pr1.Text += $"Разрешение {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Connector] FROM [dbo].[Monitors] WHERE [Id_monitors] = 1", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_monitor.pr1.Text += $"Коннектор {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Connector] FROM [dbo].[Monitors] WHERE [Id_monitors] = 1", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_monitor.pr1.Text += $"Коннектор {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Matrix] FROM [dbo].[Monitors] WHERE [Id_monitors] = 1", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_monitor.pr1.Text += $"Матрица {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Matrix] FROM [dbo].[Monitors] WHERE [Id_monitors] = 1", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_monitor.pr1.Text += $"Матрица {opisanie[0]}, \n";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Hz] FROM [dbo].[Monitors] WHERE [Id_monitors] = 1", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_monitor.pr1.Text += $"Частота обновления {opisanie[0]}, ";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Hz] FROM [dbo].[Monitors] WHERE [Id_monitors] = 1", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_monitor.pr1.Text += $"Частота обновления {opisanie[0]}, ";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Monitors] WHERE [Id_monitors] = 1", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_monitor.pr1.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Monitors] WHERE [Id_monitors] = 1", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_monitor.pr1.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Monitors] WHERE [Id_monitors] = 1", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_monitor.pr1.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Monitors] WHERE [Id_monitors] = 1", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_monitor.pr1.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Monitors] WHERE [Id_monitors] = 1", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Monitors] WHERE [Id_monitors] = 1", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_monitor.pr1.Text;
+                    idd = 1;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_monitor.pr1.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp50_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_monitor = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Monitors] WHERE [Id_monitors] = 2", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_monitor.pr2.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Monitors] WHERE [Id_monitors] = 2", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_monitor = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Monitors] WHERE [Id_monitors] = 2", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Monitors]";
+                        id = "[Id_monitors]";
+                        win_monitor.pr2.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Resolution] FROM [dbo].[Monitors] WHERE [Id_monitors] = 2", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_monitor.pr2.Text += $"Разрешение {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Resolution] FROM [dbo].[Monitors] WHERE [Id_monitors] = 2", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_monitor.pr2.Text += $"Разрешение {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Connector] FROM [dbo].[Monitors] WHERE [Id_monitors] = 2", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_monitor.pr2.Text += $"Коннектор {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Connector] FROM [dbo].[Monitors] WHERE [Id_monitors] = 2", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_monitor.pr2.Text += $"Коннектор {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Matrix] FROM [dbo].[Monitors] WHERE [Id_monitors] = 2", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_monitor.pr2.Text += $"Матрица {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Matrix] FROM [dbo].[Monitors] WHERE [Id_monitors] = 2", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_monitor.pr2.Text += $"Матрица {opisanie[0]}, \n";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Hz] FROM [dbo].[Monitors] WHERE [Id_monitors] = 2", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_monitor.pr2.Text += $"Частота обновления {opisanie[0]}, ";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Hz] FROM [dbo].[Monitors] WHERE [Id_monitors] = 2", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_monitor.pr2.Text += $"Частота обновления {opisanie[0]}, ";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Monitors] WHERE [Id_monitors] = 2", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_monitor.pr2.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Monitors] WHERE [Id_monitors] = 2", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_monitor.pr2.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Monitors] WHERE [Id_monitors] = 2", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_monitor.pr2.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Monitors] WHERE [Id_monitors] = 2", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_monitor.pr2.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Monitors] WHERE [Id_monitors] = 2", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Monitors] WHERE [Id_monitors] = 2", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_monitor.pr2.Text;
+                    idd = 2;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_monitor.pr2.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp51_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_monitor = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Monitors] WHERE [Id_monitors] = 3", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_monitor.pr3.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Monitors] WHERE [Id_monitors] = 3", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_monitor = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Monitors] WHERE [Id_monitors] = 3", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Monitors]";
+                        id = "[Id_monitors]";
+                        win_monitor.pr3.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Resolution] FROM [dbo].[Monitors] WHERE [Id_monitors] = 3", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_monitor.pr3.Text += $"Разрешение {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Resolution] FROM [dbo].[Monitors] WHERE [Id_monitors] = 3", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_monitor.pr3.Text += $"Разрешение {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Connector] FROM [dbo].[Monitors] WHERE [Id_monitors] = 3", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_monitor.pr3.Text += $"Коннектор {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Connector] FROM [dbo].[Monitors] WHERE [Id_monitors] = 3", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_monitor.pr3.Text += $"Коннектор {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Matrix] FROM [dbo].[Monitors] WHERE [Id_monitors] = 3", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_monitor.pr3.Text += $"Матрица {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Matrix] FROM [dbo].[Monitors] WHERE [Id_monitors] = 3", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_monitor.pr3.Text += $"Матрица {opisanie[0]}, \n";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Hz] FROM [dbo].[Monitors] WHERE [Id_monitors] = 3", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_monitor.pr3.Text += $"Частота обновления {opisanie[0]}, ";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Hz] FROM [dbo].[Monitors] WHERE [Id_monitors] = 3", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_monitor.pr3.Text += $"Частота обновления {opisanie[0]}, ";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Monitors] WHERE [Id_monitors] = 3", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_monitor.pr3.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Monitors] WHERE [Id_monitors] = 3", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_monitor.pr3.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Monitors] WHERE [Id_monitors] = 3", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_monitor.pr3.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Monitors] WHERE [Id_monitors] = 3", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_monitor.pr3.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Monitors] WHERE [Id_monitors] = 3", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Monitors] WHERE [Id_monitors] = 3", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_monitor.pr3.Text;
+                    idd = 3;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_monitor.pr3.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp52_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_monitor = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Monitors] WHERE [Id_monitors] = 4", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_monitor.pr4.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Monitors] WHERE [Id_monitors] = 4", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_monitor = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Monitors] WHERE [Id_monitors] = 4", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Monitors]";
+                        id = "[Id_monitors]";
+                        win_monitor.pr4.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Resolution] FROM [dbo].[Monitors] WHERE [Id_monitors] = 4", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_monitor.pr4.Text += $"Разрешение {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Resolution] FROM [dbo].[Monitors] WHERE [Id_monitors] = 4", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_monitor.pr4.Text += $"Разрешение {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Connector] FROM [dbo].[Monitors] WHERE [Id_monitors] = 4", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_monitor.pr4.Text += $"Коннектор {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Connector] FROM [dbo].[Monitors] WHERE [Id_monitors] = 4", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_monitor.pr4.Text += $"Коннектор {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Matrix] FROM [dbo].[Monitors] WHERE [Id_monitors] = 4", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_monitor.pr4.Text += $"Матрица {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Matrix] FROM [dbo].[Monitors] WHERE [Id_monitors] = 4", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_monitor.pr4.Text += $"Матрица {opisanie[0]}, \n";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Hz] FROM [dbo].[Monitors] WHERE [Id_monitors] = 4", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_monitor.pr4.Text += $"Частота обновления {opisanie[0]}, ";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Hz] FROM [dbo].[Monitors] WHERE [Id_monitors] = 4", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_monitor.pr4.Text += $"Частота обновления {opisanie[0]}, ";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Monitors] WHERE [Id_monitors] = 4", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_monitor.pr4.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Monitors] WHERE [Id_monitors] = 4", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_monitor.pr4.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Monitors] WHERE [Id_monitors] = 4", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_monitor.pr4.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Monitors] WHERE [Id_monitors] = 4", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_monitor.pr4.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Monitors] WHERE [Id_monitors] = 4", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Monitors] WHERE [Id_monitors] = 4", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_monitor.pr4.Text;
+                    idd = 4;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_monitor.pr4.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp53_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_monitor = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Monitors] WHERE [Id_monitors] = 5", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_monitor.pr5.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Monitors] WHERE [Id_monitors] = 5", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_monitor = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Monitors] WHERE [Id_monitors] = 5", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Monitors]";
+                        id = "[Id_monitors]";
+                        win_monitor.pr5.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Resolution] FROM [dbo].[Monitors] WHERE [Id_monitors] = 5", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_monitor.pr5.Text += $"Разрешение {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Resolution] FROM [dbo].[Monitors] WHERE [Id_monitors] = 5", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_monitor.pr5.Text += $"Разрешение {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Connector] FROM [dbo].[Monitors] WHERE [Id_monitors] = 5", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_monitor.pr5.Text += $"Коннектор {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Connector] FROM [dbo].[Monitors] WHERE [Id_monitors] = 5", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_monitor.pr5.Text += $"Коннектор {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Matrix] FROM [dbo].[Monitors] WHERE [Id_monitors] = 5", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_monitor.pr5.Text += $"Матрица {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Matrix] FROM [dbo].[Monitors] WHERE [Id_monitors] = 5", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_monitor.pr5.Text += $"Матрица {opisanie[0]}, \n";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Hz] FROM [dbo].[Monitors] WHERE [Id_monitors] = 5", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_monitor.pr5.Text += $"Частота обновления {opisanie[0]}, ";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Hz] FROM [dbo].[Monitors] WHERE [Id_monitors] = 5", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_monitor.pr5.Text += $"Частота обновления {opisanie[0]}, ";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Monitors] WHERE [Id_monitors] = 5", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_monitor.pr5.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Monitors] WHERE [Id_monitors] = 5", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_monitor.pr5.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Monitors] WHERE [Id_monitors] = 5", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_monitor.pr5.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Monitors] WHERE [Id_monitors] = 5", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_monitor.pr5.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Monitors] WHERE [Id_monitors] = 5", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Monitors] WHERE [Id_monitors] = 5", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_monitor.pr5.Text;
+                    idd = 5;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_monitor.pr5.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp54_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_monitor = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Monitors] WHERE [Id_monitors] = 6", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_monitor.pr6.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Monitors] WHERE [Id_monitors] = 6", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_monitor = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Monitors] WHERE [Id_monitors] = 6", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Monitors]";
+                        id = "[Id_monitors]";
+                        win_monitor.pr6.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Resolution] FROM [dbo].[Monitors] WHERE [Id_monitors] = 6", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_monitor.pr6.Text += $"Разрешение {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Resolution] FROM [dbo].[Monitors] WHERE [Id_monitors] = 6", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_monitor.pr6.Text += $"Разрешение {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Connector] FROM [dbo].[Monitors] WHERE [Id_monitors] = 6", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_monitor.pr6.Text += $"Коннектор {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Connector] FROM [dbo].[Monitors] WHERE [Id_monitors] = 6", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_monitor.pr6.Text += $"Коннектор {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Matrix] FROM [dbo].[Monitors] WHERE [Id_monitors] = 6", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_monitor.pr6.Text += $"Матрица {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Matrix] FROM [dbo].[Monitors] WHERE [Id_monitors] = 6", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_monitor.pr6.Text += $"Матрица {opisanie[0]}, \n";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Hz] FROM [dbo].[Monitors] WHERE [Id_monitors] = 6", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_monitor.pr6.Text += $"Частота обновления {opisanie[0]}, ";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Hz] FROM [dbo].[Monitors] WHERE [Id_monitors] = 6", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_monitor.pr6.Text += $"Частота обновления {opisanie[0]}, ";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Monitors] WHERE [Id_monitors] = 6", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_monitor.pr6.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Monitors] WHERE [Id_monitors] = 6", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_monitor.pr6.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Monitors] WHERE [Id_monitors] = 6", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_monitor.pr6.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Monitors] WHERE [Id_monitors] = 6", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_monitor.pr6.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Monitors] WHERE [Id_monitors] = 6", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Monitors] WHERE [Id_monitors] = 6", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_monitor.pr6.Text;
+                    idd = 6;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_monitor.pr6.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void klaviatyri_Click(object sender, RoutedEventArgs e)
@@ -4527,284 +6406,380 @@ namespace уп
 
         private void Kyp55_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_klav = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 1", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_klav.pr1.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 1", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_klav = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 1", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Klaviatyra]";
+                        id = "[id_klaviatyra]";
+                        win_klav.pr1.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Tip] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 1", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_klav.pr1.Text += $"Тип {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Tip] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 1", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_klav.pr1.Text += $"Тип {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Material] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 1", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_klav.pr1.Text += $"Материал {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Material] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 1", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_klav.pr1.Text += $"Материал {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Format] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 1", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_klav.pr1.Text += $"Формат {opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Format] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 1", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_klav.pr1.Text += $"Формат {opisanie[0]}, ";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 1", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_klav.pr1.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 1", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_klav.pr1.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 1", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_klav.pr1.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 1", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_klav.pr1.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 1", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 1", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_klav.pr1.Text;
+                    idd = 1;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_klav.pr1.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp56_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_klav = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 2", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_klav.pr2.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 2", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_klav = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 2", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Klaviatyra]";
+                        id = "[id_klaviatyra]";
+                        win_klav.pr2.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Tip] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 2", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_klav.pr2.Text += $"Тип {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Tip] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 2", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_klav.pr2.Text += $"Тип {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Material] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 2", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_klav.pr2.Text += $"Материал {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Material] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 2", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_klav.pr2.Text += $"Материал {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Format] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 2", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_klav.pr2.Text += $"Формат {opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Format] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 2", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_klav.pr2.Text += $"Формат {opisanie[0]}, ";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 2", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_klav.pr2.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 2", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_klav.pr2.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 2", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_klav.pr2.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 2", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_klav.pr2.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 2", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 2", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_klav.pr2.Text;
+                    idd = 2;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_klav.pr2.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp57_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_klav = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 3", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_klav.pr3.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 3", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_klav = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 3", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Klaviatyra]";
+                        id = "[id_klaviatyra]";
+                        win_klav.pr3.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Tip] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 3", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_klav.pr3.Text += $"Тип {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Tip] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 3", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_klav.pr3.Text += $"Тип {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Material] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 3", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_klav.pr3.Text += $"Материал {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Material] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 3", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_klav.pr3.Text += $"Материал {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Format] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 3", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_klav.pr3.Text += $"Формат {opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Format] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 3", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_klav.pr3.Text += $"Формат {opisanie[0]}, ";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 3", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_klav.pr3.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 3", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_klav.pr3.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 3", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_klav.pr3.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 3", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_klav.pr3.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 3", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 3", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_klav.pr3.Text;
+                    idd = 3;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_klav.pr3.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp58_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_klav = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 4", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_klav.pr4.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 4", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_klav = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 4", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Klaviatyra]";
+                        id = "[id_klaviatyra]";
+                        win_klav.pr4.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Tip] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 4", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_klav.pr4.Text += $"Тип {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Tip] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 4", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_klav.pr4.Text += $"Тип {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Material] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 4", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_klav.pr4.Text += $"Материал {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Material] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 4", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_klav.pr4.Text += $"Материал {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Format] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 4", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_klav.pr4.Text += $"Формат {opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Format] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 4", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_klav.pr4.Text += $"Формат {opisanie[0]}, ";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 4", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_klav.pr4.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 4", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_klav.pr4.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 4", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_klav.pr4.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 4", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_klav.pr4.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 4", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 4", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_klav.pr4.Text;
+                    idd = 4;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_klav.pr4.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp59_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_klav = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 5", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_klav.pr5.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 5", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_klav = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 5", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Klaviatyra]";
+                        id = "[id_klaviatyra]";
+                        win_klav.pr5.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Tip] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 5", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_klav.pr5.Text += $"Тип {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Tip] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 5", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_klav.pr5.Text += $"Тип {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Material] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 5", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_klav.pr5.Text += $"Материал {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Material] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 5", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_klav.pr5.Text += $"Материал {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Format] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 5", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_klav.pr5.Text += $"Формат {opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Format] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 5", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_klav.pr5.Text += $"Формат {opisanie[0]}, ";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 5", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_klav.pr5.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 5", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_klav.pr5.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 5", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_klav.pr5.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 5", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_klav.pr5.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 5", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 5", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_klav.pr5.Text;
+                    idd = 5;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_klav.pr5.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp60_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_klav = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 6", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_klav.pr6.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 6", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_klav = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 6", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Klaviatyra]";
+                        id = "[id_klaviatyra]";
+                        win_klav.pr6.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Tip] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 6", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_klav.pr6.Text += $"Тип {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Tip] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 6", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_klav.pr6.Text += $"Тип {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Material] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 6", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_klav.pr6.Text += $"Материал {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Material] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 6", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_klav.pr6.Text += $"Материал {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Format] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 6", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_klav.pr6.Text += $"Формат {opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Format] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 6", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_klav.pr6.Text += $"Формат {opisanie[0]}, ";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 6", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_klav.pr6.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 6", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_klav.pr6.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 6", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_klav.pr6.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 6", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_klav.pr6.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 6", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Klaviatyra] WHERE [id_klaviatyra] = 6", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_klav.pr6.Text;
+                    idd = 6;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_klav.pr6.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void mishi_Click(object sender, RoutedEventArgs e)
@@ -4921,260 +6896,356 @@ namespace уп
 
         private void Kyp61_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_mish = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Mouse] WHERE [id_mouse] = 1", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_mish.pr1.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mouse] WHERE [id_mouse] = 1", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_mish = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Mouse] WHERE [id_mouse] = 1", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Mouse]";
+                        id = "[id_mouse]";
+                        win_mish.pr1.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [DPI] FROM [dbo].[Mouse] WHERE [id_mouse] = 1", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_mish.pr1.Text += $"DPI {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [DPI] FROM [dbo].[Mouse] WHERE [id_mouse] = 1", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_mish.pr1.Text += $"DPI {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Connector] FROM [dbo].[Mouse] WHERE [id_mouse] = 1", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_mish.pr1.Text += $"Коннектор {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Connector] FROM [dbo].[Mouse] WHERE [id_mouse] = 1", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_mish.pr1.Text += $"Коннектор {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mouse] WHERE [id_mouse] = 1", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_mish.pr1.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mouse] WHERE [id_mouse] = 1", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_mish.pr1.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mouse] WHERE [id_mouse] = 1", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_mish.pr1.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mouse] WHERE [id_mouse] = 1", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_mish.pr1.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mouse] WHERE [id_mouse] = 1", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mouse] WHERE [id_mouse] = 1", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_mish.pr1.Text;
+                    idd = 1;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_mish.pr1.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp62_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_mish = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Mouse] WHERE [id_mouse] = 2", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_mish.pr2.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mouse] WHERE [id_mouse] = 2", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_mish = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Mouse] WHERE [id_mouse] = 2", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Mouse]";
+                        id = "[id_mouse]";
+                        win_mish.pr2.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [DPI] FROM [dbo].[Mouse] WHERE [id_mouse] = 2", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_mish.pr2.Text += $"DPI {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [DPI] FROM [dbo].[Mouse] WHERE [id_mouse] = 2", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_mish.pr2.Text += $"DPI {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Connector] FROM [dbo].[Mouse] WHERE [id_mouse] = 2", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_mish.pr2.Text += $"Коннектор {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Connector] FROM [dbo].[Mouse] WHERE [id_mouse] = 2", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_mish.pr2.Text += $"Коннектор {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mouse] WHERE [id_mouse] = 2", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_mish.pr2.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mouse] WHERE [id_mouse] = 2", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_mish.pr2.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mouse] WHERE [id_mouse] = 2", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_mish.pr2.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mouse] WHERE [id_mouse] = 2", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_mish.pr2.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mouse] WHERE [id_mouse] = 2", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mouse] WHERE [id_mouse] = 2", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_mish.pr2.Text;
+                    idd = 2;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_mish.pr2.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp63_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_mish = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Mouse] WHERE [id_mouse] = 3", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_mish.pr3.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mouse] WHERE [id_mouse] = 3", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_mish = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Mouse] WHERE [id_mouse] = 3", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Mouse]";
+                        id = "[id_mouse]";
+                        win_mish.pr3.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [DPI] FROM [dbo].[Mouse] WHERE [id_mouse] = 3", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_mish.pr3.Text += $"DPI {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [DPI] FROM [dbo].[Mouse] WHERE [id_mouse] = 3", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_mish.pr3.Text += $"DPI {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Connector] FROM [dbo].[Mouse] WHERE [id_mouse] = 3", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_mish.pr3.Text += $"Коннектор {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Connector] FROM [dbo].[Mouse] WHERE [id_mouse] = 3", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_mish.pr3.Text += $"Коннектор {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mouse] WHERE [id_mouse] = 3", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_mish.pr3.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mouse] WHERE [id_mouse] = 3", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_mish.pr3.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mouse] WHERE [id_mouse] = 3", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_mish.pr3.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mouse] WHERE [id_mouse] = 3", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_mish.pr3.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mouse] WHERE [id_mouse] = 3", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mouse] WHERE [id_mouse] = 3", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_mish.pr3.Text;
+                    idd = 3;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_mish.pr3.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp64_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_mish = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Mouse] WHERE [id_mouse] = 4", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_mish.pr4.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mouse] WHERE [id_mouse] = 4", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_mish = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Mouse] WHERE [id_mouse] = 4", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Mouse]";
+                        id = "[id_mouse]";
+                        win_mish.pr4.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [DPI] FROM [dbo].[Mouse] WHERE [id_mouse] = 4", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_mish.pr4.Text += $"DPI {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [DPI] FROM [dbo].[Mouse] WHERE [id_mouse] = 4", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_mish.pr4.Text += $"DPI {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Connector] FROM [dbo].[Mouse] WHERE [id_mouse] = 4", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_mish.pr4.Text += $"Коннектор {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Connector] FROM [dbo].[Mouse] WHERE [id_mouse] = 4", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_mish.pr4.Text += $"Коннектор {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mouse] WHERE [id_mouse] = 4", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_mish.pr4.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mouse] WHERE [id_mouse] = 4", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_mish.pr4.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mouse] WHERE [id_mouse] = 4", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_mish.pr4.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mouse] WHERE [id_mouse] = 4", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_mish.pr4.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mouse] WHERE [id_mouse] = 4", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mouse] WHERE [id_mouse] = 4", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_mish.pr4.Text;
+                    idd = 4;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_mish.pr4.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp65_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_mish = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Mouse] WHERE [id_mouse] = 5", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_mish.pr5.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mouse] WHERE [id_mouse] = 5", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_mish = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Mouse] WHERE [id_mouse] = 5", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Mouse]";
+                        id = "[id_mouse]";
+                        win_mish.pr5.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [DPI] FROM [dbo].[Mouse] WHERE [id_mouse] = 5", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_mish.pr5.Text += $"DPI {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [DPI] FROM [dbo].[Mouse] WHERE [id_mouse] = 5", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_mish.pr5.Text += $"DPI {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Connector] FROM [dbo].[Mouse] WHERE [id_mouse] = 5", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_mish.pr5.Text += $"Коннектор {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Connector] FROM [dbo].[Mouse] WHERE [id_mouse] = 5", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_mish.pr5.Text += $"Коннектор {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mouse] WHERE [id_mouse] = 5", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_mish.pr5.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mouse] WHERE [id_mouse] = 5", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_mish.pr5.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mouse] WHERE [id_mouse] = 5", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_mish.pr5.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mouse] WHERE [id_mouse] = 5", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_mish.pr5.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mouse] WHERE [id_mouse] = 5", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mouse] WHERE [id_mouse] = 5", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_mish.pr5.Text;
+                    idd = 5;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_mish.pr5.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp66_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_mish = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Mouse] WHERE [id_mouse] = 6", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_mish.pr6.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mouse] WHERE [id_mouse] = 6", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_mish = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Mouse] WHERE [id_mouse] = 6", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Mouse]";
+                        id = "[id_mouse]";
+                        win_mish.pr6.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [DPI] FROM [dbo].[Mouse] WHERE [id_mouse] = 6", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_mish.pr6.Text += $"DPI {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [DPI] FROM [dbo].[Mouse] WHERE [id_mouse] = 6", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_mish.pr6.Text += $"DPI {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Connector] FROM [dbo].[Mouse] WHERE [id_mouse] = 6", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_mish.pr6.Text += $"Коннектор {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Connector] FROM [dbo].[Mouse] WHERE [id_mouse] = 6", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_mish.pr6.Text += $"Коннектор {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mouse] WHERE [id_mouse] = 6", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_mish.pr6.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Mouse] WHERE [id_mouse] = 6", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_mish.pr6.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mouse] WHERE [id_mouse] = 6", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_mish.pr6.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Mouse] WHERE [id_mouse] = 6", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_mish.pr6.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mouse] WHERE [id_mouse] = 6", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Mouse] WHERE [id_mouse] = 6", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_mish.pr6.Text;
+                    idd = 6;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_mish.pr6.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void veb_kameri_Click(object sender, RoutedEventArgs e)
@@ -5310,284 +7381,380 @@ namespace уп
 
         private void Kyp67_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_veb = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 1", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_veb.pr1.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 1", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_veb = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 1", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Veb_camera]";
+                        id = "[id_Veb_camera]";
+                        win_veb.pr1.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Fps] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 1", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_veb.pr1.Text += $"Кадров в секунду {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Fps] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 1", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_veb.pr1.Text += $"Кадров в секунду {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Rezolution] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 1", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_veb.pr1.Text += $"Разрешение {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Rezolution] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 1", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_veb.pr1.Text += $"Разрешение {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Tip_matrizi] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 1", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_veb.pr1.Text += $"Тип матрицы {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Tip_matrizi] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 1", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_veb.pr1.Text += $"Тип матрицы {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 1", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_veb.pr1.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 1", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_veb.pr1.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 1", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_veb.pr1.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 1", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_veb.pr1.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 1", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 1", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_veb.pr1.Text;
+                    idd = 1;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_veb.pr1.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp68_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_veb = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 2", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_veb.pr2.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 2", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_veb = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 2", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Veb_camera]";
+                        id = "[id_Veb_camera]";
+                        win_veb.pr2.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Fps] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 2", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_veb.pr2.Text += $"Кадров в секунду {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Fps] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 2", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_veb.pr2.Text += $"Кадров в секунду {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Rezolution] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 2", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_veb.pr2.Text += $"Разрешение {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Rezolution] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 2", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_veb.pr2.Text += $"Разрешение {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Tip_matrizi] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 2", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_veb.pr2.Text += $"Тип матрицы {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Tip_matrizi] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 2", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_veb.pr2.Text += $"Тип матрицы {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 2", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_veb.pr2.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 2", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_veb.pr2.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 2", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_veb.pr2.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 2", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_veb.pr2.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 2", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 2", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_veb.pr2.Text;
+                    idd = 2;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_veb.pr2.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp69_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_veb = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 3", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_veb.pr3.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 3", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_veb = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 3", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Veb_camera]";
+                        id = "[id_Veb_camera]";
+                        win_veb.pr3.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Fps] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 3", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_veb.pr3.Text += $"Кадров в секунду {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Fps] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 3", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_veb.pr3.Text += $"Кадров в секунду {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Rezolution] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 3", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_veb.pr3.Text += $"Разрешение {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Rezolution] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 3", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_veb.pr3.Text += $"Разрешение {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Tip_matrizi] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 3", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_veb.pr3.Text += $"Тип матрицы {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Tip_matrizi] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 3", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_veb.pr3.Text += $"Тип матрицы {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 3", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_veb.pr3.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 3", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_veb.pr3.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 3", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_veb.pr3.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 3", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_veb.pr3.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 3", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 3", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_veb.pr3.Text;
+                    idd = 3;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_veb.pr3.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp70_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_veb = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 4", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_veb.pr4.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 4", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_veb = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 4", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Veb_camera]";
+                        id = "[id_Veb_camera]";
+                        win_veb.pr4.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Fps] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 4", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_veb.pr4.Text += $"Кадров в секунду {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Fps] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 4", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_veb.pr4.Text += $"Кадров в секунду {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Rezolution] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 4", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_veb.pr4.Text += $"Разрешение {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Rezolution] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 4", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_veb.pr4.Text += $"Разрешение {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Tip_matrizi] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 4", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_veb.pr4.Text += $"Тип матрицы {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Tip_matrizi] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 4", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_veb.pr4.Text += $"Тип матрицы {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 4", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_veb.pr4.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 4", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_veb.pr4.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 4", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_veb.pr4.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 4", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_veb.pr4.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 4", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 4", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_veb.pr4.Text;
+                    idd = 4;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_veb.pr4.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp71_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_veb = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 5", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_veb.pr5.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 5", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_veb = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 5", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Veb_camera]";
+                        id = "[id_Veb_camera]";
+                        win_veb.pr5.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Fps] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 5", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_veb.pr5.Text += $"Кадров в секунду {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Fps] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 5", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_veb.pr5.Text += $"Кадров в секунду {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Rezolution] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 5", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_veb.pr5.Text += $"Разрешение {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Rezolution] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 5", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_veb.pr5.Text += $"Разрешение {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Tip_matrizi] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 5", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_veb.pr5.Text += $"Тип матрицы {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Tip_matrizi] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 5", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_veb.pr5.Text += $"Тип матрицы {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 5", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_veb.pr5.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 5", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_veb.pr5.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 5", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_veb.pr5.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 5", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_veb.pr5.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 5", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 5", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_veb.pr5.Text;
+                    idd = 5;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_veb.pr5.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp72_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_veb = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 6", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_veb.pr6.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 6", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_veb = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 6", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Veb_camera]";
+                        id = "[id_Veb_camera]";
+                        win_veb.pr6.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Fps] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 6", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_veb.pr6.Text += $"Кадров в секунду {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Fps] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 6", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_veb.pr6.Text += $"Кадров в секунду {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Rezolution] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 6", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_veb.pr6.Text += $"Разрешение {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Rezolution] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 6", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_veb.pr6.Text += $"Разрешение {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Tip_matrizi] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 6", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_veb.pr6.Text += $"Тип матрицы {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Tip_matrizi] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 6", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_veb.pr6.Text += $"Тип матрицы {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 6", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_veb.pr6.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 6", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_veb.pr6.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 6", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_veb.pr6.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 6", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_veb.pr6.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 6", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Veb_camera] WHERE [id_Veb_camera] = 6", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_veb.pr6.Text;
+                    idd = 6;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_veb.pr6.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Nakopiteli_dannix_Click(object sender, RoutedEventArgs e)
@@ -5742,308 +7909,404 @@ namespace уп
 
         private void Kyp73_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_dannie = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 1", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_dannie.pr1.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 1", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_dannie = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 1", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Vneshnie_nakopiteli]";
+                        id = "[id_vneshnie_nakopiteli]";
+                        win_dannie.pr1.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Volume] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 1", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_dannie.pr1.Text += $"Объем {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Volume] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 1", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_dannie.pr1.Text += $"Объем {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Connect] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 1", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_dannie.pr1.Text += $"Разъем {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Connect] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 1", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_dannie.pr1.Text += $"Разъем {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Write_speed] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 1", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_dannie.pr1.Text += $"Скорость зап {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Write_speed] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 1", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_dannie.pr1.Text += $"Скорость зап {opisanie[0]}, \n";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Read_speed] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 1", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_dannie.pr1.Text += $"Скорость чт {opisanie[0]}, ";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Read_speed] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 1", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_dannie.pr1.Text += $"Скорость чт {opisanie[0]}, ";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 1", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_dannie.pr1.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 1", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_dannie.pr1.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 1", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_dannie.pr1.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 1", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_dannie.pr1.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 1", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 1", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_dannie.pr1.Text;
+                    idd = 1;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_dannie.pr1.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp74_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_dannie = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 2", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_dannie.pr2.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 2", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_dannie = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 2", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Vneshnie_nakopiteli]";
+                        id = "[id_vneshnie_nakopiteli]";
+                        win_dannie.pr2.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Volume] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 2", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_dannie.pr2.Text += $"Объем {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Volume] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 2", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_dannie.pr2.Text += $"Объем {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Connect] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 2", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_dannie.pr2.Text += $"Разъем {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Connect] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 2", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_dannie.pr2.Text += $"Разъем {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Write_speed] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 2", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_dannie.pr2.Text += $"Скорость зап {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Write_speed] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 2", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_dannie.pr2.Text += $"Скорость зап {opisanie[0]}, \n";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Read_speed] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 2", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_dannie.pr2.Text += $"Скорость чт {opisanie[0]}, ";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Read_speed] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 2", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_dannie.pr2.Text += $"Скорость чт {opisanie[0]}, ";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 2", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_dannie.pr2.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 2", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_dannie.pr2.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 2", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_dannie.pr2.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 2", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_dannie.pr2.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 2", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 2", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_dannie.pr2.Text;
+                    idd = 2;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_dannie.pr2.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp75_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_dannie = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 3", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_dannie.pr3.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 3", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_dannie = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 3", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Vneshnie_nakopiteli]";
+                        id = "[id_vneshnie_nakopiteli]";
+                        win_dannie.pr3.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Volume] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 3", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_dannie.pr3.Text += $"Объем {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Volume] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 3", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_dannie.pr3.Text += $"Объем {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Connect] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 3", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_dannie.pr3.Text += $"Разъем {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Connect] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 3", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_dannie.pr3.Text += $"Разъем {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Write_speed] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 3", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_dannie.pr3.Text += $"Скорость зап {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Write_speed] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 3", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_dannie.pr3.Text += $"Скорость зап {opisanie[0]}, \n";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Read_speed] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 3", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_dannie.pr3.Text += $"Скорость чт {opisanie[0]}, ";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Read_speed] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 3", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_dannie.pr3.Text += $"Скорость чт {opisanie[0]}, ";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 3", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_dannie.pr3.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 3", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_dannie.pr3.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 3", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_dannie.pr3.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 3", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_dannie.pr3.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 3", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 3", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_dannie.pr3.Text;
+                    idd = 3;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_dannie.pr3.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp76_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_dannie = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 4", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_dannie.pr4.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 4", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_dannie = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 4", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Vneshnie_nakopiteli]";
+                        id = "[id_vneshnie_nakopiteli]";
+                        win_dannie.pr4.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Volume] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 4", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_dannie.pr4.Text += $"Объем {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Volume] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 4", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_dannie.pr4.Text += $"Объем {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Connect] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 4", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_dannie.pr4.Text += $"Разъем {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Connect] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 4", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_dannie.pr4.Text += $"Разъем {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Write_speed] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 4", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_dannie.pr4.Text += $"Скорость зап {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Write_speed] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 4", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_dannie.pr4.Text += $"Скорость зап {opisanie[0]}, \n";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Read_speed] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 4", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_dannie.pr4.Text += $"Скорость чт {opisanie[0]}, ";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Read_speed] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 4", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_dannie.pr4.Text += $"Скорость чт {opisanie[0]}, ";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 4", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_dannie.pr4.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 4", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_dannie.pr4.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 4", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_dannie.pr4.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 4", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_dannie.pr4.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 4", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 4", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_dannie.pr4.Text;
+                    idd = 4;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_dannie.pr4.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp77_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_dannie = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 5", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_dannie.pr5.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 5", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_dannie = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 5", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Vneshnie_nakopiteli]";
+                        id = "[id_vneshnie_nakopiteli]";
+                        win_dannie.pr5.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Volume] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 5", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_dannie.pr5.Text += $"Объем {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Volume] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 5", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_dannie.pr5.Text += $"Объем {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Connect] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 5", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_dannie.pr5.Text += $"Разъем {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Connect] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 5", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_dannie.pr5.Text += $"Разъем {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Write_speed] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 5", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_dannie.pr5.Text += $"Скорость зап {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Write_speed] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 5", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_dannie.pr5.Text += $"Скорость зап {opisanie[0]}, \n";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Read_speed] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 5", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_dannie.pr5.Text += $"Скорость чт {opisanie[0]}, ";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Read_speed] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 5", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_dannie.pr5.Text += $"Скорость чт {opisanie[0]}, ";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 5", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_dannie.pr5.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 5", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_dannie.pr5.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 5", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_dannie.pr5.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 5", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_dannie.pr5.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 5", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 5", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_dannie.pr5.Text;
+                    idd = 5;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_dannie.pr5.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp78_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_dannie = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 6", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_dannie.pr6.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 6", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_dannie = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 6", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Vneshnie_nakopiteli]";
+                        id = "[id_vneshnie_nakopiteli]";
+                        win_dannie.pr6.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Volume] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 6", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_dannie.pr6.Text += $"Объем {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Volume] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 6", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_dannie.pr6.Text += $"Объем {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Connect] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 6", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_dannie.pr6.Text += $"Разъем {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Connect] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 6", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_dannie.pr6.Text += $"Разъем {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Write_speed] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 6", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_dannie.pr6.Text += $"Скорость зап {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Write_speed] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 6", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_dannie.pr6.Text += $"Скорость зап {opisanie[0]}, \n";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Read_speed] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 6", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_dannie.pr6.Text += $"Скорость чт {opisanie[0]}, ";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Read_speed] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 6", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_dannie.pr6.Text += $"Скорость чт {opisanie[0]}, ";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 6", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_dannie.pr6.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 6", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_dannie.pr6.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 6", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_dannie.pr6.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 6", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_dannie.pr6.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 6", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Vneshnie_nakopiteli] WHERE [id_vneshnie_nakopiteli] = 6", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_dannie.pr6.Text;
+                    idd = 6;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_dannie.pr6.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void nayshniki_Click(object sender, RoutedEventArgs e)
@@ -6179,284 +8442,380 @@ namespace уп
 
         private void Kyp79_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_naysh = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 1", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_naysh.pr1.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 1", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_naysh = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 1", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Nayshniki]";
+                        id = "[id_nayshniki]";
+                        win_naysh.pr1.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Tip] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 1", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_naysh.pr1.Text += $"Тип {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Tip] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 1", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_naysh.pr1.Text += $"Тип {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Dlina] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 1", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_naysh.pr1.Text += $"Длина {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Dlina] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 1", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_naysh.pr1.Text += $"Длина {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Vid_peredachi] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 1", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_naysh.pr1.Text += $"Вид передачи {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Vid_peredachi] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 1", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_naysh.pr1.Text += $"Вид передачи {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 1", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_naysh.pr1.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 1", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_naysh.pr1.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 1", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_naysh.pr1.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 1", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_naysh.pr1.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 1", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 1", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_naysh.pr1.Text;
+                    idd = 1;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_naysh.pr1.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp80_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_naysh = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 2", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_naysh.pr2.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 2", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_naysh = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 2", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Nayshniki]";
+                        id = "[id_nayshniki]";
+                        win_naysh.pr2.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Tip] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 2", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_naysh.pr2.Text += $"Тип {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Tip] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 2", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_naysh.pr2.Text += $"Тип {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Dlina] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 2", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_naysh.pr2.Text += $"Длина {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Dlina] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 2", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_naysh.pr2.Text += $"Длина {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Vid_peredachi] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 2", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_naysh.pr2.Text += $"Вид передачи {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Vid_peredachi] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 2", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_naysh.pr2.Text += $"Вид передачи {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 2", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_naysh.pr2.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 2", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_naysh.pr2.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 2", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_naysh.pr2.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 2", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_naysh.pr2.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 2", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 2", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_naysh.pr2.Text;
+                    idd = 2;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_naysh.pr2.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp81_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_naysh = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 3", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_naysh.pr3.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 3", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_naysh = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 3", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Nayshniki]";
+                        id = "[id_nayshniki]";
+                        win_naysh.pr3.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Tip] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 3", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_naysh.pr3.Text += $"Тип {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Tip] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 3", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_naysh.pr3.Text += $"Тип {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Dlina] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 3", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_naysh.pr3.Text += $"Длина {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Dlina] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 3", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_naysh.pr3.Text += $"Длина {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Vid_peredachi] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 3", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_naysh.pr3.Text += $"Вид передачи {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Vid_peredachi] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 3", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_naysh.pr3.Text += $"Вид передачи {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 3", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_naysh.pr3.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 3", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_naysh.pr3.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 3", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_naysh.pr3.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 3", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_naysh.pr3.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 3", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 3", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_naysh.pr3.Text;
+                    idd = 3;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_naysh.pr3.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp82_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_naysh = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 4", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_naysh.pr4.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 4", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_naysh = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 4", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Nayshniki]";
+                        id = "[id_nayshniki]";
+                        win_naysh.pr4.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Tip] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 4", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_naysh.pr4.Text += $"Тип {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Tip] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 4", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_naysh.pr4.Text += $"Тип {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Dlina] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 4", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_naysh.pr4.Text += $"Длина {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Dlina] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 4", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_naysh.pr4.Text += $"Длина {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Vid_peredachi] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 4", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_naysh.pr4.Text += $"Вид передачи {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Vid_peredachi] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 4", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_naysh.pr4.Text += $"Вид передачи {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 4", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_naysh.pr4.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 4", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_naysh.pr4.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 4", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_naysh.pr4.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 4", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_naysh.pr4.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 4", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 4", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_naysh.pr4.Text;
+                    idd = 4;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_naysh.pr4.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp83_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_naysh = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 5", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_naysh.pr5.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 5", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_naysh = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 5", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Nayshniki]";
+                        id = "[id_nayshniki]";
+                        win_naysh.pr5.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Tip] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 5", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_naysh.pr5.Text += $"Тип {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Tip] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 5", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_naysh.pr5.Text += $"Тип {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Dlina] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 5", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_naysh.pr5.Text += $"Длина {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Dlina] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 5", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_naysh.pr5.Text += $"Длина {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Vid_peredachi] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 5", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_naysh.pr5.Text += $"Вид передачи {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Vid_peredachi] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 5", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_naysh.pr5.Text += $"Вид передачи {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 5", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_naysh.pr5.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 5", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_naysh.pr5.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 5", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_naysh.pr5.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 5", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_naysh.pr5.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 5", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 5", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_naysh.pr5.Text;
+                    idd = 5;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_naysh.pr5.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp84_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_naysh = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 6", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_naysh.pr6.Text = $"{opisanie[0]}, ";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 6", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_naysh = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 6", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Nayshniki]";
+                        id = "[id_nayshniki]";
+                        win_naysh.pr6.Text = $"{opisanie[0]}, ";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Tip] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 6", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_naysh.pr6.Text += $"Тип {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Tip] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 6", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_naysh.pr6.Text += $"Тип {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Dlina] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 6", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_naysh.pr6.Text += $"Длина {opisanie[0]}, ";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Dlina] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 6", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_naysh.pr6.Text += $"Длина {opisanie[0]}, ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Vid_peredachi] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 6", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_naysh.pr6.Text += $"Вид передачи {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Vid_peredachi] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 6", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_naysh.pr6.Text += $"Вид передачи {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 6", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_naysh.pr6.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 6", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_naysh.pr6.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 6", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_naysh.pr6.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 6", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_naysh.pr6.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 6", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Nayshniki] WHERE [id_nayshniki] = 6", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_naysh.pr6.Text;
+                    idd = 6;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_naysh.pr6.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void kabeli_Click(object sender, RoutedEventArgs e)
@@ -6591,284 +8950,380 @@ namespace уп
         }
         private void Kyp85_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_kabeli = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 1", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_kabeli.pr1.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 1", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_kabeli = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 1", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Kabeli]";
+                        id = "[id_kabeli]";
+                        win_kabeli.pr1.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Connector_1] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 1", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_kabeli.pr1.Text += $"{opisanie[0]} - ";
+                        SqlCommand commandd = new SqlCommand("SELECT [Connector_1] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 1", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_kabeli.pr1.Text += $"{opisanie[0]} - ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Connector_2] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 1", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_kabeli.pr1.Text += $"{opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Connector_2] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 1", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_kabeli.pr1.Text += $"{opisanie[0]}, ";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Dlina(M)] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 1", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_kabeli.pr1.Text += $"Длина {opisanie[0]}м, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Dlina(M)] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 1", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_kabeli.pr1.Text += $"Длина {opisanie[0]}м, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 1", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_kabeli.pr1.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 1", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_kabeli.pr1.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 1", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_kabeli.pr1.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 1", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_kabeli.pr1.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 1", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 1", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_kabeli.pr1.Text;
+                    idd = 1;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_kabeli.pr1.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp86_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_kabeli = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 2", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_kabeli.pr2.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 2", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_kabeli = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 2", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Kabeli]";
+                        id = "[id_kabeli]";
+                        win_kabeli.pr2.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Connector_1] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 2", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_kabeli.pr2.Text += $"{opisanie[0]} - ";
+                        SqlCommand commandd = new SqlCommand("SELECT [Connector_1] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 2", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_kabeli.pr2.Text += $"{opisanie[0]} - ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Connector_2] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 2", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_kabeli.pr2.Text += $"{opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Connector_2] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 2", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_kabeli.pr2.Text += $"{opisanie[0]}, ";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Dlina(M)] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 2", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_kabeli.pr2.Text += $"Длина {opisanie[0]}м, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Dlina(M)] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 2", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_kabeli.pr2.Text += $"Длина {opisanie[0]}м, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 2", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_kabeli.pr2.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 2", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_kabeli.pr2.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 2", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_kabeli.pr2.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 2", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_kabeli.pr2.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 2", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 2", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_kabeli.pr2.Text;
+                    idd = 2;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_kabeli.pr2.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp87_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_kabeli = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 3", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_kabeli.pr3.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 3", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_kabeli = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 3", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Kabeli]";
+                        id = "[id_kabeli]";
+                        win_kabeli.pr3.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Connector_1] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 3", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_kabeli.pr3.Text += $"{opisanie[0]} - ";
+                        SqlCommand commandd = new SqlCommand("SELECT [Connector_1] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 3", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_kabeli.pr3.Text += $"{opisanie[0]} - ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Connector_2] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 3", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_kabeli.pr3.Text += $"{opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Connector_2] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 3", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_kabeli.pr3.Text += $"{opisanie[0]}, ";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Dlina(M)] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 3", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_kabeli.pr3.Text += $"Длина {opisanie[0]}м, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Dlina(M)] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 3", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_kabeli.pr3.Text += $"Длина {opisanie[0]}м, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 3", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_kabeli.pr3.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 3", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_kabeli.pr3.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 3", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_kabeli.pr3.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 3", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_kabeli.pr3.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 3", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 3", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_kabeli.pr3.Text;
+                    idd = 3;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_kabeli.pr3.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp88_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_kabeli = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 4", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_kabeli.pr4.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 4", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_kabeli = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 4", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Kabeli]";
+                        id = "[id_kabeli]";
+                        win_kabeli.pr4.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Connector_1] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 4", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_kabeli.pr4.Text += $"{opisanie[0]} - ";
+                        SqlCommand commandd = new SqlCommand("SELECT [Connector_1] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 4", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_kabeli.pr4.Text += $"{opisanie[0]} - ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Connector_2] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 4", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_kabeli.pr4.Text += $"{opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Connector_2] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 4", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_kabeli.pr4.Text += $"{opisanie[0]}, ";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Dlina(M)] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 4", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_kabeli.pr4.Text += $"Длина {opisanie[0]}м, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Dlina(M)] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 4", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_kabeli.pr4.Text += $"Длина {opisanie[0]}м, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 4", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_kabeli.pr4.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 4", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_kabeli.pr4.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 4", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_kabeli.pr4.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 4", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_kabeli.pr4.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 4", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 4", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_kabeli.pr4.Text;
+                    idd = 4;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_kabeli.pr4.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp89_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_kabeli = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 5", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_kabeli.pr5.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 5", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_kabeli = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 5", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Kabeli]";
+                        id = "[id_kabeli]";
+                        win_kabeli.pr5.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Connector_1] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 5", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_kabeli.pr5.Text += $"{opisanie[0]} - ";
+                        SqlCommand commandd = new SqlCommand("SELECT [Connector_1] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 5", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_kabeli.pr5.Text += $"{opisanie[0]} - ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Connector_2] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 5", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_kabeli.pr5.Text += $"{opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Connector_2] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 5", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_kabeli.pr5.Text += $"{opisanie[0]}, ";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Dlina(M)] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 5", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_kabeli.pr5.Text += $"Длина {opisanie[0]}м, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Dlina(M)] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 5", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_kabeli.pr5.Text += $"Длина {opisanie[0]}м, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 5", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_kabeli.pr5.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 5", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_kabeli.pr5.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 5", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_kabeli.pr5.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 5", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_kabeli.pr5.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 5", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 5", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_kabeli.pr5.Text;
+                    idd = 5;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_kabeli.pr5.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp90_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_kabeli = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 6", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_kabeli.pr6.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 6", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_kabeli = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 6", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Kabeli]";
+                        id = "[id_kabeli]";
+                        win_kabeli.pr6.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Connector_1] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 6", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_kabeli.pr6.Text += $"{opisanie[0]} - ";
+                        SqlCommand commandd = new SqlCommand("SELECT [Connector_1] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 6", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_kabeli.pr6.Text += $"{opisanie[0]} - ";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Connector_2] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 6", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_kabeli.pr6.Text += $"{opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Connector_2] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 6", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_kabeli.pr6.Text += $"{opisanie[0]}, ";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Dlina(M)] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 6", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_kabeli.pr6.Text += $"Длина {opisanie[0]}м, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Dlina(M)] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 6", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_kabeli.pr6.Text += $"Длина {opisanie[0]}м, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 6", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_kabeli.pr6.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 6", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_kabeli.pr6.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 6", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_kabeli.pr6.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 6", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_kabeli.pr6.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 6", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kabeli] WHERE [id_kabeli] = 6", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_kabeli.pr6.Text;
+                    idd = 6;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_kabeli.pr6.Text;
-            kor.oform.Click += Oform_Click;
         }
         private void kovriki_Click(object sender, RoutedEventArgs e)
         {
@@ -7003,284 +9458,380 @@ namespace уп
 
         private void Kyp91_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_kovriki = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 1", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_kovriki.pr1.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 1", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_kovriki = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 1", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Kovriki]";
+                        id = "[id_kovriki]";
+                        win_kovriki.pr1.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Material_pokritia] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 1", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_kovriki.pr1.Text += $"Материал покрытия {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Material_pokritia] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 1", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_kovriki.pr1.Text += $"Материал покрытия {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Material_ocnovania] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 1", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_kovriki.pr1.Text += $"Материал основания {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Material_ocnovania] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 1", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_kovriki.pr1.Text += $"Материал основания {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Razmer] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 1", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_kovriki.pr1.Text += $"Размер {opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Razmer] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 1", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_kovriki.pr1.Text += $"Размер {opisanie[0]}, ";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 1", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_kovriki.pr1.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 1", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_kovriki.pr1.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 1", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_kovriki.pr1.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 1", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_kovriki.pr1.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 1", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 1", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_kovriki.pr1.Text;
+                    idd = 1;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_kovriki.pr1.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp92_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_kovriki = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 2", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_kovriki.pr2.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 2", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_kovriki = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 2", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Kovriki]";
+                        id = "[id_kovriki]";
+                        win_kovriki.pr2.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Material_pokritia] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 2", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_kovriki.pr2.Text += $"Материал покрытия {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Material_pokritia] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 2", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_kovriki.pr2.Text += $"Материал покрытия {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Material_ocnovania] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 2", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_kovriki.pr2.Text += $"Материал основания {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Material_ocnovania] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 2", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_kovriki.pr2.Text += $"Материал основания {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Razmer] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 2", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_kovriki.pr2.Text += $"Размер {opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Razmer] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 2", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_kovriki.pr2.Text += $"Размер {opisanie[0]}, ";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 2", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_kovriki.pr2.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 2", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_kovriki.pr2.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 2", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_kovriki.pr2.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 2", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_kovriki.pr2.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 2", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 2", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_kovriki.pr2.Text;
+                    idd = 2;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_kovriki.pr2.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp93_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_kovriki = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 3", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_kovriki.pr3.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 3", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_kovriki = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 3", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Kovriki]";
+                        id = "[id_kovriki]";
+                        win_kovriki.pr3.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Material_pokritia] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 3", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_kovriki.pr3.Text += $"Материал покрытия {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Material_pokritia] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 3", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_kovriki.pr3.Text += $"Материал покрытия {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Material_ocnovania] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 3", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_kovriki.pr3.Text += $"Материал основания {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Material_ocnovania] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 3", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_kovriki.pr3.Text += $"Материал основания {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Razmer] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 3", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_kovriki.pr3.Text += $"Размер {opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Razmer] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 3", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_kovriki.pr3.Text += $"Размер {opisanie[0]}, ";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 3", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_kovriki.pr3.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 3", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_kovriki.pr3.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 3", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_kovriki.pr3.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 3", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_kovriki.pr3.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 3", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 3", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_kovriki.pr3.Text;
+                    idd = 3;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_kovriki.pr3.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp94_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_kovriki = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 4", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_kovriki.pr4.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 4", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_kovriki = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 4", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Kovriki]";
+                        id = "[id_kovriki]";
+                        win_kovriki.pr4.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Material_pokritia] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 4", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_kovriki.pr4.Text += $"Материал покрытия {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Material_pokritia] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 4", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_kovriki.pr4.Text += $"Материал покрытия {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Material_ocnovania] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 4", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_kovriki.pr4.Text += $"Материал основания {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Material_ocnovania] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 4", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_kovriki.pr4.Text += $"Материал основания {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Razmer] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 4", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_kovriki.pr4.Text += $"Размер {opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Razmer] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 4", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_kovriki.pr4.Text += $"Размер {opisanie[0]}, ";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 4", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_kovriki.pr4.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 4", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_kovriki.pr4.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 4", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_kovriki.pr4.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 4", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_kovriki.pr4.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 4", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 4", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_kovriki.pr4.Text;
+                    idd = 4;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_kovriki.pr4.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp95_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_kovriki = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 5", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_kovriki.pr5.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 5", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_kovriki = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 5", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Kovriki]";
+                        id = "[id_kovriki]";
+                        win_kovriki.pr5.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Material_pokritia] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 5", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_kovriki.pr5.Text += $"Материал покрытия {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Material_pokritia] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 5", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_kovriki.pr5.Text += $"Материал покрытия {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Material_ocnovania] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 5", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_kovriki.pr5.Text += $"Материал основания {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Material_ocnovania] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 5", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_kovriki.pr5.Text += $"Материал основания {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Razmer] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 5", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_kovriki.pr5.Text += $"Размер {opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Razmer] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 5", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_kovriki.pr5.Text += $"Размер {opisanie[0]}, ";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 5", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_kovriki.pr5.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 5", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_kovriki.pr5.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 5", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_kovriki.pr5.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 5", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_kovriki.pr5.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 5", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 5", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_kovriki.pr5.Text;
+                    idd = 5;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_kovriki.pr5.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp96_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_kovriki = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 6", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_kovriki.pr6.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 6", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_kovriki = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 6", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Kovriki]";
+                        id = "[id_kovriki]";
+                        win_kovriki.pr6.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Material_pokritia] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 6", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_kovriki.pr6.Text += $"Материал покрытия {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Material_pokritia] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 6", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_kovriki.pr6.Text += $"Материал покрытия {opisanie[0]}, \n";
 
-                SqlCommand commanddd = new SqlCommand("SELECT [Material_ocnovania] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 6", connection);
-                opisanie[0] = commanddd.ExecuteScalar().ToString();
-                win_kovriki.pr6.Text += $"Материал основания {opisanie[0]}, \n";
+                        SqlCommand commanddd = new SqlCommand("SELECT [Material_ocnovania] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 6", connection);
+                        opisanie[0] = commanddd.ExecuteScalar().ToString();
+                        win_kovriki.pr6.Text += $"Материал основания {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [Razmer] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 6", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_kovriki.pr6.Text += $"Размер {opisanie[0]}, ";
+                        SqlCommand commandddd = new SqlCommand("SELECT [Razmer] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 6", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_kovriki.pr6.Text += $"Размер {opisanie[0]}, ";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 6", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_kovriki.pr6.Text += $"Цена {opisanie[0]}, \n";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 6", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_kovriki.pr6.Text += $"Цена {opisanie[0]}, \n";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 6", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_kovriki.pr6.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichestvo] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 6", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_kovriki.pr6.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 6", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Kovriki] WHERE [id_kovriki] = 6", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_kovriki.pr6.Text;
+                    idd = 6;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_kovriki.pr6.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void noutbuki_Click(object sender, RoutedEventArgs e)
@@ -7416,284 +9967,380 @@ namespace уп
 
         private void Kyp97_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_nout = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 1", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_nout.pr1.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichectvo] FROM [dbo].[Notebok] WHERE [id_notebok] = 1", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_nout = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 1", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Notebok]";
+                        id = "[id_notebok]";
+                        win_nout.pr1.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Volume_operativ] FROM [dbo].[Notebok] WHERE [id_notebok] = 1", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_nout.pr1.Text += $"Объем оперативной памяти {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Volume_operativ] FROM [dbo].[Notebok] WHERE [id_notebok] = 1", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_nout.pr1.Text += $"Объем оперативной памяти {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [procesor] FROM [dbo].[Notebok] WHERE [id_notebok] = 1", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_nout.pr1.Text += $"Процессор {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [procesor] FROM [dbo].[Notebok] WHERE [id_notebok] = 1", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_nout.pr1.Text += $"Процессор {opisanie[0]}, \n";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Pamat] FROM [dbo].[Notebok] WHERE [id_notebok] = 1", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_nout.pr1.Text += $"Объем памяти {opisanie[0]}, \n";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Pamat] FROM [dbo].[Notebok] WHERE [id_notebok] = 1", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_nout.pr1.Text += $"Объем памяти {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 1", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_nout.pr1.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 1", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_nout.pr1.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichectvo] FROM [dbo].[Notebok] WHERE [id_notebok] = 1", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_nout.pr1.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichectvo] FROM [dbo].[Notebok] WHERE [id_notebok] = 1", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_nout.pr1.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Notebok] WHERE [id_notebok] = 1", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Notebok] WHERE [id_notebok] = 1", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_nout.pr1.Text;
+                    idd = 1;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_nout.pr1.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp98_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_nout = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 2", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_nout.pr2.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichectvo] FROM [dbo].[Notebok] WHERE [id_notebok] = 2", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_nout = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 2", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Notebok]";
+                        id = "[id_notebok]";
+                        win_nout.pr2.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Volume_operativ] FROM [dbo].[Notebok] WHERE [id_notebok] = 2", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_nout.pr2.Text += $"Объем оперативной памяти {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Volume_operativ] FROM [dbo].[Notebok] WHERE [id_notebok] = 2", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_nout.pr2.Text += $"Объем оперативной памяти {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [procesor] FROM [dbo].[Notebok] WHERE [id_notebok] = 2", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_nout.pr2.Text += $"Процессор {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [procesor] FROM [dbo].[Notebok] WHERE [id_notebok] = 2", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_nout.pr2.Text += $"Процессор {opisanie[0]}, \n";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Pamat] FROM [dbo].[Notebok] WHERE [id_notebok] = 2", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_nout.pr2.Text += $"Объем памяти {opisanie[0]}, \n";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Pamat] FROM [dbo].[Notebok] WHERE [id_notebok] = 2", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_nout.pr2.Text += $"Объем памяти {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 2", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_nout.pr2.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 2", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_nout.pr2.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichectvo] FROM [dbo].[Notebok] WHERE [id_notebok] = 2", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_nout.pr2.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichectvo] FROM [dbo].[Notebok] WHERE [id_notebok] = 2", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_nout.pr2.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Notebok] WHERE [id_notebok] = 2", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Notebok] WHERE [id_notebok] = 2", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_nout.pr2.Text;
+                    idd = 2;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_nout.pr2.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp99_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_nout = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 3", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_nout.pr3.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichectvo] FROM [dbo].[Notebok] WHERE [id_notebok] = 3", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_nout = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 3", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Notebok]";
+                        id = "[id_notebok]";
+                        win_nout.pr3.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Volume_operativ] FROM [dbo].[Notebok] WHERE [id_notebok] = 3", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_nout.pr3.Text += $"Объем оперативной памяти {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Volume_operativ] FROM [dbo].[Notebok] WHERE [id_notebok] = 3", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_nout.pr3.Text += $"Объем оперативной памяти {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [procesor] FROM [dbo].[Notebok] WHERE [id_notebok] = 3", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_nout.pr3.Text += $"Процессор {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [procesor] FROM [dbo].[Notebok] WHERE [id_notebok] = 3", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_nout.pr3.Text += $"Процессор {opisanie[0]}, \n";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Pamat] FROM [dbo].[Notebok] WHERE [id_notebok] = 3", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_nout.pr3.Text += $"Объем памяти {opisanie[0]}, \n";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Pamat] FROM [dbo].[Notebok] WHERE [id_notebok] = 3", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_nout.pr3.Text += $"Объем памяти {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 3", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_nout.pr3.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 3", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_nout.pr3.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichectvo] FROM [dbo].[Notebok] WHERE [id_notebok] = 3", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_nout.pr3.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichectvo] FROM [dbo].[Notebok] WHERE [id_notebok] = 3", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_nout.pr3.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Notebok] WHERE [id_notebok] = 3", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Notebok] WHERE [id_notebok] = 3", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_nout.pr3.Text;
+                    idd = 3;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_nout.pr3.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp100_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_nout = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 4", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_nout.pr4.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichectvo] FROM [dbo].[Notebok] WHERE [id_notebok] = 4", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_nout = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 4", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Notebok]";
+                        id = "[id_notebok]";
+                        win_nout.pr4.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Volume_operativ] FROM [dbo].[Notebok] WHERE [id_notebok] = 4", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_nout.pr4.Text += $"Объем оперативной памяти {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Volume_operativ] FROM [dbo].[Notebok] WHERE [id_notebok] = 4", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_nout.pr4.Text += $"Объем оперативной памяти {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [procesor] FROM [dbo].[Notebok] WHERE [id_notebok] = 4", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_nout.pr4.Text += $"Процессор {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [procesor] FROM [dbo].[Notebok] WHERE [id_notebok] = 4", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_nout.pr4.Text += $"Процессор {opisanie[0]}, \n";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Pamat] FROM [dbo].[Notebok] WHERE [id_notebok] = 4", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_nout.pr4.Text += $"Объем памяти {opisanie[0]}, \n";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Pamat] FROM [dbo].[Notebok] WHERE [id_notebok] = 4", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_nout.pr4.Text += $"Объем памяти {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 4", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_nout.pr4.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 4", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_nout.pr4.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichectvo] FROM [dbo].[Notebok] WHERE [id_notebok] = 4", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_nout.pr4.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichectvo] FROM [dbo].[Notebok] WHERE [id_notebok] = 4", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_nout.pr4.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Notebok] WHERE [id_notebok] = 4", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Notebok] WHERE [id_notebok] = 4", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_nout.pr4.Text;
+                    idd = 4;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_nout.pr4.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp101_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_nout = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 5", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_nout.pr5.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichectvo] FROM [dbo].[Notebok] WHERE [id_notebok] = 5", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_nout = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 5", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Notebok]";
+                        id = "[id_notebok]";
+                        win_nout.pr5.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Volume_operativ] FROM [dbo].[Notebok] WHERE [id_notebok] = 5", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_nout.pr5.Text += $"Объем оперативной памяти {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Volume_operativ] FROM [dbo].[Notebok] WHERE [id_notebok] = 5", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_nout.pr5.Text += $"Объем оперативной памяти {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [procesor] FROM [dbo].[Notebok] WHERE [id_notebok] = 5", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_nout.pr5.Text += $"Процессор {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [procesor] FROM [dbo].[Notebok] WHERE [id_notebok] = 5", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_nout.pr5.Text += $"Процессор {opisanie[0]}, \n";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Pamat] FROM [dbo].[Notebok] WHERE [id_notebok] = 5", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_nout.pr5.Text += $"Объем памяти {opisanie[0]}, \n";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Pamat] FROM [dbo].[Notebok] WHERE [id_notebok] = 5", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_nout.pr5.Text += $"Объем памяти {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 5", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_nout.pr5.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 5", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_nout.pr5.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichectvo] FROM [dbo].[Notebok] WHERE [id_notebok] = 5", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_nout.pr5.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichectvo] FROM [dbo].[Notebok] WHERE [id_notebok] = 5", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_nout.pr5.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Notebok] WHERE [id_notebok] = 5", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Notebok] WHERE [id_notebok] = 5", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_nout.pr5.Text;
+                    idd = 5;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_nout.pr5.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Kyp102_Click(object sender, RoutedEventArgs e)
         {
-            katalog win_nout = new katalog();
-            string[] opisanie = new string[6];
-            korzina kor = new korzina();
-            string url;
-            this.Close();
-            using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+            using (SqlConnection connection1 = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 6", connection);
-                opisanie[0] = command.ExecuteScalar().ToString();
-                win_nout.pr6.Text = $"{opisanie[0]}, \n";
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand("SELECT [Kolichectvo] FROM [dbo].[Notebok] WHERE [id_notebok] = 6", connection1);
+                int i = Convert.ToInt32(command1.ExecuteScalar().ToString());
+                if (i < 1)
+                {
+                    MessageBox.Show("Товар отсутствует на складе");
+                }
+                else
+                {
+                    katalog win_nout = new katalog();
+                    string[] opisanie = new string[6];
+                    korzina kor = new korzina();
+                    string url;
+                    this.Close();
+                    using (SqlConnection connection = new SqlConnection("server=ngknn.ru;Trusted_Connection=No;DataBase=Man_Sor_V_A;User=33П;PWD=12357"))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("SELECT [Model] FROM [dbo].[Notebok] WHERE [id_notebok] = 6", connection);
+                        opisanie[0] = command.ExecuteScalar().ToString();
+                        table = "[dbo].[Notebok]";
+                        id = "[id_notebok]";
+                        win_nout.pr6.Text = $"{opisanie[0]}, \n";
 
-                SqlCommand commandd = new SqlCommand("SELECT [Volume_operativ] FROM [dbo].[Notebok] WHERE [id_notebok] = 6", connection);
-                opisanie[0] = commandd.ExecuteScalar().ToString();
-                win_nout.pr6.Text += $"Объем оперативной памяти {opisanie[0]}, \n";
+                        SqlCommand commandd = new SqlCommand("SELECT [Volume_operativ] FROM [dbo].[Notebok] WHERE [id_notebok] = 6", connection);
+                        opisanie[0] = commandd.ExecuteScalar().ToString();
+                        win_nout.pr6.Text += $"Объем оперативной памяти {opisanie[0]}, \n";
 
-                SqlCommand commandddd = new SqlCommand("SELECT [procesor] FROM [dbo].[Notebok] WHERE [id_notebok] = 6", connection);
-                opisanie[0] = commandddd.ExecuteScalar().ToString();
-                win_nout.pr6.Text += $"Процессор {opisanie[0]}, \n";
+                        SqlCommand commandddd = new SqlCommand("SELECT [procesor] FROM [dbo].[Notebok] WHERE [id_notebok] = 6", connection);
+                        opisanie[0] = commandddd.ExecuteScalar().ToString();
+                        win_nout.pr6.Text += $"Процессор {opisanie[0]}, \n";
 
-                SqlCommand commanddddd = new SqlCommand("SELECT [Pamat] FROM [dbo].[Notebok] WHERE [id_notebok] = 6", connection);
-                opisanie[0] = commanddddd.ExecuteScalar().ToString();
-                win_nout.pr6.Text += $"Объем памяти {opisanie[0]}, \n";
+                        SqlCommand commanddddd = new SqlCommand("SELECT [Pamat] FROM [dbo].[Notebok] WHERE [id_notebok] = 6", connection);
+                        opisanie[0] = commanddddd.ExecuteScalar().ToString();
+                        win_nout.pr6.Text += $"Объем памяти {opisanie[0]}, \n";
 
-                SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 6", connection);
-                opisanie[0] = commanddddddd.ExecuteScalar().ToString();
-                win_nout.pr6.Text += $"Цена {opisanie[0]}, ";
+                        SqlCommand commanddddddd = new SqlCommand("SELECT [Zena] FROM [dbo].[Notebok] WHERE [id_notebok] = 6", connection);
+                        opisanie[0] = commanddddddd.ExecuteScalar().ToString();
+                        win_nout.pr6.Text += $"Цена {opisanie[0]}, ";
 
-                SqlCommand commandddddd = new SqlCommand("SELECT [Kolichectvo] FROM [dbo].[Notebok] WHERE [id_notebok] = 6", connection);
-                opisanie[0] = commandddddd.ExecuteScalar().ToString();
-                win_nout.pr6.Text += $"Количество на складе {opisanie[0]} ";
+                        SqlCommand commandddddd = new SqlCommand("SELECT [Kolichectvo] FROM [dbo].[Notebok] WHERE [id_notebok] = 6", connection);
+                        opisanie[0] = commandddddd.ExecuteScalar().ToString();
+                        win_nout.pr6.Text += $"Количество на складе {opisanie[0]} ";
 
-                SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Notebok] WHERE [id_notebok] = 6", connection);
-                url = commandddddddd.ExecuteScalar().ToString();
+                        SqlCommand commandddddddd = new SqlCommand("SELECT [Image] FROM [dbo].[Notebok] WHERE [id_notebok] = 6", connection);
+                        url = commandddddddd.ExecuteScalar().ToString();
+                    }
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri($@"{url}", UriKind.Absolute);
+                    image.EndInit();
+                    kor.im.Source = image;
+                    kor.Show();
+                    kor.pokupka.Text = win_nout.pr6.Text;
+                    idd = 6;
+                    kor.oform.Click += Oform_Click;
+                }
             }
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri($@"{url}", UriKind.Absolute);
-            image.EndInit();
-            kor.im.Source = image;
-            kor.Show();
-            kor.pokupka.Text = win_nout.pr6.Text;
-            kor.oform.Click += Oform_Click;
         }
 
         private void Admin_panel_Click(object sender, RoutedEventArgs e)
